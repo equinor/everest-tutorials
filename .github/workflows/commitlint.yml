@@ -1,0 +1,28 @@
+name: commit lint
+
+on: 
+  workflow_dispatch:
+  workflow_call:
+  push:
+  pull_request:
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: setup node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: install commitlint
+        run: npm install @commitlint/{cli,config-conventional}
+
+      - name: run commitlint
+        run: npx commitlint --from=$(git merge-base origin/main HEAD) --to=HEAD
