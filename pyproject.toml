@@ -1,0 +1,18 @@
+[project]
+name = "everest_tutorials"
+version = "0.0.0"
+description = "EVEREST tutorials"
+authors = [{ name = "Equinor ASA", email = "fg_sib-scout@equinor.com" }]
+readme = "README.md"
+license = { text = "GPL-3.0" }
+requires-python = ">=3.11"
+dependencies = [
+    "furo>=2024.8.6",
+    "mypy>=1.15.0",
+    "sphinx>=8.2.3",
+    "types-setuptools>=76.0.0.20250313",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
