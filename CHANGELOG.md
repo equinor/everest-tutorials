@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/equinor/everest-tutorials/compare/v0.1.0...v0.1.1) (2025-03-20)
+
+
+### Bug Fixes
+
+* add the SECURITY.md file ([990f656](https://github.com/equinor/everest-tutorials/commit/990f65668b987895870cb021184caec0faa37091))
+
 ## 0.1.0 (2025-03-20)
 
 
