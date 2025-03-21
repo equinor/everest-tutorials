@@ -19,5 +19,13 @@ jobs:
         uses: actions/checkout@v4
       - name: create release
         uses: googleapis/release-please-action@v4
+        id: release
         with:
           release-type: python
+      - name: compress tutorial cases
+        run: tar -czvf everest-tutorial-drogon.tar.gz ./data/drogon
+      - name: upload release artifact
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload ${{ steps.release.outputs.tag_name }} everest-tutorial-drogon.tar.gz
