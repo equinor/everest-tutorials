@@ -1,3 +1,6 @@
+from importlib import metadata
+
+
 # Configuration file for the Sphinx documentation builder.
 #
 # For the full list of built-in configuration values, see the documentation:
@@ -9,6 +12,20 @@
 project = 'everest_tutorials'
 copyright = '2025, Equinor ASA'
 author = 'Equinor ASA'
+
+try:
+    dist_version = metadata.version("everest_tutorials")
+except metadata.PackageNotFoundError:
+    dist_version = "0.0.0"
+
+# The short X.Y.Z version
+version = ".".join(dist_version.split(".")[:3])
+# The full version, including alpha/beta/rc tags
+release = dist_version
+
+rst_epilog = f"""
+.. |everest_tutorial_drogon_download| replace:: https://github.com/equinor/everest-tutorials/releases/download/v{version}/everest-tutorials-drogon.tar.gz
+"""
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

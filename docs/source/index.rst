@@ -13,6 +13,7 @@ EVEREST™ tutorials
    :hidden:
    :caption: Getting started
 
+   download_material/download_material
    model_description/drogon_description
    
 
