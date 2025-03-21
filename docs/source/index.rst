@@ -1,17 +1,39 @@
-.. everest_tutorials documentation master file, created by
-   sphinx-quickstart on Thu Mar 20 14:03:31 2025.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
 
-everest_tutorials documentation
-===============================
-
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
+EVEREST™ tutorials
+==================
 
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :hidden:
 
+   self
+
+
+.. toctree::
+   :hidden:
+   :caption: Getting started
+
+   model_description/drogon_description
+   
+
+.. toctree::
+   :hidden:
+   :caption: Experiments
+
+   well_rate/well_rate
+
+
+.. toctree::
+   :hidden:
+   :caption: Other topics
+
+   other_topics/visualization
+
+
+.. toctree::
+   :hidden:
+   :caption: Development
+
+   Changelog <development/changelog>
+   Tutorial in Github <https://github.com/equinor/everest-tutorials>
+   Issue tracker <https://github.com/equinor/everest-tutorials/issues>
