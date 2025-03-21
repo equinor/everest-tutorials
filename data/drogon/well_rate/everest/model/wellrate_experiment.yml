@@ -1,0 +1,82 @@
+definitions: 
+  eclbase: simulator/model/r{{case_name}}
+  data_folder: r{{configpath}}/../../../drogon_snapshot/data/
+  initial_data: r{{configpath}}/../../../drogon_snapshot/data/DROGON
+  sim_schedule: r{{configpath}}/../../../drogon_snapshot/data/WELLRATE.SCH
+  realization_folder: r{{configpath}}/../../../drogon_snapshot/fmu-drogon-flow-files/realization-r{{realization}}
+  user_shortname: r{{os.USER}}
+  case_name: WELLRATE_EXP
+
+environment:
+  simulation_folder: r{{configpath}}/../output/r{{case_name}}/simulation_output
+  output_folder: r{{configpath}}/../output/r{{case_name}}
+  random_seed: 14062022
+      
+controls:
+  - name: well_rate
+    type: well_control
+    min: 0
+    max: 1
+    perturbation_magnitude: 0.15
+    variables:
+      - {name: A5, index: 1, initial_guess: 0.5}
+      - {name: A5, index: 2, initial_guess: 0.5}
+      - {name: A5, index: 3, initial_guess: 0.5}
+      - {name: A6, index: 1, initial_guess: 0.5}
+      - {name: A6, index: 2, initial_guess: 0.5}
+      - {name: A6, index: 3, initial_guess: 0.5}
+      - {name: A7, index: 1, initial_guess: 0.5}
+      - {name: A7, index: 2, initial_guess: 0.5}
+      - {name: A7, index: 3, initial_guess: 0.5}
+
+objective_functions:
+  - name: npv
+    scale: 1e10
+
+optimization:
+  algorithm: conmin_mfd
+  min_realizations_success: 50
+  min_pert_success: 50
+  max_batch_num: 10
+  perturbation_num: 1
+  speculative: True
+      
+model:
+  realizations: r{{range(100) | list()}}
+        
+simulator:
+  queue_system:
+    name: lsf 
+    max_running: 200
+   
+install_data:
+  - link: True
+    source: r{{realization_folder}}/iter-0/eclipse/include
+    target: simulator/include
+  - link: False
+    source: r{{initial_data}}.DATA
+    target: r{{eclbase}}.DATA
+  - link: True
+    source: r{{data_folder}}/wells.sch
+    target: simulator/model/wells.sch
+  - link: True
+    source: r{{configpath}}/../input/files/
+    target: files
+  - link: True
+    source: r{{configpath}}/../input/templates/
+    target: templates
+
+forward_model:
+
+ # Update schedule
+  - well_constraints -i files/wells_readydate.json -c files/rates_constraints.yml -rc well_rate.json -o wells_rate.json
+  - add_templates -i wells_rate.json -c files/template_config.yml -o wells_tmpl_result.json 
+  - schmerge -i wells_tmpl_result.json -s r{{sim_schedule}} -o simulator/model/SCHEDULE_OPT.SCH
+
+ # Run simulation 
+  - flow r{{eclbase}}.DATA
+  
+ # Calculate objective function
+  - npv -s r{{eclbase}}.UNSMRY -o npv -c files/prices.yml -i wells_tmpl_result.json -sd 2023-01-01 -ed 2030-01-01
+
+

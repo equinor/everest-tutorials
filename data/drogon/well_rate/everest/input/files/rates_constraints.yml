@@ -1,0 +1,13 @@
+A5:
+  1: {phase: {value: 'WATER'}, rate: {min : 0, max : 8000}, duration: {value : 500}}
+  2: {phase: {value: 'WATER'}, rate: {min : 0, max : 8000}, duration: {value : 500}}
+  3: {phase: {value: 'WATER'}, rate: {min : 0, max : 8000}, duration: {value : 500}}
+A6:
+  1: {phase: {value: 'WATER'}, rate: {min : 0, max : 8000}, duration: {value : 500}}
+  2: {phase: {value: 'WATER'}, rate: {min : 0, max : 8000}, duration: {value : 500}}
+  3: {phase: {value: 'WATER'}, rate: {min : 0, max : 8000}, duration: {value : 500}}
+A7:
+  1: {phase: {value: 'WATER'}, rate: {min : 0, max : 8000}, duration: {value : 500}}
+  2: {phase: {value: 'WATER'}, rate: {min : 0, max : 8000}, duration: {value : 500}}
+  3: {phase: {value: 'WATER'}, rate: {min : 0, max : 8000}, duration: {value : 500}}
+
