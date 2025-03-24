@@ -22,6 +22,9 @@ EVEREST™ tutorials
    :caption: Experiments
 
    well_rate/well_rate
+   well_order/well_order
+   well_selection/well_selection
+   well_trajectory/well_trajectory
 
 
 .. toctree::
