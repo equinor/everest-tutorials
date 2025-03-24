@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/equinor/everest-tutorials/compare/v0.2.0...v0.3.0) (2025-03-24)
+
+
+### Features
+
+* add gh pages publish action ([#12](https://github.com/equinor/everest-tutorials/issues/12)) ([027f3a2](https://github.com/equinor/everest-tutorials/commit/027f3a22e8422792fd0531bb709c1a789b7ca8b6))
+
 ## [0.2.0](https://github.com/equinor/everest-tutorials/compare/v0.1.1...v0.2.0) (2025-03-21)
 
 
