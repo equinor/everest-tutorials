@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/equinor/everest-tutorials/compare/v0.3.0...v0.3.1) (2025-03-24)
+
+
+### Bug Fixes
+
+* correct typo in the download artifact ([#15](https://github.com/equinor/everest-tutorials/issues/15)) ([d82a48c](https://github.com/equinor/everest-tutorials/commit/d82a48cb291747f28a2c972b123fa36335e55153))
+
 ## [0.3.0](https://github.com/equinor/everest-tutorials/compare/v0.2.0...v0.3.0) (2025-03-24)
 
 
