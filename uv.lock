@@ -110,7 +110,7 @@ wheels = [
 
 [[package]]
 name = "everest-tutorials"
-version = "0.1.1"
+version = "0.2.0"
 source = { editable = "." }
 dependencies = [
     { name = "furo" },
@@ -126,7 +126,7 @@ requires-dist = [
     { name = "mypy", specifier = ">=1.15.0" },
     { name = "sphinx", specifier = ">=8.2.3" },
     { name = "sphinx-mdinclude", specifier = ">=0.6.2" },
-    { name = "types-setuptools", specifier = ">=76.0.0.20250313" },
+    { name = "types-setuptools", specifier = ">=76.0.0" },
 ]
 
 [[package]]
