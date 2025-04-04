@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/equinor/everest-tutorials/compare/v0.4.0...v0.4.1) (2025-04-04)
+
+
+### Bug Fixes
+
+* correct documentation to reflect smaller input files ([#23](https://github.com/equinor/everest-tutorials/issues/23)) ([4d7868e](https://github.com/equinor/everest-tutorials/commit/4d7868eb7e3449783e5612e677b07f161b5848d8))
+
 ## [0.4.0](https://github.com/equinor/everest-tutorials/compare/v0.3.1...v0.4.0) (2025-04-04)
 
 
