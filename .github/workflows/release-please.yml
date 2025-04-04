@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
+        with:
+          submodules: true
       - name: create release
         uses: googleapis/release-please-action@v4
         id: release

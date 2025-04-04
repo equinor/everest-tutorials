@@ -1,3 +1,9 @@
+# EVEREST output
+#   ignores everest optimization and simulation output data when defined
+#   in `environment` section `simulation_folder: r{{configpath}}/../output[...]`
+#   and `output_folder: r{{configpath}}/../output/[...]`
+data/**/everest/output/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

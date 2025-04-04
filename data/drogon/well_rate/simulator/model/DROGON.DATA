@@ -27,9 +27,17 @@ VAPOIL
 -- Measurement unit used
 METRIC
 
+CPR
+/
+
 -- Options for equilibration
 EQLOPTS
  'THPRES'  /
+
+-- Dimensions and options for tracers
+-- 2 water tracers
+TRACERS
+ 1*  2 /
 
 -- Grid dimension
 INCLUDE
@@ -82,6 +90,7 @@ WSEGDIMS
 VFPPDIMS
 11 8 8 8 1 4 /
 
+
 -- Input and output files format
 UNIFIN
 UNIFOUT
@@ -128,6 +137,9 @@ INCLUDE
 INCLUDE
  '../include/grid/drogon.multregt' / --from ert template
 
+-- INCLUDE
+--  '../include/grid/drogon.multflt' / --from ert template
+
 -- =============================================================================
 EDIT
 -- =============================================================================
@@ -148,9 +160,23 @@ INCLUDE
 IMPORT
  '../include/props/drogon.swatinit' / --exported by rms
 
+IMPORT
+ '../include/props/drogon.swl' / --exported by rms
+
+IMPORT
+ '../include/props/drogon.swcr' / --exported by rms
+
+IMPORT
+ '../include/props/drogon.sgu' / --exported by rms
+
 INCLUDE
  '../include/props/drogon.pvt' /
 
+-- Set up tracers
+TRACER
+ WT1  WAT 'g' /
+ WT2  WAT 'g' /
+/
 
 EXTRAPMS
   4 /
@@ -159,19 +185,19 @@ EXTRAPMS
 REGIONS
 -- =============================================================================
 
-IMPORT
+INCLUDE
  '../include/regions/drogon.eqlnum' / --exported by rms
 
-IMPORT
+INCLUDE
  '../include/regions/drogon.fipnum' / --exported by rms
 
 INCLUDE
  '../include/regions/drogon.fipzon' / --exported by rms
 
-IMPORT
+INCLUDE
  '../include/regions/drogon.satnum' / --exported by rms
 
-IMPORT
+INCLUDE
  '../include/regions/drogon.pvtnum' / --exported by rms
 
 
@@ -187,6 +213,16 @@ INCLUDE
 INCLUDE
  '../include/solution/drogon.thpres' / --exported by rms
 
+-- Initial tracer concentration vs depth for tracer WT1
+TVDPFWT1
+ 1000  0.0
+ 2500  0.0 /
+
+-- Initial tracer concentration vs depth for tracer WT2
+TVDPFWT2
+ 1000  0.0
+ 2500  0.0 /
+
 RPTSOL
  RESTART=2  FIP=2  'THPRES'  'FIPRESV' /
 
@@ -199,6 +235,11 @@ RPTRST
 -- =============================================================================
 SUMMARY
 -- =============================================================================
+
+--RPTONLY
+
+SUMTHIN
+ 1 /
 
 INCLUDE
  '../include/summary/drogon.summary' /
@@ -218,7 +259,7 @@ INCLUDE
 '../include/schedule/vfp/A-4.inc'/                                           -- 4
 
 INCLUDE
- '../include/schedule/wells.sch' /
+ './WELLS.SCH' /
  
 INCLUDE
  './SCHEDULE_OPT.SCH' /
