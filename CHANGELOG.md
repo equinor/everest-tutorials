@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.0](https://github.com/equinor/everest-tutorials/compare/v0.3.1...v0.4.0) (2025-04-04)
+
+
+### Features
+
+* add placeholders for the next tutorials ([#18](https://github.com/equinor/everest-tutorials/issues/18)) ([7af7285](https://github.com/equinor/everest-tutorials/commit/7af7285aefc2949f2617423065a9cb00c43a6208))
+* added the ensemble as a git submodule ([#21](https://github.com/equinor/everest-tutorials/issues/21)) ([235195f](https://github.com/equinor/everest-tutorials/commit/235195f8750ec84ac6f58f9f182d908f609443ad))
+
 ## [0.3.1](https://github.com/equinor/everest-tutorials/compare/v0.3.0...v0.3.1) (2025-03-24)
 
 
