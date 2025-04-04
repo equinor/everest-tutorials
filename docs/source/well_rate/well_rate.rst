@@ -93,13 +93,13 @@ The following snippet illustrates the ``controls`` section of the configuration 
 
 .. literalinclude:: ../../../data/drogon/well_rate/everest/model/wellrate_experiment.yml
   :language: yaml
-  :lines: 15-30
+  :lines: 11-26
 
 .. important::
 
 	These time indexes have to be specified in the :file:`input/files/rate_constraints.yml` file, in the format of one entry per time index per well.
 
-.. literalinclude:: ../../../data/drogon/well_rate/everest/input/files/rates_constraints.yml
+.. literalinclude:: ../../../data/drogon/well_rate/everest/input/rates_constraints.yml
   :language: yaml
 
 The index key in the control definition is used in conjunction with a template file explained below to determine the time interval for which the control value is applicable. Therefore, a case with a single control time interval would be defined with a single index key value while a case with multiple time intervals will need multiple index key values. The number of index keys can be different for the different wells which means the number of control variables per well and the control time intervals can be different for different wells.
@@ -119,7 +119,7 @@ The ``forward_model`` section contains the list of jobs that will manipulate the
 
 .. literalinclude:: ../../../data/drogon/well_rate/everest/model/wellrate_experiment.yml
   :language: yaml
-  :lines: 69-80
+  :lines: 58-63
   
 The **well_constraints** job requires two input files in their respective formats to be defined by a user. These are:
 
@@ -155,7 +155,7 @@ The estimated gradient is based upon the delta between the perturbed controls an
 
 .. literalinclude:: ../../../data/drogon/well_rate/everest/model/wellrate_experiment.yml
   :language: yaml
-  :lines: 15-34
+  :lines: 11-29
 
 .. important::
 
