@@ -35,7 +35,7 @@ def setup_environment(snapshot, source_root: Path, experiment_name: str, config_
     config.optimization.max_batch_num = 2
     config.model.realizations = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     config.model.realizations_weights = [1 / len(config.model.realizations)] * len(config.model.realizations)
-    config.environment.simulation_folder = f"{config.definitions['user_shortname']}/{config.definitions['case_name']}"
+    # config.environment.simulation_folder = f"{config.definitions['user_shortname']}/{config.definitions['case_name']}"
 
     # Dump and read modified config file:
     modified_config_file = f"{Path(config_file).stem}_modified.yml"
