@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/equinor/everest-tutorials/compare/v0.4.1...v0.5.0) (2025-05-06)
+
+
+### Features
+
+* added the contributors guide to the repository and documentation ([#26](https://github.com/equinor/everest-tutorials/issues/26)) ([4a9d5a7](https://github.com/equinor/everest-tutorials/commit/4a9d5a72a457614456293dcaba892d3bb2ca6de8))
+
 ## [0.4.1](https://github.com/equinor/everest-tutorials/compare/v0.4.0...v0.4.1) (2025-04-04)
 
 
