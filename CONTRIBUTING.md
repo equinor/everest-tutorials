@@ -23,7 +23,7 @@ Below are the guidelines to help you contribute effectively.
 
 The EVEREST Tutorials repository is focused on providing reproducible tutorials for EVEREST. 
 This is a documentation-based repository with examples and configuration files that focus on practical usage. 
-Contributions are welcome to improve the tutorials, fix bugs, and suggest enhancements to the documentation.
+Contributors are welcome to improve the tutorials, fix bugs, and suggest enhancements to the documentation.
 
 
 ## Development Guidelines
