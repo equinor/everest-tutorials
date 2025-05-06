@@ -75,25 +75,21 @@ def read_file_to_string(file_path: str) -> str:
         return file.read()
 
 def _read_opt_and_summary_data(ever_config: EverestConfig) -> str:
-        api = EverestDataAPI(ever_config)
-        opt_df, _, _ = api.export_dataframes()
-        summary_data_df = api.summary_values()
+    api = EverestDataAPI(ever_config)
+    opt_df, _, _ = api.export_dataframes()
+    summary_data_df = api.summary_values()
 
-        # Sort summary dataframe in same way as the older dataframe
-        sort_sum_data_df = summary_data_df.sort(["batch", "date", "simulation"])
+    # Sort summary dataframe in same way as the older dataframe
+    sort_sum_data_df = summary_data_df.sort(["batch", "date", "simulation"])
 
-        # Filter out pertubation (old dataframe only contains function evaluations) and drop unnecessary columns
-        filtered_opt_df = opt_df.filter(~((opt_df["perturbation"].is_not_null()) & (opt_df["simulation_id"].is_null())))
-        short_filt_opt_df = filtered_opt_df.drop(["perturbation", "simulation_id", "realization", "batch_id"])
+    # Filter out pertubation (old dataframe only contains function evaluations) and drop unnecessary columns
+    filtered_opt_df = opt_df.filter(~((opt_df["perturbation"].is_not_null()) & (opt_df["simulation_id"].is_null())))
+    short_filt_opt_df = filtered_opt_df.drop(["perturbation", "simulation_id"])
 
-        # Repeat batches for each reporting step
-        num_report_steps_batch_0 = sort_sum_data_df.filter(pl.col('batch') == 0)['date'].n_unique()
-        num_report_steps_batch_1 = sort_sum_data_df.filter(pl.col('batch') == 1)['date'].n_unique()
-        first_batch_repeated = pl.concat([short_filt_opt_df.slice(0, len(short_filt_opt_df) // 2)] * num_report_steps_batch_0)
-        second_batch_repeated = pl.concat([short_filt_opt_df.slice(len(short_filt_opt_df) // 2, len(short_filt_opt_df))] * num_report_steps_batch_1)
-        total_opt_df = pl.concat([first_batch_repeated, second_batch_repeated])
-        experiment_results = sort_sum_data_df.hstack(total_opt_df)
-        return _extract_csv_from_df(experiment_results)
+    # Repeat batches for each reporting step
+    short_filt_opt_df = short_filt_opt_df.rename({"batch_id": "batch"})
+    experiment_results = sort_sum_data_df.join(short_filt_opt_df, on=["batch", "realization"], how="inner")
+    return _extract_csv_from_df(experiment_results)
 
 def _extract_csv_from_df(df: pl.DataFrame) -> str:
     csv_buffer = io.StringIO()
