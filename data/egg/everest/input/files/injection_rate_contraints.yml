@@ -1,0 +1,31 @@
+INJECT1:
+  1: {phase: {value: 'WATER'}, duration: {value : 1095}}
+  2: {phase: {value: 'WATER'}, duration: {value : 1095}}
+
+INJECT2:
+  1: {phase: {value: 'WATER'}, duration: {value : 1095}}
+  2: {phase: {value: 'WATER'}, duration: {value : 1095}}
+
+INJECT3:
+  1: {phase: {value: 'WATER'}, duration: {value : 1095}}
+  2: {phase: {value: 'WATER'}, duration: {value : 1095}}
+
+INJECT4:
+  1: {phase: {value: 'WATER'}, duration: {value : 1095}}
+  2: {phase: {value: 'WATER'}, duration: {value : 1095}}
+
+INJECT5:
+  1: {phase: {value: 'WATER'}, duration: {value : 1095}}
+  2: {phase: {value: 'WATER'}, duration: {value : 1095}}
+
+INJECT6:
+  1: {phase: {value: 'WATER'}, duration: {value : 1095}}
+  2: {phase: {value: 'WATER'}, duration: {value : 1095}}
+
+INJECT7:
+  1: {phase: {value: 'WATER'}, duration: {value : 1095}}
+  2: {phase: {value: 'WATER'}, duration: {value : 1095}}
+
+INJECT8:
+  1: {phase: {value: 'WATER'}, duration: {value : 1095}}
+  2: {phase: {value: 'WATER'}, duration: {value : 1095}}

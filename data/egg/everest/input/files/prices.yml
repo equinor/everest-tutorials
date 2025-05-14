@@ -1,0 +1,28 @@
+prices:
+    FOPT:
+        - { date: 2023-04-25, value: 503.2, currency: USD }
+    FWPT:
+        - { date: 2023-04-25, value: -6.3, currency: USD }
+    FWIT:
+        - { date: 2023-04-25, value: -6.3, currency: USD }
+
+
+discount_rates:
+    - { date: 2025-04-25, value: 0.08 }
+
+well_costs:
+    - { well: INJECT1, value: 5e6, currency: USD }
+    - { well: INJECT2, value: 5e6, currency: USD }
+    - { well: INJECT3, value: 5e6, currency: USD }
+    - { well: INJECT4, value: 5e6, currency: USD }
+    - { well: INJECT5, value: 5e6, currency: USD }
+    - { well: INJECT6, value: 5e6, currency: USD }
+    - { well: INJECT7, value: 5e6, currency: USD }
+    - { well: INJECT8, value: 5e6, currency: USD }
+
+costs:
+    - { date: 2025-04-25, value: 5e6, currency: USD }
+    - { date: 2025-04-25, value: 5e6, currency: USD }
+    - { date: 2025-04-25, value: 5e6, currency: USD }
+    - { date: 2025-04-25, value: 5e6, currency: USD }
+

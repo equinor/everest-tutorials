@@ -1,0 +1,7 @@
+templates:
+  -
+    file: './templates/wconinje.jinja'
+    keys:
+        opname: rate
+        phase: WATER
+
