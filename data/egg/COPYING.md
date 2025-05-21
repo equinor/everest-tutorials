@@ -1,0 +1,1 @@
+J.D.Jansen (2013): The Egg Model - data files. Version 1. 4TU.ResearchData. dataset. https://doi.org/10.4121/uuid:916c86cd-3558-4672-829a-105c62985ab2

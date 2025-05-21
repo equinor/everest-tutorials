@@ -1,0 +1,65 @@
+definitions:
+  case_name: EGG_INJECTION_RATES
+  user_shortname: r{{os.USER}}
+  flow_folder: r{{configpath}}/../../flow/
+  flowbase: flow/model/r{{case_name}}
+  eclbase: r{{flowbase}}
+  realization_folder: r{{configpath}}/../../flow/realizations/realization-r{{realization}}
+
+environment:
+  simulation_folder: r{{configpath}}/../output/r{{case_name}}/simulation_output
+  output_folder: r{{configpath}}/../output/r{{case_name}}
+
+controls:
+  - name: well_rate
+    type: generic_control
+    perturbation_magnitude: 30
+    min: 0
+    max: 320
+    variables:
+      - { name: INJECT1, initial_guess: [80, 80] }
+      - { name: INJECT2, initial_guess: [80, 80] }
+      - { name: INJECT3, initial_guess: [80, 80] }
+      - { name: INJECT4, initial_guess: [80, 80] }
+      - { name: INJECT5, initial_guess: [80, 80] }
+      - { name: INJECT6, initial_guess: [80, 80] }
+      - { name: INJECT7, initial_guess: [80, 80] }
+      - { name: INJECT8, initial_guess: [80, 80] }
+
+objective_functions:
+  - name: npv
+
+optimization:
+  algorithm: optpp_q_newton
+  min_realizations_success: 1
+  min_pert_success: 1
+  perturbation_num: 1 
+  max_batch_num: 10
+
+model:
+  realizations: r{{range(100) | list()}}
+  data_file: r{{flow_folder}}/model/EGG_MODEL_FLOW.DATA
+
+install_data:
+  - link: False
+    source: r{{flow_folder}}/include
+    target: flow/model/include
+  - link: False
+    source: r{{flow_folder}}/model/EGG_MODEL_FLOW.DATA
+    target: r{{flowbase}}.DATA
+  - link: False
+    source: r{{realization_folder}}/PERM.INC
+    target: flow/model/PERM.INC
+  - link: True
+    source: r{{configpath}}/../input/templates
+    target: templates
+  - link: True
+    source: r{{configpath}}/../input/files/
+    target: files
+
+forward_model:
+  - well_constraints -i files/wells_readydate.json -c files/injection_rate_contraints.yml -rc well_rate.json -o wc_wells.json
+  - add_templates    -i wc_wells.json -c files/template_config.yml -o at_wells.json
+  - schmerge         -s r{{flow_folder}}/model/SCHEDULE_TEMPLATE.SCH -i at_wells.json -o flow/model/EGG_RATES_EVEREST.SCH
+  - flow              r{{flowbase}}.DATA
+  - npv              -s r{{flowbase}}.UNSMRY -o npv -c files/prices.yml -sd 2025-03-25 -ed 2035-11-05 -i files/wells_readydate.json
