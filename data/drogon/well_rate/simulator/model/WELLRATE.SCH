@@ -13,6 +13,7 @@ WCONPROD
 WCONINJE
  'A5'   WATER  SHUT   RATE    6500         1*         500 /
  'A6'   WATER  SHUT   RATE    6500         1*         500 /
+ 'A7'   WATER  SHUT   RATE    6500         1*         500 /
 /
 
 DATES
@@ -28,7 +29,7 @@ DATES
 /
 
 DATES
- 02 MAY 2023 /
+ 2 MAY 2023 /
 /
 
 WELOPEN
