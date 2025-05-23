@@ -21,16 +21,33 @@ Below are the guidelines to help you contribute effectively.
 
 ## Introduction
 
-The EVEREST Tutorials repository is focused on providing reproducible tutorials for EVEREST. 
+The `everest-tutorials` repository is focused on providing reproducible tutorials for EVEREST. 
 This is a documentation-based repository with examples and configuration files that focus on practical usage. 
 Contributors are welcome to improve the tutorials, fix bugs, and suggest enhancements to the documentation.
 
 
 ## Development Guidelines
 
+### Cloning the repository
+
+The `everest-tutorials` repository includes a git submodule linking to the [`fmu-drogon-flow-files`](https://github.com/equinor/fmu-drogon-flow-files/). This submodule contains the input files needed to run the Drogon examples. If you are interested in working with those, you will have to clone this repository recursively: 
+
+```bash
+git clone --recurse-submodules  https://github.com/equinor/everest-tutorials.git
+```
+
+This will clone all files, including the files in the `fmu-drogon-flow-files` repository.
+
+If you are only interested in editing the text files, or work with the other examples, you can clone the repository directly:
+
+```bash
+git clone https://github.com/equinor/everest-tutorials.git
+```
+
+
 ### Drogon model
 
-All provided examples use the Drogon synthetic reservoir model (https://github.com/equinor/fmu-drogon), more specifically the prior of the ensemble output by the iteration `iter-0` (https://github.com/equinor/fmu-drogon-flow-files/).
+All provided examples use the Drogon synthetic reservoir model ([`fmu-drogon`](https://github.com/equinor/fmu-drogon)), more specifically the prior of the ensemble output by the first iteration, or simply `iter-0` ([`fmu-drogon-flow-files`](https://github.com/equinor/fmu-drogon-flow-files/)).
 To avoid duplication, the ensemble data is made available in `/data/drogon/fmu-drogon-flow-files` as a git submodule of the original Drogon repository.
 
 
@@ -125,6 +142,14 @@ Follow the repository's commit message format.
 Provide a clear description of the changes in the pull request.
 Link any related issues or discussions in the pull request description.
 Confirm that all automated checks (such as workflows or actions) pass before requesting a review.
+
+
+## Packaging and Release Artifacts
+
+
+
+## Documentation Builds
+
 
 
 ## Getting Help
