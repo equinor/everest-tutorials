@@ -1,42 +1,63 @@
 # Contributors Guide
 
-Welcome to the **EVEREST™ Tutorials** repository! 
-We appreciate your interest in contributing to this project. 
+Welcome to `everest-tutorials`, the **EVEREST™ Tutorials** repository!
+We appreciate your interest in contributing to this project.
 
-We expect all contributors to adhere to the [Code of Conduct](CODE_OF_CONDUCT.md). 
+We expect all contributors to adhere to the [Code of Conduct](CODE_OF_CONDUCT.md).
 Be respectful and inclusive in all interactions.
+
+If you have any questions or need assistance, feel free to [open a new issue](https://github.com/equinor/everest-tutorials/issues/new/choose) or [start a new discussion](https://github.com/equinor/everest-tutorials/discussions/new/choose).
 
 Below are the guidelines to help you contribute effectively.
 
-
-## Table of Contents
-
-1. [Introduction](#introduction)
-2. [Development Guidelines](#development-guidelines)
-3. [Commit Messages and Pull Requests](#commit-messages-and-pull-requests)
-4. [Packaging and Release Artifacts](#packaging-and-release-artifacts)
-5. [Documentation Builds](#documentation-builds)
-6. [Getting Help](#getting-help)
-
-
 ## Introduction
 
-The `everest-tutorials` repository is focused on providing reproducible tutorials for EVEREST. 
-This is a documentation-based repository with examples and configuration files that focus on practical usage. 
+The `everest-tutorials` repository is focused on providing reproducible tutorials for EVEREST.
+This is a documentation-based repository with examples and configuration files that focus on practical and reproducible usage.
 Contributors are welcome to improve the tutorials, fix bugs, and suggest enhancements to the documentation.
+
+The documentation is built from `main` and is available as a github page in https://equinor.github.io/everest-tutorials/.
 
 
 ## Development Guidelines
 
+### Project organization
+
+The data for each tutorial case is in a directory on the same level as the Drogon ensemble, following the format `/data/drogon/<tutorial_case_name>/`. 
+As an example, the well rate optimization experiment is found in `data/drogon/well_rate/`.
+As an example, this is the directory layout:
+
+```
+data                           # root directory for data
+└── drogon                     # Drogon-based tutorials
+    ├── fmu-drogon-flow-files  # the git submodule containing the ensemble
+    ├── well_rate              # the well rate optimization tutorial
+    └── <tutorial_case_name>   # another case using the Drogon ensemble
+```
+
+As an examble, within the `well_rate` directory, you find all needed input, templates and configuration files to run the optimization experiment:
+
+```
+well_rate
+├── everest    # optimization relevant directory
+│   ├── input  # input for the optimization case
+│   └── model  # optimization model or configuration file
+└── simulator  # simulator relevant directory
+    └── model  # simulator model or configuration file
+```
+
+You can navigate those directories to get examples of the available files. 
+
+
 ### Cloning the repository
 
-The `everest-tutorials` repository includes a git submodule linking to the [`fmu-drogon-flow-files`](https://github.com/equinor/fmu-drogon-flow-files/). This submodule contains the input files needed to run the Drogon examples. If you are interested in working with those, you will have to clone this repository recursively: 
+The `everest-tutorials` repository includes a git submodule linking to the [`fmu-drogon-flow-files`](https://github.com/equinor/fmu-drogon-flow-files/). This submodule contains the input files needed to run the Drogon examples. If you are interested in working with those files, you will have to clone this repository recursively: 
 
 ```bash
 git clone --recurse-submodules  https://github.com/equinor/everest-tutorials.git
 ```
 
-This will clone all files, including the files in the `fmu-drogon-flow-files` repository.
+This will clone all files, including the files from the `fmu-drogon-flow-files` repository.
 
 If you are only interested in editing the text files, or work with the other examples, you can clone the repository directly:
 
@@ -44,18 +65,17 @@ If you are only interested in editing the text files, or work with the other exa
 git clone https://github.com/equinor/everest-tutorials.git
 ```
 
+### Documentation Builds
 
-### Drogon model
+The documentation is maintained as Python package with all depenencies listed in [pyproject.toml](pyproject.toml). 
+The project makes use of `uv` as a package manager, although you can use any other package manager that supports [PEP 518](https://peps.python.org/pep-0518/). 
+Once the dependencies are installed, you can use `sphinx-build` to build your documentation:
 
-All provided examples use the Drogon synthetic reservoir model ([`fmu-drogon`](https://github.com/equinor/fmu-drogon)), more specifically the prior of the ensemble output by the first iteration, or simply `iter-0` ([`fmu-drogon-flow-files`](https://github.com/equinor/fmu-drogon-flow-files/)).
-To avoid duplication, the ensemble data is made available in `/data/drogon/fmu-drogon-flow-files` as a git submodule of the original Drogon repository.
+```bash
+sphinx-build -M html ./docs/source ./docs/build/
+```
 
-
-### Tutorial cases
-
-Each tutorial is in a directory on the same level as the Drogon ensemble, following the format `/data/drogon/TUTORIAL_CASE_NAME/`.
-As an example, the well rate optimization experiment is found in `data/drogon/well_rate/`.
-Within the `well_rate` directory, you find all needed input, templates and configuration files to run the optimization experiment.
+The built documentation is found in the `./docs/build` directory.
 
 
 ### Automatic packaging
@@ -68,15 +88,9 @@ The uploaded assets are found in either:
 - a specific release version (e.g v0.4.1): `https://github.com/equinor/everest-tutorials/releases/download/v0.4.1/everest-tutorials-drogon.tar.gz`
 
 
-### Updating Documentation
+### Commit Messages and Pull Requests
 
-Ensure that any changes to the tutorials or examples are reflected in the built documentation.
-Documentation files should follow the formatting guidelines below, be concise and easy to read.
-
-
-## Commit Messages and Pull Requests
-
-### Commit Messages
+#### Commit Messages
 
 This repository follows a specific format for commit messages.
 Please ensure that your commit messages are clear and conform to the required style.
@@ -120,19 +134,18 @@ The accepted types follow the [Angular convention](https://github.com/convention
 | `test`    | Adding or updating tests (e.g., unit tests, integration tests)                                                             |
 
 
-#### Commit Message Examples
-
-From the merged pull request #21:
+As an examples, this is a commit message from the merged pull request #21:
 
 ```
 feat: added the ensemble as a git submodule
 ```
 
-From the automatic release manager:
+And this is a commit message from the automatic release manager:
 
 ```
 chore(main): release 0.4.1
 ```
+
 
 ### Pull Request Guidelines
 
@@ -144,14 +157,3 @@ Link any related issues or discussions in the pull request description.
 Confirm that all automated checks (such as workflows or actions) pass before requesting a review.
 
 
-## Packaging and Release Artifacts
-
-
-
-## Documentation Builds
-
-
-
-## Getting Help
-
-If you have any questions or need assistance, feel free to [open a new issue](https://github.com/equinor/everest-tutorials/issues/new/choose) or [start a new discussion](https://github.com/equinor/everest-tutorials/discussions/new/choose).
