@@ -59,7 +59,7 @@ run_tests () {
     pip install .
     release_name=$(echo "$_FULL_RELEASE_NAME" | cut --delimiter=- --fields=1)
     set +e
-    python -m pytest -svv tests | tee pytest-output
+    python -m pytest -svv --snapshot-update tests | tee pytest-output
     if [[ "$?" -eq "1" ]]; then
         # The failure return code should be masked if this is due to pytest timing out,
         # then we assume that the compute cluster was too busy to fulfill the test.
