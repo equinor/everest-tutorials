@@ -29,6 +29,7 @@ def setup_environment(snapshot, source_root: Path, experiment_name: str, config_
 
     os.chdir(os.path.join(source_root, "data", "drogon", experiment_name, "everest", "model"))
     config = EverestConfig.load_file(config_file)
+    config.optimization.speculative = True
     config.optimization.max_batch_num = 2
     config.model.realizations = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     config.model.realizations_weights = [1 / len(config.model.realizations)] * len(config.model.realizations)
