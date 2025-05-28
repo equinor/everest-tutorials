@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.5.0](https://github.com/equinor/everest-tutorials/compare/v0.4.1...v0.5.0) (2025-05-28)
+
+
+### Features
+
+* add the new EGG case from the SPE workshop ([#31](https://github.com/equinor/everest-tutorials/issues/31)) ([26cac9e](https://github.com/equinor/everest-tutorials/commit/26cac9e4ab080159b44a2200c4b1e128bc5bbf77))
+* added the contributors guide to the repository and documentation ([#26](https://github.com/equinor/everest-tutorials/issues/26)) ([4a9d5a7](https://github.com/equinor/everest-tutorials/commit/4a9d5a72a457614456293dcaba892d3bb2ca6de8))
+
+
+### Bug Fixes
+
+* use HTTPS for public sub-module instead of SSH ([#36](https://github.com/equinor/everest-tutorials/issues/36)) ([8860556](https://github.com/equinor/everest-tutorials/commit/88605568bf2b2fab4bd0fbb34e27704aab86d60a))
+
+
+### Documentation
+
+* redo well rate tutorial for autoscaling ([#37](https://github.com/equinor/everest-tutorials/issues/37)) ([3bb30d7](https://github.com/equinor/everest-tutorials/commit/3bb30d7be44cfb57941cffb71f88c1e30555c78d))
+
 ## [0.4.1](https://github.com/equinor/everest-tutorials/compare/v0.4.0...v0.4.1) (2025-04-04)
 
 
