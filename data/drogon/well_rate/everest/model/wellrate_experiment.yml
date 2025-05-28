@@ -30,11 +30,9 @@ objective_functions:
 
 optimization:
   algorithm: conmin_mfd
-  min_realizations_success: 50
-  min_pert_success: 50
+  min_realizations_success: 80
   max_batch_num: 10
   perturbation_num: 1
-  speculative: True
 
 model:
   realizations: r{{range(100) | list()}}

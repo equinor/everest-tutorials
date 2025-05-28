@@ -1,7 +1,6 @@
-
+**********************
 Well Rate Optimization
-======================
-
+**********************
 
 The primary goal of this tutorial is to illustrate the process of optimizing production and injection rates of individual wells. The optimization maximizes a user-chosen, predefined objective function. The tutorial consists of three sections:
 
@@ -9,16 +8,25 @@ The primary goal of this tutorial is to illustrate the process of optimizing pro
 2. :ref:`Special considerations <howto_wr>`
 3. :ref:`Practical experiment <experiment_wr>`
 
-
 Model Description
------------------
+#################
 
-This example uses the Drogon model. A detailed description of the Drogon reservoir model can be found :ref:`here <drogon_description>`.
+The Drogon field is a new Equinor benchmark model, used for testing different algorithms and software.
 
+.. figure:: ../model_description/images/drogon_soil.png
+    :width: 1689px
+    :height: 1047px
+    :align: center
+    :scale: 40
+    :alt: model soil wells
+    :figclass: align-center
+
+    The oil saturation map of one of the Drogon field realizations showing the location of the existing well targets and faults.
+
+A detailed description of the Drogon reservoir model can be found :doc:`here <model_description/1_drogon_description>`.
 
 Objective Function
-------------------
-
+##################
 
 The well injection rate optimization experiment uses a single objective function. The chosen objective is an economic metric known as the net present value (NPV). The NPV serves as the quantifiable criterion for measuring the improvement in profitability and evaluating the performance of the optimization process. Its specific definition is as follows:
 
@@ -45,13 +53,10 @@ The unit prices for oil production (:math:`r_o`), water production (:math:`r_{wp
 
     $ gedit prices.yml
 
-
 .. _setup_wr:
 
 The setup of well rate controls
--------------------------------
-
-
+###############################
 An injection or production strategy for a well or collection of wells is defined by two main components, namely the amplitude (the value of the rate prescribed) and the duration for which the value is prescribed. The current standard forward model job available in EVEREST (called **well_constraints**) allows for the rates, time intervals and injection phases to be perturbed. A user can define multiple time intervals to be varied by the procedure. Thus for each time interval a duration, rate and phase control variable can be defined. This tutorial presents only how to define control variables asssociated with injection rates. 
 
 This section demonstrates the necessary inputs for setting up a well rate optimization case. The configuration file :file:`wellrate_experiment.yml` is built in such a way that it can be adapted to implement different well rate optimization experiments.
@@ -71,25 +76,20 @@ The control vector for `wellrate_experiment.yml` contains water injection rates 
 
 The most relevant parts of the configuration file for this set of experiments are the ``controls`` and the ``forward model`` sections, which are described below.
 
-
 Controls
---------
-
-
+********
 The following parameters describing the control variables should be defined in the ``controls`` section of the configuration file:
 
 * **Name** of the controls (user-defined, in this tutorial “well_rate” )
-* **Lower and upper bounds** for the control variable
+* **Lower and upper bounds** for the control variable in unscaled values
 * **Perturbation magnitude for gradient approximation.** This parameter affects the degree of statistical perturbations applied to a set of controls to estimate the sensitivity around the current solution. These perturbations are used to compute the stochastic gradient passed to the optimizer.
-* **Initial values** of the controls (e.g., initial_guess). These controls are scaled in the range of [0.00, 1.00].
+* **Initial values** of the controls (e.g., initial_guess). These controls are unscaled in the range of lower and upper bounds defined above.
 
-The conversion of the scaled controls (**“well_rate”**) to the actual control values used by the simulator (i.e., the transformation to corresponding parameters within **WCONPROD**, **WCONINJE** keywords) is explained later in this tutorial.
-
-The following snippet illustrates the ``controls`` section of the configuration file for three wells over two time intervals.
+The following snippet illustrates the ``controls`` section of the configuration file for three wells over three time intervals.
 
 .. note::
 
-	In order to define an action on a specific well at different times, EVEREST requires that a control variable is defined for that specific target and timestamp. This is achieved by prescribing a unique combination of target **name** and time **index**. In the code snippet below, two well actions are defined for each of the injectors at two different timestamps.
+	In order to define an action on a specific well at different times, EVEREST requires that a control variable is defined for that specific target and timestamp. This is achieved by prescribing a unique combination of target **name** and time **index**. In the code snippet below, three well actions are defined for each of the injectors at three different timestamps.
 
 .. literalinclude:: ../../../data/drogon/well_rate/everest/model/wellrate_experiment.yml
   :language: yaml
@@ -99,7 +99,7 @@ The following snippet illustrates the ``controls`` section of the configuration 
 
 	These time indexes have to be specified in the :file:`input/files/rate_constraints.yml` file, in the format of one entry per time index per well.
 
-.. literalinclude:: ../../../data/drogon/well_rate/everest/input/rates_constraints.yml
+.. literalinclude:: ../../../data/drogon/well_rate/everest/input/files/rates_constraints.yml
   :language: yaml
 
 The index key in the control definition is used in conjunction with a template file explained below to determine the time interval for which the control value is applicable. Therefore, a case with a single control time interval would be defined with a single index key value while a case with multiple time intervals will need multiple index key values. The number of index keys can be different for the different wells which means the number of control variables per well and the control time intervals can be different for different wells.
@@ -108,18 +108,16 @@ The index key in the control definition is used in conjunction with a template f
 
 	It is recommended to start with a configuration with relatively few control variables to evaluate and quality check the setup. More control variables can be added at a later stage, which in general will add complexity but also flexibility in order to obtain an optimized strategy. The optimal/robust setup w.r.t. control variables is typically case dependent and should be evaluated by the individual EVEREST users.
 
-
 .. _wr_forward_model:
 
 Forward Models
---------------
-
+**************
 
 The ``forward_model`` section contains the list of jobs that will manipulate the SCHEDULE files required for the simulations. The setup of the forward models for the well rate optimization experiments is presented below:
 
 .. literalinclude:: ../../../data/drogon/well_rate/everest/model/wellrate_experiment.yml
   :language: yaml
-  :lines: 58-63
+  :lines: 56-61
   
 The **well_constraints** job requires two input files in their respective formats to be defined by a user. These are:
 
@@ -127,7 +125,7 @@ The **well_constraints** job requires two input files in their respective format
 	This file is used to define the start of prescribing the first target rate for each well. This information is used to calculate the dates which correspond to the time intervals in the prediction phase as defined by the user.
 
 2. :file:`-c  rates_constraints.yml`
-	This file contains information about the minimum and maximum allowable values for the flow rates that can be prescribed to the simulator. These bounds are used to scale the EVEREST control values and to convert back to absolute values when parsing to the simulator. The duration and phase keys are used to define the production/injection phase of each well and the length of the control time duration.
+	This file contains information about the duration and phase keys are used to define the production/injection phase of each well and the length of the control time duration.
 
 In addition to these two user-defined input files required by this forward model job, an additional file specified using **-rc** :file:`well_rate.json` is provided as input. :file:`well_rate.json` is automatically generated by EVEREST and is named according to the value given in the key **name** in the ``controls`` section. Finally, the output file of the **well_constraints** forward model, specified using **-o** :file:`wells_rate.yml`, can also be user-defined and serves as input to the next job in the sequence of forward models.
 
@@ -142,28 +140,20 @@ The final job in this sequence of forward models is the **schmerge** job which p
 
 	For more detailed information and examples regarding the forward models please refer to the detailed :doc:`forward model documentation <everest:forward_model_jobs>`.
   
-
 .. _howto_wr:
 
 Special considerations
-----------------------
-
+######################
 
 The following section contains recommendations regarding certain settings that may be case dependent and that can influence the performance of the gradient-based iterative procedure.
 
-The estimated gradient is based upon the delta between the perturbed controls and the current controls versus the delta of the corresponding objective functions. To realize the full impact of both quantities it is advised to keep both the controls and objectives in the same order of magnitude. Scaling has some impact on the gradient calculation, however the extent of this impact is case- and problem-dependent.
+The estimated gradient is based upon the delta between the perturbed controls and the current controls versus the delta of the corresponding objective functions. EVEREST ensures that both the controls and the objectives are in the same order of magnitude, since the relative scale has an impact on the gradient calculation.
 
 .. literalinclude:: ../../../data/drogon/well_rate/everest/model/wellrate_experiment.yml
   :language: yaml
   :lines: 11-29
 
-.. important::
-
-	We recommend that the scaled objective functions values be in the same order of magnitude as the control variables.
-
-.. important::
-
-	As presented in the **controls** section above, it is preferable to start from a control strategy which doesn't have all controls set on the boundaries (min or max). This choice should always be coupled with the perturbation magnitude.
+As presented in the **controls** section above, it is preferable to start from a control strategy which doesn't have all controls set on the boundaries (min or max). This choice should always be coupled with the perturbation magnitude.
 
 Moreover, irrespective of the gradient quality, the algorithm used for optimization can impact search performance depending on the case and the type of control being used as variable.
 
@@ -171,12 +161,10 @@ Moreover, irrespective of the gradient quality, the algorithm used for optimizat
 
 	For more detailed information regarding the available algorithms please refer to the detailed :doc:`optimization backend documentation <everest:optimization_backends>`.
 
-
 .. _experiment_wr:
 
 Well Rate Optimization Experiment
----------------------------------
-
+##################################
 
 The following experiment shows how to run EVEREST for well rate optimization with a given configuration file. The optimization iterates on different well rate strategies to improve an objective function, which in this case is the NPV.
 
@@ -186,13 +174,11 @@ The following experiment shows how to run EVEREST for well rate optimization wit
 
 .. note::
 
-	The optimization results were generated using the EVEREST **version 13.0.4**. Expect small differences in results when using different EVEREST distributions.
+	The optimization results were generated using the EVEREST **version 14.2.3**. Expect small differences in results when using different EVEREST distributions.
 
 
 Experiment setup
-----------------
-
-
+*****************
 In this experiment, we will alter the flow rates for different injection wells during a period of 7 years (from 2023 to 2030) to maximize an economic objective function, i.e., NPV. The control rates are defined three times in the 7-year simulated period every 500 days. Therefore, with three wells (we only vary the rates of the three injectors while keeping the controls of the producers fixed) and three control time intervals, we have a total of 3x3=9 control variables to be optimized. In this experiment uncertainty is taken into account by  using an ensemble of a 100 equally-plausible reservoir models and maximizing average NPV.
 
 The EVEREST configuration file for this experiment is :file:`wellrate_experiment.yml`.
@@ -231,28 +217,25 @@ The results of the optimization process can be found in the following location:
 
   .. code-block:: console
 
-      $ cd everest/output/WELLRATE_EXP/optimization_output/dakota
+      $ cd everest/output/WELLRATE_EXP/optimization_output/
 
-In this folder, the file :file:`dakota_tabular.dat` contains the objective function (with the opposite sign) value for each iteration (the function evolution graph plotted below is generated based on these values).
-
-In addition to the objective function values users can also export the result of different simulator keywords using the **everest export** functionality. The results are then exported to a .csv file. This file can then be used in any visualization solution, e.g., Spotfire, to analyze the results for different quantities.
-
+This folder contains the optimization results in the form of **.parquet** files aggregated by batch (:file:`optimization_output/ensembles`), or by experiment (:file:`optimization_output/optimizer`). These files can be processed in the same way as **.csv** files. The objective function evolution graph and the control variables plot presented below are generated based on these files.
+Additionally, the direct output from the optimizer is also located here, :file:`optimization_output/dakota`.
 
 Analysis
---------
-
+********
 
 The Everviz application can be used to load the optimization results and plot the objective function values. The figure show that an increase in the objective, i.e., the expected NPV over the entire ensemble, has been achieved.
 
 .. figure:: images/obj_fct.svg
-    :width: 519px
-    :height: 414px
+    :width: 529px
+    :height: 431px
     :align: center
     :alt: obj fct exp1
     :scale: 100
     :figclass: align-center
 
-    The initial NPV is 15.2bn USD while the best NPV (batch 9) yields an NPV of 16.4bn USD. The optimal well rate configuration provides an NPV improvement of 7.96% or 1.21bn USD 
+    The initial NPV is 15.26bn USD while the best NPV (batch 9) yields an NPV of 16.45bn USD. The optimal well rate configuration provides an NPV improvement of 8% or 1.19bn USD 
 
 .. admonition:: Optimization results can be visualized using the built in solution, Everviz
 
@@ -262,7 +245,7 @@ The Everviz application can be used to load the optimization results and plot th
 
 .. important::
 
-	For more detailed information regarding the Everviz usage please refer to the detailed :ref:`everviz documentation <everviz>`.
+	For more detailed information regarding the Everviz usage please refer to the detailed :doc:`documentation <4_everviz>`.
 
 To quantify and comprehend the flow mechanisms that led to the observed increase in the objective function value, a comparison of the initial and optimal injection strategies is provided in the figures below. The field oil production and water injection rates, as well as the cumulative production and injection rates, are compared between the initial case (represented in purple) and the optimized case (represented in orange) for all model realizations. These results correspond to ''**batch 0**'' (initial case) and ''**batch 9**'' (optimized case) from the simulation output.
 
@@ -346,3 +329,6 @@ The figure below compares the initial and optimal values for the controls. The f
 
     Initial versus optimal controls
 
+.. important::
+
+	For more examples on how to add complexity to the setups please refer to the :doc:`multi-objective <3_3_well_rate_multi_objective>` and  :doc:`constrained optimization <3_2_well_rate_constraints>` topics.
