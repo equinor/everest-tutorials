@@ -1,0 +1,90 @@
+scales:
+    x: 7207.0
+    y: 6303.0
+    z: 133.0
+
+references:
+    x: 462945.0
+    y: 5933015.0
+    z: 1633.0
+
+interpolation:
+  type: resinsight
+  measured_depth_step: 5.0
+
+connections:
+  type: resinsight
+  date: 2020-07-01
+  formations_file: ./files/drogon_formations.lyr
+  perforations:
+    - well: A1
+      formations: [0]
+    - well: A2
+      formations: [0]
+    - well: A3
+      formations: [0]
+    - well: A4
+      formations: [0]
+    - well: A5
+      formations: [0]
+    - well: A6
+      formations: [0]
+
+wells:
+  - name: A1
+    group: OP
+    phase: OIL
+    skin: 0.0
+    radius: 0.15
+    dogleg: 4.0
+    cost: 7.0e6
+    platform: platform1
+  - name: A2
+    group: OP
+    phase: OIL
+    skin: 0.0
+    radius: 0.15
+    dogleg: 4.0
+    cost: 7.0e6
+    platform: platform1
+  - name: A3
+    group: OP
+    phase: OIL
+    skin: 0.0
+    radius: 0.15
+    dogleg: 4.0
+    cost: 7.0e6
+    platform: platform1
+  - name: A4
+    group: OP
+    phase: OIL
+    skin: 0.0
+    radius: 0.15
+    dogleg: 4.0
+    cost: 7.0e6
+    platform: platform1
+  - name: A5
+    group: WI
+    phase: WATER
+    skin: 0.0
+    radius: 0.15
+    dogleg: 4.0
+    cost: 7.0e6
+    platform: platform1
+  - name: A6
+    group: WI
+    phase: WATER
+    skin: 0.0
+    radius: 0.15
+    dogleg: 4.0
+    cost: 7.0e6
+    platform: platform1
+
+platforms:
+  - name: platform1
+    x: 462638.0
+    y: 5932453.0
+    k: 200.0
+
+npv_input_file: prices.yml
+

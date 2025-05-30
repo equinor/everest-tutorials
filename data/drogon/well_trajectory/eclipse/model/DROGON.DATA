@@ -1,0 +1,418 @@
+--==============================================================================
+--		Synthetic reservoir simulation model Drogon (2020)
+--==============================================================================
+
+-- Drogon model - modified for EVEREST
+
+
+-- =============================================================================
+RUNSPEC
+-- =============================================================================
+
+-- Simulation run title
+TITLE
+ Drogon synthetic reservoir model
+
+-- Simulation run start
+START
+ 3 SEP 2022 /
+
+-- Fluid phases present
+OIL
+GAS
+WATER
+DISGAS
+VAPOIL
+
+-- Measurement unit used
+METRIC
+
+-- Options for equilibration
+EQLOPTS
+ 'THPRES'  /
+
+-- Grid dimension
+INCLUDE
+  '../include/runspec/drogon.dimens' / -- exported by rms
+
+-- Table dimensions
+INCLUDE
+  '../include/runspec/drogon.tabdims' / -- exported by rms
+
+-- Dimension of equilibration tables
+INCLUDE
+  '../include/runspec/drogon.eqldims' / -- exported by rms
+
+-- Regions dimension data
+INCLUDE
+  '../include/runspec/drogon.regdims' / -- exported by rms
+
+-- x-,y-,z- and multnum regions
+INCLUDE
+  '../include/runspec/drogon.gridopts' / -- exported by rms
+
+-- Dimensions for fault data
+FAULTDIM
+ 500 /
+
+-- Well dimension data
+-- nwmaxz: max wells in the model
+-- ncwmax: max connections per well
+-- ngmaxz: max groups in the model
+-- nwgmax: max wells in any one group
+WELLDIMS
+-- nwmaxz  ncwmax  ngmaxz  nwgmax
+   20       100     10       20 /
+
+-- Dimensions for multi-segment wells
+-- nswlmx: max multi-segment wells in the model
+-- nsegmx: max segments per well
+-- nlbrmx: max branches per multi-segment well
+WSEGDIMS
+-- nswlmx  nsegmx  nlbrmx
+   3       150      100 /
+
+-- VFP table dimensions
+-- 1. Max number of flow values per table
+-- 2. Max number of THP values per table
+-- 3. Max number of WFR values per table
+-- 4. Max number of GFR values per table
+-- 5. Max number of ALQ values per table
+-- 6. Max number of VFP tables
+VFPPDIMS
+11 8 8 8 1 4 /
+
+-- Input and output files format
+UNIFIN
+UNIFOUT
+
+
+-- print and stop limits
+-- -----------print------------  -----------stop--------------------
+-- mes  com  war  prb  err  bug  mes  com   war     prb    err  bug
+MESSAGES
+   1*   1*   1*   1000 10   1*   1*    1*  1000000 7000    0   /
+
+
+-- =============================================================================
+GRID
+-- =============================================================================
+NOECHO
+
+NEWTRAN
+
+GRIDFILE
+ 0 1 /
+
+INIT
+
+--Generates connections across pinched-out layers
+PINCH
+ 3*  ALL  /
+
+IMPORT
+ '../include/grid/drogon.grid' / --exported by rms
+
+INCLUDE
+ '../include/grid/drogon.faults' / --exported by rms
+
+IMPORT
+ '../include/grid/drogon.poro' / --exported by rms
+
+IMPORT
+ '../include/grid/drogon.perm' / --exported by rms
+
+INCLUDE
+ '../include/grid/drogon.multnum' / --exported by rms
+
+INCLUDE
+ '../include/grid/drogon.multregt' / --from ert template
+
+-- =============================================================================
+EDIT
+-- =============================================================================
+
+INCLUDE
+ '../include/edit/drogon.trans' / --exported by rms
+
+
+-- =============================================================================
+PROPS
+-- =============================================================================
+
+FILLEPS
+
+INCLUDE
+ '../include/props/drogon.sattab' / --exported by rms
+
+IMPORT
+ '../include/props/drogon.swatinit' / --exported by rms
+
+INCLUDE
+ '../include/props/drogon.pvt' /
+
+
+EXTRAPMS
+  4 /
+
+-- =============================================================================
+REGIONS
+-- =============================================================================
+
+INCLUDE
+ '../include/regions/drogon.eqlnum' / --exported by rms
+
+INCLUDE
+ '../include/regions/drogon.fipnum' / --exported by rms
+
+INCLUDE
+ '../include/regions/drogon.fipzon' / --exported by rms
+
+INCLUDE
+ '../include/regions/drogon.satnum' / --exported by rms
+
+INCLUDE
+ '../include/regions/drogon.pvtnum' / --exported by rms
+
+
+-- =============================================================================
+SOLUTION
+-- =============================================================================
+
+INCLUDE
+ '../include/solution/drogon.equil' / --exported by rms
+INCLUDE
+ '../include/solution/drogon.rxvd' / --!! manually created (7 equil regions)
+
+INCLUDE
+ '../include/solution/drogon.thpres' / --exported by rms
+
+RPTSOL
+ RESTART=2  FIP=2  'THPRES'  'FIPRESV' /
+
+-- ALLPROPS --> fluid densities, viscosities , reciprocal formation volume factors and phase relative permeabilities
+-- NORST=1  --> output for visualization only
+RPTRST
+ BASIC=2 ALLPROPS RVSAT RSSAT PBPD  NORST=1 RFIP RPORV /
+
+
+-- =============================================================================
+SUMMARY
+-- =============================================================================
+
+INCLUDE
+ '../include/summary/drogon.summary' /
+
+
+-- =============================================================================
+SCHEDULE
+-- =============================================================================
+
+INCLUDE
+'../include/schedule/vfp/A-1.inc'/                                           -- 1
+INCLUDE
+'../include/schedule/vfp/A-2.inc'/                                           -- 2
+INCLUDE
+'../include/schedule/vfp/A-3.inc'/                                           -- 3
+INCLUDE
+'../include/schedule/vfp/A-4.inc'/                                           -- 4
+ 
+
+INCLUDE
+ '../../A1.SCH' /
+
+INCLUDE
+ '../../A2.SCH' /
+
+INCLUDE
+ '../../A3.SCH' /
+
+INCLUDE
+ '../../A4.SCH' /
+
+INCLUDE
+ '../../A5.SCH' /
+
+INCLUDE
+ '../../A6.SCH' /
+
+
+WCONPROD
+--WELL OP/SH   CTL       ORAT       WRAT       GRAT       LRAT       RRAT        BHP        THP   VFP        ALQ
+ 'A1'   OPEN  LRAT       3000       3000         1*       4000         1*        150         1*    1*         1* /
+ 'A2'   OPEN  LRAT       4000       4000         1*       2500         1*        150         1*    1*         1* /
+ 'A3'   OPEN  LRAT       4000       4000         1*       2500         1*        150         1*    1*         1* /
+ 'A4'   OPEN  LRAT       4000       4000         1*       4000         1*        150         1*    1*         1* /
+/
+
+WCONINJE
+--WELL PHASE OP/SH   CTL       SRAT       RRAT        BHP        THP   VFP
+ 'A5'  WATER  OPEN  RATE       6500         1*        500         1*    1* /
+ 'A6'  WATER  OPEN  RATE       6500         1*        500         1*    1* /
+/
+
+TUNING
+-- TSINIT       TSMAXZ     TSMINZ     TSMCHP     TSFMAX     TSFMIN     TSFCNV     TFDIFF     THRUPT     TMAXWC
+          1         10         1*         1*         1*         1*         1*         1*         1*          1 /
+-- TRGTTE       TRGCNV     TRGMBE     TRGLCV     XXXTTE     XXXCNV     XXXMBE     XXXLCV     XXXWFL
+         1*         1*         1*         1*         1*         1*         1*         1*         1* /
+-- NEWTMX       NEWTMN     LITMAX     LITMIN     MXWSIT     MXWPIT
+         12          1         50          1         50         50 /
+
+DATES
+ 1 OCT 2022 /
+/
+
+DATES
+ 1 NOV 2022 /
+/
+
+DATES
+ 1 DEC 2022 /
+/
+
+DATES
+ 1 JAN 2023 /
+/
+
+DATES
+ 1 FEB 2023 /
+/
+
+DATES
+ 1 MAR 2023 /
+/
+
+DATES
+ 1 APR 2023 /
+/
+
+DATES
+ 1 MAY 2023 /
+/
+
+DATES
+ 1 JUN 2023 /
+/
+
+DATES
+ 1 JLY 2023 /
+/
+
+DATES
+ 1 AUG 2023 /
+/
+
+DATES
+ 1 SEP 2023 /
+/
+
+DATES
+ 1 OCT 2023 /
+/
+
+DATES
+ 1 NOV 2023 /
+/
+
+DATES
+ 1 DEC 2023 /
+/
+
+DATES
+ 1 JAN 2024 /
+/
+
+DATES
+ 1 FEB 2024 /
+/
+
+DATES
+ 1 MAR 2024 /
+/
+
+DATES
+ 1 APR 2024 /
+/
+
+DATES
+ 1 MAY 2024 /
+/
+
+DATES
+ 1 JUN 2024 /
+/
+
+DATES
+ 1 JLY 2024 /
+/
+
+DATES
+ 1 AUG 2024 /
+/
+
+DATES
+ 1 SEP 2024 /
+/
+
+DATES
+ 1 OCT 2024 /
+/
+
+DATES
+ 1 NOV 2024 /
+/
+
+DATES
+ 1 DEC 2024 /
+/
+
+DATES
+ 1 JAN 2025 /
+/
+
+DATES
+ 1 APR 2025 /
+/
+
+DATES
+ 1 JLY 2025 /
+/
+
+DATES
+ 1 OCT 2025 /
+/
+
+DATES
+ 1 JAN 2026 /
+/
+
+DATES
+ 1 APR 2026 /
+/
+
+DATES
+ 1 JLY 2026 /
+/
+
+DATES
+ 1 OCT 2026 /
+/
+
+DATES
+ 31 DEC 2026 /
+/
+
+RPTRST
+ BASIC=2 NORST=1 /
+
+DATES
+ 1 JAN 2027 /
+/
+
+--------------
+END
+--------------
+
+
+
