@@ -287,7 +287,7 @@ After preparing the Everest input files, this section presents the two main well
 
 
 * **name (predefined)**: Assigns the x,y,z coordiantes of (:math:`P_1`), (:math:`P_2`), and (:math:`P_3`).
-* **type (predefined)**: Specifies the control type, by default generic_control.
+* **type (default)**: Specifies the control type, by default generic_control.
 * **perturbation_magnitude**: Lower and upper bounds around the initial guess based on Gaussian (normal) distribution in meters.
 * **min, max**: Sets the minimum and maximum value of the corresponding coordinate to restrict the location of the well trajectory perturbations within a specified rectangular bounding box
 * **variables**: Control variables defined as follows:
