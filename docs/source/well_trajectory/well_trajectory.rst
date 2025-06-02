@@ -338,7 +338,7 @@ In addition to the Everest main configuration file, :file:`drogon_trajectory_for
 
 
 * **wells**:
-    - *name*: Well name that has to allign with the well names in the configure file. 
+    - *name*: Well name that must align with the well names in the configure file. 
     - *group*: Well group name printed to WELSPECS
     - *phase*: Phase name printed to WELSPECS
     - *skin*: Skin factor printed to COMPDAT
