@@ -293,7 +293,7 @@ After preparing the Everest input files, this section presents the two main well
 * **variables**: Control variables defined as follows:
     *  *name*: Name of corresponding well coordinate
     *  *initial_guess*: Initial guess of the corresponding well coordinate.
-    *  *enable (predefined)*: If set to False, the corresponding coordinate will be excluded from the optimization process.
+    *  *enable (default)*: If set to False, the corresponding coordinate will be excluded from the optimization process.
 
 
 
