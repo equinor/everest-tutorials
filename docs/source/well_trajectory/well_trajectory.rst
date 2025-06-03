@@ -90,12 +90,12 @@ A snippet of the price input file is displayed below. The following input parame
 
 * **prices**:
     * *FOPT, FGPT, FWPT, FWIT*: Specifies the corresponding production or injection quantity.
-    * *currency (predefined)*: USD
+    * *currency (default)*: USD
     * *date*: Optional — used if discount rates apply.
     * *value*: Defines the prices of the corresponding quantity. Prices must be consistent with the volume unit used in Eclipse, e.g., $/Sm³.
 
 * **well_costs**:
-    * *currency (predefined)*: USD
+    * *currency (default)*: USD
     * *value*: Drilling cost specified in $/km of well length.
     * *well*: Specifies which well the cost applies to.
 
@@ -128,7 +128,7 @@ The Everest well trajectory module uses five coordinates per well to describe an
 .. _guide_points:
 
 
-.. figure:: images/well_traject/guide_points.png
+.. figure:: images/well_trajectory/guide_points.png
     :align: center
     :alt: model zones
     :figclass: align-center
@@ -141,7 +141,7 @@ To ensure the monotonicity of the well trajectories, points (:math:`P_1`) and (:
 - *y*: UTM Northing horizontal position (north–south) in meters
 - *z*: Depth in meters, typically measured from mean sea level
 
-The corresponding coordinates can be, for example, read from ResInsight after one of the geolgical realizations has been loaded. Note that Everest automatically normalizes the coordinates to ensure that all variables are represented on a comparable scale during the optimization process.
+The corresponding coordinates can be, for example, read from ResInsight after one of the geological realizations has been loaded. Note that Everest automatically normalizes the coordinates to ensure that all variables are represented on a comparable scale during the optimization process.
 
 
 The middle point (:math:`P_2`) = (:math:`P_2`\_a), (:math:`P_2`\_b), (:math:`P_2`\_c) is defined by:
@@ -157,7 +157,7 @@ The default values of (:math:`P_2`\_a), (:math:`P_2`\_b), and (:math:`P_2`\_c) a
 
 
 
-.. figure:: images/well_traject/workflow_2.png
+.. figure:: images/well_trajectory/workflow_2.png
     :align: center
     :alt: box
     :figclass: align-center
@@ -168,11 +168,11 @@ The default values of (:math:`P_2`\_a), (:math:`P_2`\_b), and (:math:`P_2`\_c) a
 
 
 
-After parametrizing the well trajectories into a manageable set of guide points, Everest extrapolates the corresponding well paths and writes them in a format readable by the reservoir simulator. During the optimization process, Everest moves the guide points within the given coordinate limits and selected perturbation magnitudes. Based on the updated guide points, the well trajectory module extrapolates the well paths and calculates the corresponding well geometry and perforations to be passed to the reservoir simulator. The data is written to the Eclipse/OPM keywords WELSPECS and COMPDAT. To retrieve the required geometrical input, the .EGRID and .INIT files must be present. In the case of multi-segment wells, the well trajectory module can also generate WELSEGS and COMPSEGS keywords.
+After parametrizing the well trajectories with a set of guide points, Everest extrapolates the corresponding well paths and writes them in a format readable by the reservoir simulator. During the optimization process, Everest moves the guide points within the given coordinate limits and selected perturbation magnitudes. Based on the updated guide points, the well trajectory module extrapolates the well paths and calculates the corresponding well geometry and perforations to be passed to the reservoir simulator. The data is written to the Eclipse/OPM keywords WELSPECS and COMPDAT. To retrieve the required geometrical input, the .EGRID and .INIT files must be present. In the case of multi-segment wells, the well trajectory module can also generate WELSEGS and COMPSEGS keywords.
 
 
 
-.. figure:: images/well_traject/workflow_1.png
+.. figure:: images/well_trajectory/workflow_1.png
     :width: 4161px
     :height: 931px
     :align: center
@@ -187,7 +187,7 @@ After parametrizing the well trajectories into a manageable set of guide points,
 To determine the grid blocks intersected by the well trajectories, well connections, transmissibilities, and effective Kh factors, Everest is coupled to ResInsight. The connection factors are influenced by the geological properties of the intercepted grid block, as well as a geometric correction factor that accounts for the length and position of the well trajectory segment within each intercepted grid block. The geometric factor is derived from projection calculations (see Figure below). Furthermore, Everest allows users to specify parameters such as wellbore diameter, skin factor, and D-factor.
 
 
-.. figure:: images/well_traject/workflow_3.png
+.. figure:: images/well_trajectory/workflow_3.png
     :width: 1362px
     :height: 350px
     :align: center
@@ -205,7 +205,7 @@ To restrict well trajectory perturbations to geologically meaningful areas, the 
 
 .. _bounding_box:
 
-.. figure:: images/well_traject/bounding_box.png
+.. figure:: images/well_trajectory/bounding_box.png
     :align: center
     :alt: model zones
     :figclass: align-center
@@ -232,10 +232,10 @@ In this tutorial, we will assume that no wells have been added to the Eclipse fi
 
 * The forward model prints the general specification data for wells (WELSPECS) and the completion specification data (COMPDAT) into files named *A1.SCH* to *A6.SCH*. Ensure that the Eclipse Schedule section of the simulation file is linked to the output files generated by the forward model.
 
-* Ensure that the WCONPROD section contains an entry for each added production well (A1 to A4). Moreover, the  two injection wells are specified in the WCONINJE section.
+* Ensure that the WCONPROD section contains an entry for each added production well (A1 to A4). Moreover, the two injection wells are specified in the WCONINJE section.
 
 
-* Optionally (and not used in this tutorial), in the case of multisegment wells, the user can add *A1_MSW.SCH* to *A6_MSW.SCH*. These files contain the segment structure of a multisegment well (WELSEGS) and the locations of completions within a multisegment well (COMPSEGS).
+* Optionally (and not used in this tutorial), in the case of multisegmented wells, the user can add *A1_MSW.SCH* to *A6_MSW.SCH*. These files contain the segmented structure of a multisegmented well (WELSEGS) and the locations of completions within a multisegmented well (COMPSEGS).
 
 
 A summary of the modified Eclipse *.DATA* file is provided below, which includes the six well schedule files and the corresponding WCONPROD and WCONINJE keywords. 
@@ -268,7 +268,7 @@ Everest input for well path optimization
 =================
 
 
-After preparing the Everest input files, this section presents the two main well trajectory configuration files in detail. File :file:`drogon_well_trajectory_tutorial.yml` defines the general Everest input, including the control variables. File :file:`drogon_trajectory_forward_model.yml` describes the well trajectory forward model. The Everest control section in :file:`file:drogon_well_trajectory_tutorial.yml` defines the coordinates of the four production and two injection wells using three guide points ((:math:`P_1`), (:math:`P_2`), and (:math:`P_3`)). For a three-dimensional case, this results in 54 coordinates that are optimized. The controls section consists of the following keywords:
+After preparing the Everest input files, this section presents the two main well trajectory configuration files in detail. File :file:`drogon_well_trajectory_tutorial.yml` defines the general Everest input, including the control variables. File :file:`drogon_trajectory_forward_model.yml` describes the well trajectory forward model input. The Everest control section in :file:`file:drogon_well_trajectory_tutorial.yml` defines the coordinates of the four production and two injection wells using three guide points ((:math:`P_1`), (:math:`P_2`), and (:math:`P_3`)). For a three-dimensional case, this results in 54 coordinates that are optimized. The controls section consists of the following keywords:
 
 
 .. admonition:: Go to
@@ -286,14 +286,14 @@ After preparing the Everest input files, this section presents the two main well
 
 
 
-* **name (predefined)**: Assigns the x,y,z coordiantes of (:math:`P_1`), (:math:`P_2`), and (:math:`P_3`).
-* **type (predefined)**: Specifies the control type, by default generic_control.
+* **name (default)**: Assigns the x,y,z coordiantes of (:math:`P_1`), (:math:`P_2`), and (:math:`P_3`).
+* **type (default)**: Specifies the control type, by default generic_control.
 * **perturbation_magnitude**: Lower and upper bounds around the initial guess based on Gaussian (normal) distribution in meters.
 * **min, max**: Sets the minimum and maximum value of the corresponding coordinate to restrict the location of the well trajectory perturbations within a specified rectangular bounding box
 * **variables**: Control variables defined as follows:
     *  *name*: Name of corresponding well coordinate
     *  *initial_guess*: Initial guess of the corresponding well coordinate.
-    *  *enable (predefined)*: If set to False, the corresponding coordinate will be excluded from the optimization process.
+    *  *enable (default)*: If set to False, the corresponding coordinate will be excluded from the optimization process.
 
 
 
@@ -319,9 +319,6 @@ After completing the simulation runs and calculating the objective function, Eve
 
 
 
-
-
-
 In addition to the Everest main configuration file, :file:`drogon_trajectory_forward_model.yml` defines the well trajectory forward job. The following parameters are specified in the file:
 
 
@@ -338,12 +335,12 @@ In addition to the Everest main configuration file, :file:`drogon_trajectory_for
 
 
 * **wells**:
-    - *name*: Well name that has to allign with the well names in the configure file. 
+    - *name*: Well name that has to allign with the well names in the configuration file. 
     - *group*: Well group name printed to WELSPECS
     - *phase*: Phase name printed to WELSPECS
     - *skin*: Skin factor printed to COMPDAT
     - *radius*: Well radius printed to COMPDAT
-    - *dogleg*: TBC
+    - *dogleg*: Measure of well curvature in degrees/30m.
     - *Platform*: Anchor point of (:math:`P_1`), (:math:`P_2`), (:math:`P_3`). 
 
 
@@ -377,8 +374,6 @@ In addition to the Everest main configuration file, :file:`drogon_trajectory_for
 
 
 
-
-
 .. _optimization_results:
 
 Tutorial results
@@ -406,13 +401,6 @@ If the  *lint* command does not indicate any errors, we can execute the command 
 
 
 
-
-
-.. _experiments_wtj:
-
-Tutorial results
---------------------
-
 The results of the optimization process can be visualized using the built-in solution, **Everviz**, or, for example, customized Python analysis tools. To use Everviz, type the following command
 
 .. admonition:: Launch Everviz for the current experiment
@@ -424,29 +412,29 @@ The results of the optimization process can be visualized using the built-in sol
 
 
 
-The Figure below displays the evolution of the objective function (NPV) over eight optimization batches. Starting from an initial NPV of $ 2.8 B, the optimizer rapidly improves the value in the early batch iterations, reaching approximately  $ 3.7 B by batch 5. This corresponds to a total increase of $0.9 billion, representing a 31% improvement over the initial value.
+The Figure below displays the evolution of the objective function (NPV) over eight optimization batches. Starting from an initial NPV of $ 2.68 B, the optimizer rapidly improves the value in the early batch iterations, reaching approximately  $ 3.45 B by batch 5. This corresponds to a total increase of $0.78 billion, representing a 29% improvement over the initial value.
 
 .. _Objective_Function_summary:
 
-.. figure:: images/well_traject/Objective_Function_summary.svg
+.. figure:: images/well_trajectory/Objective_Function_summary.svg
     :align: center
     :alt: model zones
     :figclass: align-center
 
     Development the objective function (NPV) over eight optimization batches. The optimizer increases NPV from $2.8 billion to approximately $3.7 billion by batch 5.
 
-The Figures below compare the cumulative production between the initial well configuration (Batch 0) and the optimized well trajectory result (Batch 5). Both cumulative oil production and gas production have increased significantly in Batch 5, with oil production rising by 30% and gas production by 26%. Additionally, water production has decreased by 16%, resulting in reduced operational costs associated with water handling. The combination of higher oil and gas output, along with lower water production, leads to a notable improvement in NPV due to the optimized well trajectories.
+The Figures below compare the cumulative production between the initial well configuration (Batch 0) and the optimized well trajectory result (Batch 5). Both cumulative oil production and gas production have increased significantly in Batch 5, with oil production rising by 20% and gas production by 21%. Additionally, water production has decreased by 15%, resulting in reduced operational costs associated with water handling. The combination of higher oil and gas output, along with lower water production, leads to a notable improvement in NPV due to the optimized well trajectories.
 
 .. _Objective_Function_summary:
 
-.. figure:: images/well_traject/DROGON_TRAJECTORY_FOPT.svg
+.. figure:: images/well_trajectory/DROGON_TRAJECTORY_FOPT.svg
     :align: center
     :alt: model zones
     :figclass: align-center
 
     Comparison of total field oil production for initial and optimized well trajectory strategies.
 
-.. figure:: images/well_traject/DROGON_TRAJECTORY_FGPT.svg
+.. figure:: images/well_trajectory/DROGON_TRAJECTORY_FGPT.svg
     :align: center
     :alt: model zones
     :figclass: align-center
@@ -454,7 +442,7 @@ The Figures below compare the cumulative production between the initial well con
     Comparison of total field gas production for initial and optimized well trajectory strategies.
 
 
-.. figure:: images/well_traject/DROGON_TRAJECTORY_FWPT.svg
+.. figure:: images/well_trajectory/DROGON_TRAJECTORY_FWPT.svg
     :align: center
     :alt: model zones
     :figclass: align-center
@@ -474,7 +462,7 @@ Finally, Figure 11 and Figure 12 display the initial and optimized well trajecto
 
     Average oil saturation of the Drogon ensemble for Batch 0 (base case).
 
-.. figure:: images/drogon/SOIL_BATCH_9.png
+.. figure:: images/drogon/SOIL_BATCH_5.png
     :align: center
     :alt: model zones
     :figclass: align-center
