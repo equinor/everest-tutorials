@@ -7,11 +7,7 @@ definitions:
   case_name: DROGON_TRAJECTORY_TUTORIAL
   
 environment:
-<<<<<<< HEAD
   simulation_folder: /scratch/everest/users/ffeld/DROGON_TRAJECTORY/r{{case_name}}
-=======
-  simulation_folder: r{{configpath}}/../output/r{{case_name}}/r{{user_shortname}}/r{{case_name}}
->>>>>>> 5ac87da (Apply additional updates to documentation and figures)
   output_folder: r{{configpath}}/../output/r{{case_name}}
   random_seed: 202220928
 
@@ -137,8 +133,8 @@ controls:
 objective_functions:
   -
     name: npv
-    weight: 1
-    normalization: 0.000000001
+    auto_scale: True 
+    
 
 optimization:
   algorithm: optpp_q_newton
@@ -153,11 +149,7 @@ optimization:
     - "max_step = 0.1"
  
 model:
-<<<<<<< HEAD
-  realizations: r{{ range(100) | list() }}
-=======
   realizations: r{{ range(10) | list() }}
->>>>>>> 5ac87da (Apply additional updates to documentation and figures)
   data_file: r{{ecl_initial_data}}.DATA
 
 simulator:
@@ -184,11 +176,7 @@ install_data:
 
 forward_model:
   # update schedule
-<<<<<<< HEAD
-  - well_trajectory -c files/drogon_well_trajectory_input_scaled.yml -E r{{realization_folder}}/model/DROGON_SIM
-=======
   - well_trajectory -c files/drogon_trajectory_forward_model.yml -E r{{realization_folder}}/model/DROGON_SIM
->>>>>>> 5ac87da (Apply additional updates to documentation and figures)
   
   # run simulation  
   - eclipse100 --version 2021.1 r{{eclbase}}.DATA

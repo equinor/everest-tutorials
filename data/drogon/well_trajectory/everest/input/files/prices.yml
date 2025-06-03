@@ -1,37 +1,41 @@
 prices:
   FOPT:
   - currency: USD
-    date: 2022-09-03
-    value: 400
+    date: 2023-01-01
+    value: 440
   FGPT:
   - currency: USD
-    date: 2022-09-03
+    date: 2023-01-01
     value: 0.4
   FWPT:
   - currency: USD
-    date: 2022-09-03
+    date: 2023-01-01
     value: -6.3
   FWIT:
   - currency: USD
-    date: 2022-09-03
+    date: 2023-01-01
     value: -6.3
   
+discount_rates:
+    - { date: 2023-01-01, value: 0.08 }
+
+
 well_costs:
 - currency: USD
-  value: 4e6
+  value: 1.5e6
   well: A1
 - currency: USD
-  value: 4e6
+  value: 1.5e6
   well: A2
 - currency: USD
-  value: 4e6
+  value: 1.5e6
   well: A3
 - currency: USD
-  value: 4e6
+  value: 1.5e6
   well: A4
 - currency: USD
-  value: 6e6
+  value: 1.5e6
   well: A5
 - currency: USD
-  value: 6e6
+  value: 1.5e6
   well: A6
