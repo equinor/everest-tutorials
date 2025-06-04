@@ -107,10 +107,6 @@ A snippet of the price input file is displayed below. The following input parame
 
 
 
-
-
-
-
 .. _Everest_workflow_description:
 
 Everest well trajectory workflow
@@ -120,9 +116,7 @@ Everest well trajectory workflow
 Well path parametrization
 --------------------
 
-
-
-The Everest well trajectory module uses five coordinates per well to describe and optimize well trajectories. The description of well paths by a reduced and reasonable number of control variables is crucial for efficient mathematical optimization. The wellhead or platform location (:math:`P_p`) specifies the starting point of the well, while the kick-off point (:math:`P_k`) defines the depth at which the well begins to deviate from a vertical path.  Points (:math:`P_1`), (:math:`P_2`), and (:math:`P_3`) define the well path within the target formation, for example, the formation entry point, midpoint, and well bottom. In this tutorial, the wellhead (:math:`P_p`) and kick-off point (:math:`P_k`) are assumed to be constant, however, both points can be handled as control variables and optimized. An illustration of the guide points is sketched in Figure 2 below. 
+The Everest well trajectory module uses five points per well trajectory to describe well paths. The wellhead or platform location (:math:`P_p`) specifies the starting point of the well, while the kick-off point (:math:`P_k`) defines the depth at which the well begins to deviate from a vertical path.  Points (:math:`P_1`), (:math:`P_2`), and (:math:`P_3`) define the well path within the target formation, for example, the formation entry point, midpoint, and well bottom. In this tutorial, the wellhead (:math:`P_p`) and kick-off point (:math:`P_k`) are assumed to be constant, however, both points can be handled as control variables and optimized. An illustration of the guide points is sketched in Figure 2 below. 
 
 
 .. _guide_points:
@@ -163,8 +157,6 @@ The default values of (:math:`P_2`\_a), (:math:`P_2`\_b), and (:math:`P_2`\_c) a
     :figclass: align-center
 
     Well trajectory three guide point parametrization. The midpoint :math:`P_2`, parameterized by :math:`P_{2a} \in [0, 1]` (horizontal position), :math:`P_{2b} \in [-0.3, 0.3]` (curvature), and :math:`P_{2c} \in [0, 1]` (vertical position), represents a projected point along the path from :math:`P_1` to :math:`P_3`.
-
-
 
 
 
@@ -211,11 +203,6 @@ To restrict well trajectory perturbations to geologically meaningful areas, the 
     :figclass: align-center
 
     Drogon model with a bounding box to restrict the optimization process within the target formation or area. 
-
-
-
-
-
 
 
 
@@ -286,11 +273,7 @@ After preparing the Everest input files, this section presents the two main well
 
 
 
-<<<<<<< HEAD
 * **name (default)**: Assigns the x,y,z coordiantes of (:math:`P_1`), (:math:`P_2`), and (:math:`P_3`).
-=======
-* **name (predefined)**: Assigns the x,y,z coordiantes of (:math:`P_1`), (:math:`P_2`), and (:math:`P_3`).
->>>>>>> 3107f44489db9a2c6d5024a933a93ef83820db0c
 * **type (default)**: Specifies the control type, by default generic_control.
 * **perturbation_magnitude**: Lower and upper bounds around the initial guess based on Gaussian (normal) distribution in meters.
 * **min, max**: Sets the minimum and maximum value of the corresponding coordinate to restrict the location of the well trajectory perturbations within a specified rectangular bounding box
@@ -339,11 +322,7 @@ In addition to the Everest main configuration file, :file:`drogon_trajectory_for
 
 
 * **wells**:
-<<<<<<< HEAD
-    - *name*: Well name that has to allign with the well names in the configuration file. 
-=======
     - *name*: Well name that must align with the well names in the configure file. 
->>>>>>> 3107f44489db9a2c6d5024a933a93ef83820db0c
     - *group*: Well group name printed to WELSPECS
     - *phase*: Phase name printed to WELSPECS
     - *skin*: Skin factor printed to COMPDAT
