@@ -36,7 +36,6 @@ optimization:
 
 model:
   realizations: r{{range(100) | list()}}
-  data_file: r{{configpath}}/../../simulator/model/DROGON.DATA
 
 simulator:
   queue_system:
@@ -57,5 +56,9 @@ forward_model:
   - well_constraints -i input/wells_readydate.json -c input/rates_constraints.yml -rc well_rate.json -o wells_constr_result.json
   - add_templates -i wells_constr_result.json -c input/template_config.yml -o wells_tmpl_result.json 
   - schmerge -i wells_tmpl_result.json -s simulator/model/WELLRATE.SCH -o simulator/model/SCHEDULE_OPT.SCH
-  - flow simulator/model/DROGON.DATA
+  - job: flow r{{eclbase}} --enable-tuning=true
+    results:
+      file_name: r{{eclbase}}
+      type: summary
+      keys: ['FOPR', 'WOPR']
   - npv -s simulator/model/DROGON.UNSMRY -o npv -c input/prices.yml -i wells_tmpl_result.json -sd 2023-01-01 -ed 2030-01-01
