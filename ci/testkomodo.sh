@@ -1,38 +1,3 @@
-check_queue () {
-    # Keeping this the same as
-    # https://github.com/equinor/komodo-releases/blob/main/.github/workflows/run_reek_hm.yml
-    set +e
-    hostname
-    export PATH=$PATH:/global/bin
-    # /global/bin/bjobs gives an error message when run on non-shared disks.
-    # Filter it away, but keep stderr as is, and error hard if bjobs returns errors other than 255.
-    function check_bjobs_status_code {
-        err_code=$1
-        if [ "$err_code" -ne 0 ]; then
-        if [ "$err_code" -eq 255 ]; then
-            echo "bjobs returned error code 255, but we allow to continue .."
-        else
-            echo "bjobs failed with code $err_code"
-            exit 1
-        fi
-        fi
-    }
-    bjobs 2> >(grep -v "No such file or directory") >/dev/null
-    check_bjobs_status_code $?
-    echo "LSF cluster availability:"
-    set +x  # Avoid tracing thousands of lines of bjobs
-    bjobs_states=$(bjobs -u all 2>/dev/null)
-    check_bjobs_status_code $?
-    pending_jobs=$(echo "$bjobs_states" | grep -c PEND)
-    echo "--------------------------------------------------"
-    echo "Running jobs: $(echo "$bjobs_states" | grep -c RUN)"
-    echo "Pending jobs: $(echo $pending_jobs)"
-    echo "--------------------------------------------------"
-    echo $pending_jobs > pending_jobs_count
-    set -x
-    set -e
-}
-
 run_tests () {
     set -e
     if [[ "$CI_RUNNER_LABEL" == "azure" ]]; then
