@@ -1,7 +1,6 @@
 run_tests () {
     set -e
     if [[ "$CI_RUNNER_LABEL" == "azure" ]]; then
-        #RUNNER_ROOT="/lustre1/users/f_scout_ci/egg_tests"
         echo "Skip running everest tutorial integration test on azure for now"
         return 0
     elif [[ "$CI_RUNNER_LABEL" == "onprem" ]]; then
@@ -23,7 +22,7 @@ run_tests () {
     pip install --upgrade pip
     pip install .
     release_name=$(echo "$_FULL_RELEASE_NAME" | cut --delimiter=- --fields=1)
-    set +e
+    set +o errexit
     python -m pytest -svv tests | tee pytest-output
     if [[ "$?" -eq "1" ]]; then
         # The failure return code should be masked if this is due to pytest timing out,
@@ -37,7 +36,7 @@ run_tests () {
             exit 1
         fi
     fi
-    set -e
+    set -o errexit
     # Clean up the temp folder removing folders older than 7 days
     find "$RUNNER_ROOT" -maxdepth 1 -mtime +7 -user f_scout_ci -type d -exec rm -r {} \;
 }

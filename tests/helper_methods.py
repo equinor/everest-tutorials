@@ -27,7 +27,7 @@ def setup_environment(snapshot, source_root: Path, experiment_name: str, config_
         )
     reference_file = f"{reference}.csv"
 
-    os.chdir(os.path.join(source_root, "data", "drogon", experiment_name, "everest", "model"))
+    os.chdir(source_root / "data" / "drogon" / experiment_name / "everest" / "model")
     config = EverestConfig.load_file(config_file)
     config.optimization.speculative = True
     config.optimization.max_batch_num = 2
@@ -67,10 +67,6 @@ def cleanup(request) -> None:
                 # order to inspect failed test results
                 shutil.rmtree(os.path.join("..", "output"), ignore_errors=True)
 
-def read_file_to_string(file_path: str) -> str:
-    with open(file_path, 'r') as file:
-        return file.read()
-
 def _read_opt_and_summary_data(ever_config: EverestConfig, parsed_ert_version: str) -> str:
     api = EverestDataAPI(ever_config)
     summary_data_df = api.summary_values()
@@ -93,7 +89,7 @@ def _read_opt_and_summary_data(ever_config: EverestConfig, parsed_ert_version: s
     # Sort summary dataframe in same way as the older dataframe
     sort_sum_data_df = summary_data_df.sort(["batch", "date", "simulation"])
 
-    # Filter out pertubation (old dataframe only contains function evaluations) and drop unnecessary columns
+    # Filter out perturbation (old dataframe only contains function evaluations) and drop unnecessary columns
     filtered_opt_df = opt_df.filter(~((opt_df["perturbation"].is_not_null()) & (opt_df["simulation_id"].is_null())))
     short_filt_opt_df = filtered_opt_df.drop(["perturbation", "simulation_id"])
 
