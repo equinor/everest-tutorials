@@ -1,0 +1,186 @@
+definitions:          
+  eclbase: eclipse/model/r{{case_name}}
+  ecl_initial_data: r{{configpath}}/../../eclipse/model/DROGON
+  eclipse_folder: r{{configpath}}/../../eclipse/model
+  realization_folder: r{{configpath}}/../../ensemble/realizations/realization-r{{realization}}
+  user_shortname: r{{os.USER}}
+  case_name: DROGON_TRAJECTORY_TUTORIAL
+  
+environment:
+  simulation_folder: /scratch/everest/users/ffeld/DROGON_TRAJECTORY/r{{case_name}}
+  output_folder: r{{configpath}}/../output/r{{case_name}}
+  random_seed: 202220928
+
+wells:
+  - {name: A1}
+  - {name: A2}
+  - {name: A3}
+  - {name: A4}
+  - {name: A5}
+  - {name: A6}
+
+
+controls:
+  - name: p1_x
+    type: generic_control         
+    perturbation_magnitude: 75
+    min: 459341
+    max:  466548
+    variables:
+      - {name: A1, initial_guess: 462191, enabled: True}  
+      - {name: A2, initial_guess: 461116, enabled: True}  
+      - {name: A3, initial_guess: 462665, enabled: True}  
+      - {name: A4, initial_guess: 463743, enabled: True} 
+      - {name: A5, initial_guess: 461553, enabled: True} 
+      - {name: A6, initial_guess: 461362, enabled: True} 
+  - name: p1_y
+    type: generic_control         
+    perturbation_magnitude: 75
+    min: 5929863
+    max:  5936166
+    variables:
+      - {name: A1, initial_guess:  5934104} 
+      - {name: A2, initial_guess:  5933799}
+      - {name: A3, initial_guess:  5932804}
+      - {name: A4, initial_guess:  5931578}
+      - {name: A5, initial_guess:  5935779}
+      - {name: A6, initial_guess:  5931866}
+  - name: p1_z
+    type: generic_control         
+    perturbation_magnitude: 3
+    min: 1566.5
+    max:  1699.5
+    variables:
+      - {name: A1, initial_guess: 1597.8}  
+      - {name: A2, initial_guess: 1635.5}
+      - {name: A3, initial_guess: 1609.0}
+      - {name: A4, initial_guess: 1629.0}
+      - {name: A5, initial_guess: 1689.1}
+      - {name: A6, initial_guess: 1689.5}
+  - name: p2_a
+    type: generic_control         
+    perturbation_magnitude: 0.01
+    min: 0.0
+    max: 1.0
+    variables:
+      - {name: A1, initial_guess:  0.5}
+      - {name: A2, initial_guess:  0.5}
+      - {name: A3, initial_guess:  0.5}
+      - {name: A4, initial_guess:  0.5}
+      - {name: A5, initial_guess:  0.5}
+      - {name: A6, initial_guess:  0.5}
+  - name: p2_b
+    type: generic_control         
+    perturbation_magnitude: 0.01
+    min: -0.3
+    max:  0.3
+    variables:
+      - {name: A1, initial_guess:  0.0}
+      - {name: A2, initial_guess:  0.0}
+      - {name: A3, initial_guess:  0.0}
+      - {name: A4, initial_guess:  0.0}
+      - {name: A5, initial_guess:  0.0}
+      - {name: A6, initial_guess:  0.0} 
+  - name: p2_c
+    type: generic_control         
+    perturbation_magnitude: 0.01
+    min: 0.0
+    max: 1.0
+    variables:
+      - {name: A1, initial_guess:  0.5}
+      - {name: A2, initial_guess:  0.5}
+      - {name: A3, initial_guess:  0.5}
+      - {name: A4, initial_guess:  0.5}
+      - {name: A5, initial_guess:  0.5}
+      - {name: A6, initial_guess:  0.5}
+  - name: p3_x
+    type: generic_control         
+    perturbation_magnitude: 125
+    min: 459341
+    max:  466548
+    variables:
+      - {name: A1, initial_guess: 462514}
+      - {name: A2, initial_guess: 461112}
+      - {name: A3, initial_guess: 462781}
+      - {name: A4, initial_guess: 464353}
+      - {name: A5, initial_guess: 461527}
+      - {name: A6, initial_guess: 461369}
+  - name: p3_y
+    type: generic_control         
+    perturbation_magnitude: 125
+    min: 5929863
+    max:  5936166
+    variables:
+      - {name: A1, initial_guess:  5934070}
+      - {name: A2, initial_guess:  5933739}
+      - {name: A3, initial_guess:  5932778}
+      - {name: A4, initial_guess:  5932734}
+      - {name: A5, initial_guess:  5935588}
+      - {name: A6, initial_guess:  5931801}
+  - name: p3_z
+    type: generic_control         
+    perturbation_magnitude: 3
+    min: 1566.5
+    max:  1739
+    variables:
+      - {name: A1, initial_guess:  1637.3} 
+      - {name: A2, initial_guess:  1645.0} 
+      - {name: A3, initial_guess:  1651.6} 
+      - {name: A4, initial_guess:  1657.0} 
+      - {name: A5, initial_guess:  1719.4}
+      - {name: A6, initial_guess:  1728.7}
+
+objective_functions:
+  -
+    name: npv
+    auto_scale: True 
+    
+
+optimization:
+  algorithm: optpp_q_newton
+  min_realizations_success: 1
+  min_pert_success: 1
+  max_function_evaluations: 1000
+  perturbation_num: 1
+  max_iterations: 10
+  max_batch_num: 10
+  speculative: True
+  options:
+    - "max_step = 0.1"
+ 
+model:
+  realizations: r{{ range(10) | list() }}
+  data_file: r{{ecl_initial_data}}.DATA
+
+simulator:
+  queue_system:
+    name: lsf
+    lsf_queue: mr
+    max_running: 200
+  max_runtime: 10000
+  resubmit_limit: 0
+  
+install_data:
+  - link: False
+    source: r{{ecl_initial_data}}.DATA
+    target: r{{eclbase}}.DATA  
+  - link: False
+    source: r{{configpath}}/../input/files/prices.yml
+    target: prices.yml
+  - link: True
+    source: r{{realization_folder}}/include
+    target: eclipse/include 
+  - link: True
+    source: r{{configpath}}/../input/files
+    target: files
+
+forward_model:
+  # update schedule
+  - well_trajectory -c files/drogon_trajectory_forward_model.yml -E r{{realization_folder}}/model/DROGON_SIM
+  
+  # run simulation  
+  - eclipse100 --version 2021.1 r{{eclbase}}.DATA
+ 
+  # calculate objective function
+  - npv -s r{{eclbase}}.UNSMRY -o npv -c prices.yml -sd 2022-09-03 -ed 2027-01-01 -i files/aw_readydates.json
+  
