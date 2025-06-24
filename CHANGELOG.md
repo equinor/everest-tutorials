@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.6.0](https://github.com/equinor/everest-tutorials/compare/v0.5.0...v0.6.0) (2025-06-24)
+
+
+### Features
+
+* add integration test for well_rate tutorial ([#41](https://github.com/equinor/everest-tutorials/issues/41)) ([db6d7a8](https://github.com/equinor/everest-tutorials/commit/db6d7a8aa485725b3788fbf967be4e513785dd09))
+
+
+### Documentation
+
+* add tutorial for rate multi objective ([#48](https://github.com/equinor/everest-tutorials/issues/48)) ([b561b79](https://github.com/equinor/everest-tutorials/commit/b561b797403881b1a1dbf70041d11e9d0822a0af))
+* **well_trajectory:** revised round 3 ([#46](https://github.com/equinor/everest-tutorials/issues/46)) ([689ec97](https://github.com/equinor/everest-tutorials/commit/689ec97bf5c6107fbde39fb669965d0319d0f35e))
+
 ## [0.5.0](https://github.com/equinor/everest-tutorials/compare/v0.4.1...v0.5.0) (2025-05-28)
 
 
