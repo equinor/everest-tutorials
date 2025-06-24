@@ -38,7 +38,7 @@ After completing the optimization procedure, we can plot the results in a simila
 
    f(x) = w_1*npv(x) - w_2*fwpt(x)
 
-where **x** is the control vector containing the rates being optimized.
+where :math:`x` is the control vector containing the rates being optimized.
 
 .. note::
 
