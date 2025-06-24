@@ -331,4 +331,4 @@ The figure below compares the initial and optimal values for the controls. The f
 
 .. important::
 
-	For more examples on how to add complexity to the setups please refer to the :doc:`multi-objective <3_3_well_rate_multi_objective>` and  :doc:`constrained optimization <3_2_well_rate_constraints>` topics.
+	For more examples on how to add complexity to the setups please refer to the :doc:`multi-objective <well_rate_multi_objective>` and  :doc:`constrained optimization <well_rate_constraints>` topics.

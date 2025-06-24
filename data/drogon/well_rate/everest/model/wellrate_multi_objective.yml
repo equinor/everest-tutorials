@@ -1,0 +1,66 @@
+definitions: 
+  case_name: WELLRATE_MULTIOBJECTIVE_EXP
+  realization_folder: r{{configpath}}/../../../fmu-drogon-flow-files/realization-r{{realization}}/iter-0/eclipse
+  eclbase: simulator/model/DROGON
+
+environment:
+  simulation_folder: r{{configpath}}/../output/r{{case_name}}/simulation_output
+  output_folder: r{{configpath}}/../output/r{{case_name}}
+  random_seed: 14062022
+
+controls:
+  - name: well_rate
+    type: well_control
+    min: 0
+    max: 8000
+    perturbation_magnitude: 1200
+    variables:
+      - {name: A5, index: 1, initial_guess: 4000}
+      - {name: A5, index: 2, initial_guess: 4000}
+      - {name: A5, index: 3, initial_guess: 4000}
+      - {name: A6, index: 1, initial_guess: 4000}
+      - {name: A6, index: 2, initial_guess: 4000}
+      - {name: A6, index: 3, initial_guess: 4000}
+      - {name: A7, index: 1, initial_guess: 4000}
+      - {name: A7, index: 2, initial_guess: 4000}
+      - {name: A7, index: 3, initial_guess: 4000}
+
+objective_functions:
+  - name: npv
+    weight: 0.3
+  - name: fwpt
+    weight: 0.7
+
+optimization:
+  algorithm: optpp_q_newton
+  min_realizations_success: 80
+  max_batch_num: 10
+  perturbation_num: 1
+  speculative: True
+
+model:
+  realizations: r{{range(100) | list()}}
+  data_file: r{{configpath}}/../../../simulator/model/DROGON.DATA
+
+simulator:
+  queue_system:
+    name: lsf 
+
+install_data:
+  - link: True
+    source: r{{realization_folder}}/include
+    target: simulator/include
+  - link: False
+    source: r{{configpath}}/../../../simulator/model
+    target: simulator/model
+  - link: True
+    source: r{{configpath}}/../input
+    target: input
+
+forward_model:
+  - well_constraints -i input/wells_readydate.json -c input/rates_constraints.yml -rc well_rate.json -o wells_constr_result.json
+  - add_templates -i wells_constr_result.json -c input/template_config.yml -o wells_tmpl_result.json 
+  - schmerge -i wells_tmpl_result.json -s simulator/model/WELLRATE.SCH -o simulator/model/SCHEDULE_OPT.SCH
+  - flow r{{eclbase}} --enable-tuning=true
+  - npv -s simulator/model/DROGON.UNSMRY -o npv -c input/prices.yml -i wells_tmpl_result.json -sd 2023-01-01 -ed 2030-01-01
+  - extract_summary_data -s r{{eclbase}}.UNSMRY -sd 2023-01-01 -ed 2030-01-01 -k FWPT -o fwpt -m -1
