@@ -8,7 +8,7 @@ Most real-world design and planning problems must also satisfy multiple objectiv
 
 	J = w*J_{I} + (1-w)*J_{II}
 
-where J :subscript:`I` and J :subscript:`II` are the two objective functions considered and *w* is the weighting factor between both of objectives. Note that this can be extended to cases with more objectives by introducing more weights, which are recommended to be chosen as fraction values (i.e., 0 ≤ w ≤ 1) adding up to 1.
+where :math:`J_I` and :math:`J_{II}` are the two objective functions considered and :math:`w` is the weighting factor between both of objectives. Note that this can be extended to cases with more objectives by introducing more weights, which are recommended to be chosen as fraction values (i.e., 0 ≤ :math:`w` ≤ 1) adding up to 1.
 
 Multi-objective optimization configuration file in EVEREST needs the following modification in comparison with the standard optimization configuration.
 
