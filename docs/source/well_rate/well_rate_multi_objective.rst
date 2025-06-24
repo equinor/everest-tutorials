@@ -18,7 +18,7 @@ Objective function section
 **The weight setting for each objective function:**
     Users can specify a higher weight for the preferred objective function. In the following example, we chose to prioritize FWPT over NPV.
 
-Following snippet shows the changes made to **objective_functions** section of the config file for multi-objective optimization:
+Following snippet shows the changes made to :code:`objective_functions` section of the config file for multi-objective optimization:
 
 .. literalinclude:: ../data/drogon/well_rate/everest/model/wellrate_multi_objective.yml
   :language: yaml
