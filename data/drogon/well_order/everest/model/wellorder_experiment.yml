@@ -1,0 +1,70 @@
+definitions: 
+  case_name: WELLORDER_EXP
+  realization_folder: r{{configpath}}/../../../fmu-drogon-flow-files/realization-r{{realization}}/iter-0/eclipse
+  eclbase: simulator/model/DROGON
+
+environment:
+  simulation_folder: r{{configpath}}/../output/r{{case_name}}/simulation_output
+  output_folder: r{{configpath}}/../output/r{{case_name}}
+  random_seed: 20250523
+
+wells:
+  - {name: A1, drill_time: 120}
+  - {name: A2, drill_time: 120}
+  - {name: A3, drill_time: 120}
+  - {name: A4, drill_time: 120}
+  - {name: A5, drill_time: 120}
+  - {name: A6, drill_time: 120}
+      
+controls:
+  - name: well_order
+    type: well_control
+    min: 0
+    max: 1
+    perturbation_magnitude: 0.05
+    variables:
+      - {name: A1, initial_guess: 0.6}
+      - {name: A2, initial_guess: 0.55}
+      - {name: A3, initial_guess: 0.5}
+      - {name: A4, initial_guess: 0.45}
+      - {name: A5, initial_guess: 0.4}
+      - {name: A6, initial_guess: 0.35}
+
+objective_functions:
+  - name: npv
+
+optimization:
+  max_batch_num: 10
+  perturbation_num: 1
+  speculative: True
+  min_realizations_success: 50
+  min_pert_success: 50
+  options:
+    - "max_step = 0.3"
+
+model:
+  realizations: r{{range(100) | list()}}
+  data_file: r{{configpath}}/../../simulator/model/DROGON.DATA
+     
+simulator:
+  queue_system:
+    name: lsf 
+
+install_data:
+  - link: True
+    source: r{{realization_folder}}/include
+    target: simulator/include
+  - link: False
+    source: r{{configpath}}/../../simulator/model
+    target: simulator/model
+  - link: True
+    source: r{{configpath}}/../input
+    target: input
+
+forward_model:
+  - drill_planner -i wells.json -c input/drill_planner_config.yml -opt well_order.json -o wells.json
+  - add_templates -i wells.json -c input/template_config.yml -o wells.json 
+  - schmerge -i wells.json -s simulator/model/WELLORDER.SCH -o simulator/model/SCHEDULE_OPT.SCH
+  - flow --enable-tuning=True simulator/model/DROGON.DATA
+  - npv -s simulator/model/DROGON.UNSMRY -o npv -c input/prices.yml -i wells.json -sd 2023-01-01 -ed 2030-01-01
+
