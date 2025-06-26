@@ -94,7 +94,7 @@ def plot_columns_from_parquet(
         plt.text(
             0.95,
             -0.15,
-            f"Total objective increase: {increase:.2e}",
+            f"Total objective increase: ${increase:.2e}",
             transform=plt.gca().transAxes,
             fontsize=FONTSIZE,
             fontweight="bold",
@@ -107,7 +107,7 @@ def plot_columns_from_parquet(
     plt.ylim(bounds)
     plt.legend(columns, fontsize=FONTSIZE, facecolor="white")
     plt.xlabel("Batch", fontsize=20, fontweight="bold")
-    plt.ylabel("Objective functions", fontsize=20, fontweight="bold")
+    plt.ylabel("Objective functions [$]", fontsize=20, fontweight="bold")
     plt.xticks(fontsize=FONTSIZE)
     plt.yticks(fontsize=FONTSIZE)
     plt.gca().set_axisbelow(True)

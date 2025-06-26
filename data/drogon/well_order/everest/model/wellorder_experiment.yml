@@ -34,17 +34,14 @@ objective_functions:
   - name: npv
 
 optimization:
+  min_realizations_success: 50
   max_batch_num: 10
   perturbation_num: 1
-  speculative: True
-  min_realizations_success: 50
-  min_pert_success: 50
   options:
     - "max_step = 0.3"
 
 model:
   realizations: r{{range(100) | list()}}
-  data_file: r{{configpath}}/../../simulator/model/DROGON.DATA
      
 simulator:
   queue_system:
@@ -65,6 +62,8 @@ forward_model:
   - drill_planner -i wells.json -c input/drill_planner_config.yml -opt well_order.json -o wells.json
   - add_templates -i wells.json -c input/template_config.yml -o wells.json 
   - schmerge -i wells.json -s simulator/model/WELLORDER.SCH -o simulator/model/SCHEDULE_OPT.SCH
-  - flow --enable-tuning=True simulator/model/DROGON.DATA
+  - job: flow r{{eclbase}} --enable-tuning=true
+    results:
+      file_name: r{{eclbase}}
+      type: summary
   - npv -s simulator/model/DROGON.UNSMRY -o npv -c input/prices.yml -i wells.json -sd 2023-01-01 -ed 2030-01-01
-
