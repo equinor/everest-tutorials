@@ -1,0 +1,5 @@
+templates:
+  -
+    file: 'input/welopen.jinja'
+    keys:
+        opname: open
