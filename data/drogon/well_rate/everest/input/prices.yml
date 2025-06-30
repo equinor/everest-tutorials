@@ -1,23 +1,21 @@
 prices:
     FOPT:
-        - { date: 2023-01-01, value: 340, currency: USD }
+        - { date: 2023-01-01, value: 440, currency: USD }
     FWPT:
-        - { date: 2023-01-01, value: -12, currency: USD }
+        - { date: 2023-01-01, value: -6.3, currency: USD }
     FGPT:
-        - { date: 2023-01-01, value: 35.3147, currency: USD }
+        - { date: 2023-01-01, value: 0.4, currency: USD }
     FWIT:
-        - { date: 2023-01-01, value: -6.29, currency: USD }
-    FGIT:
-        - { date: 2023-01-01, value: -40, currency: USD }
+        - { date: 2023-01-01, value: -6.3, currency: USD }
 
 discount_rates:
     - { date: 2023-01-01, value: 0.08 }
 
 well_costs:
-    - { well: A1, value: 20e6, currency: USD }
-    - { well: A2, value: 20e6, currency: USD }
-    - { well: A3, value: 20e6, currency: USD }
-    - { well: A4, value: 20e6, currency: USD }
-    - { well: A5, value: 20e6, currency: USD }
-    - { well: A6, value: 20e6, currency: USD }
+    - { well: A1, value: 5e6, currency: USD }
+    - { well: A2, value: 5e6, currency: USD }
+    - { well: A3, value: 5e6, currency: USD }
+    - { well: A4, value: 5e6, currency: USD }
+    - { well: A5, value: 5e6, currency: USD }
+    - { well: A6, value: 5e6, currency: USD }
 
