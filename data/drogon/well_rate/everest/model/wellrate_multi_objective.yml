@@ -39,8 +39,7 @@ optimization:
   speculative: True
 
 model:
-  realizations: r{{range(100) | list()}}
-  data_file: r{{configpath}}/../../../simulator/model/DROGON.DATA
+  realizations: "0-99"
 
 simulator:
   queue_system:
