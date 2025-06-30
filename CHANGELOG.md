@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.1](https://github.com/equinor/everest-tutorials/compare/v0.6.0...v0.6.1) (2025-06-30)
+
+
+### Documentation
+
+* update prices file for well rate ([#57](https://github.com/equinor/everest-tutorials/issues/57)) ([d6c8493](https://github.com/equinor/everest-tutorials/commit/d6c8493223b60a3f171075659820387085f75f14))
+
 ## [0.6.0](https://github.com/equinor/everest-tutorials/compare/v0.5.0...v0.6.0) (2025-06-24)
 
 
