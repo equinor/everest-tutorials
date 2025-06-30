@@ -30,7 +30,7 @@ The forward model for calculating objective function NPV and FWPT needs to be ac
 
 .. literalinclude:: ../data/drogon/well_rate/everest/model/wellrate_multi_objective.yml
   :language: yaml
-  :lines: 60-66
+  :lines: 59-65
 
 After completing the optimization procedure, we can plot the results in a similar manner as in the previous experiments. The objective function (a weighted sum equation) is shown with iterations in the figure below. The weighted sum equation shown here is:
 
