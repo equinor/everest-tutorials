@@ -31,7 +31,7 @@ Optimization variables
 Drilling priority values
 ************************
 
-We are planning to drill 6 wells, i.e. 4 producers: A1, A2, A3, A4 and 2 injectors A5, A6. We choose the starting date for drilling to be 2022-09-03. We assume that the drilling rig is available and there is no breaks in its availability. We also assume that it takes 120 days for each well to be drilled and ready to be opened. This means the dates at which wells will be opened are fixed and we only search for optimal opening order. See the :ref:`table_initial_controls_do` for resulting drilling dates based on chosen starting date and drilling times.
+We plan to drill 6 wells; 4 producers: A1, A2, A3, A4 and 2 injectors A5, A6. We choose the starting date for drilling to be 2022-09-03. We assume that the drilling rig continuously available without any interruptions. We also assume that it takes 120 days for each well to be drilled, completed and ready to operate. This means that the dates at which wells will be opened in the model are fixed and we only search for optimal opening order. See the :ref:`table_initial_controls_do` for resulting drilling dates based on chosen starting date and drilling times.
 
 .. _table_initial_controls_do:
 .. csv-table:: Table: Initial drilling order
@@ -42,7 +42,7 @@ We are planning to drill 6 wells, i.e. 4 producers: A1, A2, A3, A4 and 2 injecto
    "Wells","A1","A2","A3","A4","A5","A6"
    "Priorities","0.6","0.55","0.5","0.45","0.4","0.35"
 
-Let's assume, we want to start optimization with wells drilled in alphabetical order. We need to assign drilling priority value for each well. The higher the probability value the earlier the well will be drilled. This means, we need to choose the highest priority value for the first well (A1) and lowest priority for the last well (A6). See the :ref:`table_initial_controls_do` for chosen well priority values. We recommend spacing priority values evenly. We also need to specify what standard deviation to use when randomizing priorities for perturbations. We recommend setting standard deviation to be equal to difference between the priority values (0.05 for the example in :ref:`table_initial_controls_do`). For information on how to define a more complex time scheduling constraints for rig and slot (un)availability, see relevant documentation section `(Everest documentation <https://everest.readthedocs.io/en/latest/forward_model_jobs.html#drill_planner-category>`_)
+Let's assume, we want to start optimization with wells drilled in alphabetical order. We need to assign drilling priority value for each well. The higher the probability value the earlier the well will be drilled. This means, we need to choose the highest priority value for the first well (A1) and lowest priority for the last well (A6). See the :ref:`table_initial_controls_do` for chosen well priority values. We recommend spacing priority values evenly. We also need to specify what standard deviation to use when randomizing priorities for perturbations. We recommend setting standard deviation to be equal to difference between the priority values (0.05 for the example in :ref:`table_initial_controls_do`). For information on how to define a more complex time scheduling constraints with rig and slot availability, see relevant documentation section `(Everest documentation <https://everest.readthedocs.io/en/latest/forward_model_jobs.html#drill_planner-category>`_)
 
 .. _objectives_wo:
 Objective functions
@@ -51,7 +51,7 @@ Objective functions
 Net present value (NPV)
 ***********************
 
-A single objective function is utilized in this well trajectory optimization tutorial. The economic objective function is defined as Net present value (NPV) as follows:
+A single objective function is utilized in this well trajectory optimization tutorial. The economic objective function is defined as Net Present Value (NPV) as follows:
 
 .. math::
 
@@ -85,10 +85,7 @@ The model contains four production wells (A1 to A4) and two water injection well
 Prepare configuration
 *********************
 
-.. 
-    TODO section reference might be better than the link
-
-The downloaded material is already complete and ready to be launched, however it is still useful to understand how the defined problem was configured. Information related to initial guess, objective functions and the model needs to be specified in main EVEREST configuration file. After downloading `Download Tutorial <https://equinor.github.io/everest-tutorials/download_material/download_material.html>`_ this file will be located at ``well_order/everest/model/wellorder_experiment.yml``.
+The downloaded material is already complete and ready to be launched, however it is still useful to understand how the defined problem was configured. Information related to initial guess, objective functions and the model needs to be specified in main EVEREST configuration file. After downloading tutorial files from :ref:`download_material` this file will be located at ``well_order/everest/model/wellorder_experiment.yml``.
 
 .. _config_main_wo:
 Main configuration
@@ -151,26 +148,26 @@ Before the optimization, the schedule file for simulation needs to be adapted. F
 
 Updated schedule files for two different perturbations can be open to see the differences.
 
-
 .. _results_wo:
-
 Run EVEREST and analyze results
 #########################################
 
-.. 
-    TODO section references might be better than the links
-
-After downloading the tutorial files from `Download Tutorial <https://equinor.github.io/everest-tutorials/download_material/download_material.html>`_ and the reservoir model realizations from `Drogon Reservoir <https://equinor.github.io/everest-tutorials/model_description/drogon_description.html>`_ we need to point EVEREST to the downloaded model realizations by changing the line:
+After downloading the tutorial files from :ref:`download_material` and the reservoir model realizations from :ref:`drogon_description` we need to point EVEREST to the downloaded model realizations by changing the line:
 
 .. literalinclude:: ../../../data/drogon/well_order/everest/model/wellorder_experiment.yml
    :language: yaml
    :lines: 1,3
 
-to the correct directory path. In addition we might want to change the name of the cluster scheduler. If no cluster support is present, then we can change the line to run all simulations locally, i.e., change ``lsf`` to ``local`` in line:
+to the correct directory path. 
 
-.. literalinclude:: ../../../data/drogon/well_order/everest/model/wellorder_experiment.yml
-   :language: yaml
-   :lines: 46-48
+.. note::
+   In addition we might want to change the name of the cluster scheduler. If no cluster support is present, then we can change the line to run all simulations locally, i.e., change ``lsf`` to ``local`` in line:
+
+   .. literalinclude:: ../../../data/drogon/well_order/everest/model/wellorder_experiment.yml
+      :language: yaml
+      :lines: 46-48
+   
+   See also `Everest documentation <https://everest.readthedocs.io/en/latest/config_reference.html#>`_.
 
 To launch EVEREST, we can execute the following command in the directory with configuration file:
 
@@ -199,9 +196,9 @@ In our case we can find optimization results in ``r{{configpath}}/../output/r{{c
    Drilling order in batch 0 is the chosen initial drilling order. 
 
 .. note::
-   Depending on the choice of ``speculative`` option in ``optimization`` section, the calculations for current best solution and for the gradient might be split in multiple batches.
+   Depending on the choice of ``speculative`` option in ``optimization`` section, the calculations for current best solution and for the gradient might be split in multiple batches, see `Everest documentation <https://everest.readthedocs.io/en/latest/config_reference.html#>`_.
 
-The :ref:`figure_objectives_wo` shows average objective function at the iterations of the optimization experiment (average NPV over all geological realizations). The increase in objective function value of 2.77e+08 was achieved by changing a drilling order from the initial guess. 
+The :ref:`figure_objectives_wo` shows average objective function at the iterations of the optimization experiment (average NPV over all geological realizations). The increase in objective function value of $6.24e+07 was achieved by changing a drilling order from the initial guess. 
 
 .. _figure_objectives_wo:
 .. figure:: images/optimization/wo_objectives.svg
@@ -215,7 +212,7 @@ The :ref:`figure_objectives_wo` shows average objective function at the iteratio
 
    Figure: Initial and optimal priorities
 
-The drilling order is defined by set of priority values. We can compare these values for the initial guess an optimal solution, see :ref:`figure_controls_wo`. Most notably, the priority value of the producer A4 increased placing it in front of producers A2 and A3. In addition, the priority values of both injectors decreased, reinforcing their place behind the producers. However, the injector A6 came in before injector A5, see :ref:`table_controls_wo`.
+The drilling order is defined by set of priority values. We can compare these values for the initial guess an optimal solution, see :ref:`figure_controls_wo`. Most notably, the priority value of the producer A4 and injector A5 increased placing them in front of producers A2 and A3. In addition, the priority values of injector A6 decreased, reinforcing its place at the end of the drilling sequnce, see :ref:`table_controls_wo`.
 
 .. _table_controls_wo:
 .. csv-table:: Table: Initial and optimal drilling order
@@ -224,9 +221,9 @@ The drilling order is defined by set of priority values. We can compare these va
 
    "Dates","2023-01-01","2023-05-02","2023-08-31","2023-12-30","2024-04-29","2024-08-28"
    "Initial order","A1","A2","A3","A4","A5","A6"
-   "Optimal order","A1","A4","A2","A3","A6","A5"
+   "Optimal order","A1","A4","A5","A2","A3","A6"
 
-In order to understand why the gain in NPV is achieved we can compare production data from the reservoir simulations for initial and optimal strategies. We notice that, by drilling producer A4 earlier, we achieved increased oil production in the beginning of the production life-cycle while decreasing in later stage, see :ref:`figure_fopr_wo` and :ref:`figure_fopt_wo`. Despite lower total oil production in the optimal solution, the increased oil production earlier in time is beneficial due to objective function being discounted in time.
+In order to understand why the gain in NPV is achieved we can compare production data from the reservoir simulations for initial and optimal strategies. We notice that, by drilling producer and injector earlier, we achieved increased oil production in the two time periods in the beginning and also increasing total cumulative oil production at the end of the production life-cycle, see :ref:`figure_fopr_wo` and :ref:`figure_fopt_wo`.
 
 .. _figure_fopr_wo:
 .. figure:: images/production/wo_FOPR.svg
@@ -240,7 +237,7 @@ In order to understand why the gain in NPV is achieved we can compare production
 
    Figure: Field Oil Production Total
 
-Following increasing oil production, the gas production has also been increased at the earlier stage of production, see :ref:`figure_fgpt_wo`.
+While we increased total oil production, the total gas production has been slightly decreased, see :ref:`figure_fgpt_wo`. It was a beneficial trade-off for the NPV.
 
 .. _figure_fgpt_wo:
 .. figure:: images/production/wo_FGPT.svg
@@ -248,7 +245,7 @@ Following increasing oil production, the gas production has also been increased 
    
    Figure: Field Gas Production Total
 
-At the same time the profiles for water production and water injection for optimal well order remained similar to those for initial strategy, see :ref:`figure_fwpt_wo` and :ref:`figure_fwit_wo`. Therefore no significant financial penalty was introduced.
+By drilling injectory earlier, the cumulative values for water production and water injection increased compared to intitial strategy, see :ref:`figure_fwpt_wo` and :ref:`figure_fwit_wo`. It was again a beneficial trade-off for the NPV.
 
 .. _figure_fwpt_wo:
 .. figure:: images/production/wo_FWPT.svg
@@ -256,14 +253,10 @@ At the same time the profiles for water production and water injection for optim
 
    Figure: Field Water Production Total
 
-
 .. _figure_fwit_wo:
 .. figure:: images/production/wo_FWIT.svg
    :width: 90%
 
    Figure: Field Water Injection Total
-
-..
-    TODO add reference to Experiments section
 
 This concludes the drilling order tutorial. We encourage the reader to check other types of tutorials in the Experiments section.
