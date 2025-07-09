@@ -287,7 +287,7 @@ def plot_summaries(
 casename = "wo"
 simulation_folder = (
     "../optimization/drogon/well_order/everest/output/"
-    "WELLORDER_EXP2"
+    "WELLORDER_EXP"
     "/simulation_output/"
 )
 plots_folder = "docs/source/well_order/images/production/"

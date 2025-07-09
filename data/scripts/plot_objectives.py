@@ -126,7 +126,7 @@ def plot_columns_from_parquet(
 
 casename = "wo"
 path_results = os.path.join(
-    "../optimization/drogon/well_order/everest/output/WELLORDER_EXP2"
+    "../optimization/drogon/well_order/everest/output/WELLORDER_EXP"
 )
 columns = ["npv"]
 batches = [0, 1, 2, 3, 4, 5]

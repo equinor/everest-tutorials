@@ -3,6 +3,13 @@ TUNING
 /
 /
 
+GRUPTREE
+  'OP'      'FIELD' /
+  'RFT'     'FIELD' /
+  'WI'      'FIELD' /
+/
+
+
 WCONPROD
  'A1'    SHUT  LRAT 3*    4000  1* 150 /
  'A2'    SHUT  LRAT 3*    2500  1* 150 /
