@@ -1,0 +1,9 @@
+templates:
+  -
+    file: 'input/welopen.jinja'
+    keys:
+        opname: open
+  -
+    file: 'input/welshut.jinja'
+    keys:
+        opname: shut
