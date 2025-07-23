@@ -39,7 +39,7 @@ The EVEREST well trajectory optimization case consists of four production wells 
 
 
 
-More details about the Drogon reservoir model can be found :doc:`here <drogon_description>`. The Drogon EVEREST well trajectory material can be downloaded using the instructions below:
+The Drogon EVEREST well trajectory material can be downloaded using the instructions below:
 
 .. admonition:: 1. Download or copy the compressed file containing the tutorial setup to the folder where you want to run the exercise
 
@@ -100,7 +100,7 @@ A snippet of the price input file is displayed below. The following input parame
     * *well*: Specifies which well the cost applies to.
 
 
-.. literalinclude:: ../data/drogon/well_trajectory/everest/input/files/prices.yml
+.. literalinclude:: ../../../data/drogon/well_trajectory/everest/input/files/prices.yml
     :language: yml
     :lines: 1-40
 
@@ -243,7 +243,7 @@ A summary of the modified Eclipse *.DATA* file is provided below, which includes
       $ gedit DROGON.data
 
 
-.. literalinclude:: ../data/drogon/well_trajectory/eclipse/model/DROGON.DATA
+.. literalinclude:: ../../../data/drogon/well_trajectory/eclipse/model/DROGON.DATA
     :lines:  221-252
 
 
@@ -284,7 +284,7 @@ After preparing the EVEREST input files, this section presents the two main well
 
 
 
-.. literalinclude:: ../data/drogon/well_trajectory/everest/model/drogon_well_trajectory_tutorial.yml
+.. literalinclude:: ../../../data/drogon/well_trajectory/everest/model/drogon_well_trajectory_tutorial.yml
     :language: yaml
     :lines: 23-131
 
@@ -297,7 +297,7 @@ Besides defining the control variables section, the :file:`drogon_well_trajector
 * **npv**: Calculates the objective function - in this example, the Net present value
 
 
-.. literalinclude:: ../data/drogon/well_trajectory/everest/model/drogon_well_trajectory_tutorial.yml
+.. literalinclude:: ../../../data/drogon/well_trajectory/everest/model/drogon_well_trajectory_tutorial.yml
     :language: yaml
     :lines: 177-185
 
@@ -354,7 +354,7 @@ In addition to the EVEREST main configuration file, :file:`drogon_trajectory_for
       $ gedit drogon_trajectory_forward_model.yml
 
 
-.. literalinclude:: ../data/drogon/well_trajectory/everest/input/files/drogon_trajectory_forward_model.yml
+.. literalinclude:: ../../../data/drogon/well_trajectory/everest/input/files/drogon_trajectory_forward_model.yml
     :language: yml
     :lines: 1-89
 
