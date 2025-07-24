@@ -149,7 +149,7 @@ optimization:
     - "max_step = 0.1"
  
 model:
-  realizations: r{{ range(10) | list() }}
+  realizations: "0-9"
   data_file: r{{ecl_initial_data}}.DATA
 
 simulator:
