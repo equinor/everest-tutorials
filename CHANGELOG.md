@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.6.1](https://github.com/equinor/everest-tutorials/compare/v0.6.0...v0.6.1) (2025-07-31)
+
+
+### Documentation
+
+* update prices file for well rate ([#57](https://github.com/equinor/everest-tutorials/issues/57)) ([d6c8493](https://github.com/equinor/everest-tutorials/commit/d6c8493223b60a3f171075659820387085f75f14))
+* well order tutorial for Drogon case  ([#55](https://github.com/equinor/everest-tutorials/issues/55)) ([3e6919c](https://github.com/equinor/everest-tutorials/commit/3e6919c5ede940d15e579ce98c46700a34b60819))
+* well trajectory doc fixing broken link ([#69](https://github.com/equinor/everest-tutorials/issues/69)) ([dab3e26](https://github.com/equinor/everest-tutorials/commit/dab3e266057d698171ebcdc59b2d7c5648ae6d60))
+
 ## [0.6.0](https://github.com/equinor/everest-tutorials/compare/v0.5.0...v0.6.0) (2025-06-24)
 
 
