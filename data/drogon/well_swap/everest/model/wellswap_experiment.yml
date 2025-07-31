@@ -48,7 +48,7 @@ optimization:
     - "max_step = 0.2"
 
 model:
-  realizations: r{{range(100) | list()}}
+  realizations: 0-99
 
 simulator:
   queue_system:
@@ -66,7 +66,7 @@ install_data:
     target: input
 
 forward_model:
-  - well_swapping --priorities well_priorities.json --constraints swapping_constraints.json --cases wells.json --output wells.json --config input/well_swap_config.yml
+  - well_swapping -p well_priorities.json -cr swapping_constraints.json -cs wells.json -o wells.json -c input/well_swap_config.yml
   - add_templates -i wells.json -c input/template_config.yml -o wells.json
   - schmerge -i wells.json -s simulator/model/WELLSWAP.SCH -o simulator/model/SCHEDULE_OPT.SCH
   - job: flow r{{eclbase}} --enable-tuning=True
