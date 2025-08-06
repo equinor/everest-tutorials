@@ -19,7 +19,7 @@ EVEREST™ tutorials
 
 .. toctree::
    :hidden:
-   :caption: Qualified features
+   :caption: Topics
 
    well_rate/well_rate
    well_order/well_order
@@ -30,7 +30,7 @@ EVEREST™ tutorials
 
 .. toctree::
    :hidden:
-   :caption: Experimental features
+   :caption: Experimental
 
    well_swap/well_swap
 
