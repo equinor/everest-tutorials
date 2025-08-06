@@ -19,14 +19,20 @@ EVEREST™ tutorials
 
 .. toctree::
    :hidden:
-   :caption: Experiments
+   :caption: Topics
 
    well_rate/well_rate
    well_order/well_order
    well_selection/well_selection
    well_trajectory/well_trajectory
-   well_swap/well_swap
    multi_objective/well_rate_multi_objective
+
+
+.. toctree::
+   :hidden:
+   :caption: Experimental
+
+   well_swap/well_swap
 
 
 .. toctree::
