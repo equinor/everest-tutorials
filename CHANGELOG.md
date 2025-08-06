@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.6.1](https://github.com/equinor/everest-tutorials/compare/v0.6.0...v0.6.1) (2025-08-06)
+
+
+### Bug Fixes
+
+* add missing well costs for A7 ([f946ead](https://github.com/equinor/everest-tutorials/commit/f946ead99d27968581655d5c7baac7f90f447266))
+
+
+### Documentation
+
+* changes index.rst and moves well swapping to experimental section ([#71](https://github.com/equinor/everest-tutorials/issues/71)) ([c4d6d3f](https://github.com/equinor/everest-tutorials/commit/c4d6d3fcbe31b22a08bb5578fe1955eaaa479de2))
+* update prices file for well rate ([#57](https://github.com/equinor/everest-tutorials/issues/57)) ([d6c8493](https://github.com/equinor/everest-tutorials/commit/d6c8493223b60a3f171075659820387085f75f14))
+* well trajectory doc fixing broken link ([#69](https://github.com/equinor/everest-tutorials/issues/69)) ([dab3e26](https://github.com/equinor/everest-tutorials/commit/dab3e266057d698171ebcdc59b2d7c5648ae6d60))
+* **well_order:** add well order tutorial ([3e6919c](https://github.com/equinor/everest-tutorials/commit/3e6919c5ede940d15e579ce98c46700a34b60819))
+* **well_swap:** add well swapping tutorial ([d094bcf](https://github.com/equinor/everest-tutorials/commit/d094bcfd8c68aa36e939722d25f78b4a678c378b))
+
 ## [0.6.0](https://github.com/equinor/everest-tutorials/compare/v0.5.0...v0.6.0) (2025-06-24)
 
 
