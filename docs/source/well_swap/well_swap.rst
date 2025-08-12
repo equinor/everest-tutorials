@@ -135,11 +135,13 @@ We also need to specify the name of the objective function in the ``objective_fu
 
 .. note::
    Using priority control values (for parametrization of discrete decisions) requires additional attention to the step size of the line search of the back-end optimizer. In this tutorial, because priority controls are combined with continuous duration controls, the following settings of the optpp_q_newton optimizer Dakota back-end (default in EVEREST) are chosen:
+
    .. literalinclude:: ../../../data/drogon/well_swap/everest/model/wellswap_experiment.yml
       :language: yaml
       :lines: 41,47-48
-   These settings are case-dependent, well swapping optimization in other cases may require adjusting this ``max_step`` value.
    
+   These settings are case-dependent, well swapping optimization in other cases may require adjusting this ``max_step`` value.
+
 .. _configs_forward_jobs_wsw:
 Configuration of forward jobs
 #############################
