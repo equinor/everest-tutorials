@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.2](https://github.com/equinor/everest-tutorials/compare/v0.6.1...v0.6.2) (2025-08-13)
+
+
+### Bug Fixes
+
+* html rendering for `max_step` in well_swap.rst ([#74](https://github.com/equinor/everest-tutorials/issues/74)) ([0bc1f8d](https://github.com/equinor/everest-tutorials/commit/0bc1f8db86ed88ab095334ed5551547444ac27c1))
+
 ## [0.6.1](https://github.com/equinor/everest-tutorials/compare/v0.6.0...v0.6.1) (2025-08-06)
 
 
