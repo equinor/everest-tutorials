@@ -26,6 +26,7 @@ EVEREST™ tutorials
    well_selection/well_selection
    well_trajectory/well_trajectory
    multi_objective/well_rate_multi_objective
+   control_sensitivities/control_sensitivities
 
 
 .. toctree::
