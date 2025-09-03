@@ -55,7 +55,7 @@ optimization:
   min_pert_success: 100
 
 model:
-  realizations: r{{range(100) | list()}}
+  realizations: 0-99
 
 simulator:
   queue_system:

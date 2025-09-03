@@ -46,10 +46,9 @@ See table :ref:`table_drilling_sequence` for the base case drilling dates (witho
    :widths: 20, 20, 20, 20, 20, 20, 20
    :align: center
 
-   "Wells","A1","A2","A3","A4","A5","A6"
-   "Priority","0.6","0.55","0.5","0.45","0.4","0.35"
+   "Driling order","A1","A2","A3","A4","A5","A6"
    "Drilling duration (days)","120","120","120","120","120","120"
-   "Dates","2023-01-01","2023-05-02","2023-08-31","2023-12-30","2024-04-29","2024-08-28"
+   "Well opening dates","2023-01-01","2023-05-02","2023-08-31","2023-12-30","2024-04-29","2024-08-28"
 
 In order to generate samples of the uncertain well drilling delays, we introduce new variables in the ``controls`` section of the EVEREST configuration file. The EVEREST workflow will perturb the delays around the specified ``initial_guess`` based on a Gaussian distribution with standard deviation equal to the value entered in ``perturbation_magnitude`` and within the ``min`` and ``max`` bounds. The perturbed scenarios will be evaluated and the resulting objective functions will be used to estimate a stochastic gradient of those objectives with respect to the delay variables. We will analyze these gradients to understand the influence of the delays on the selected quantities of interest (i.e., the objective functions specified in EVEREST configuration file) and identify the most impactful wells in terms of delays.
 
@@ -68,8 +67,8 @@ In order to generate samples of the uncertain well drilling delays, we introduce
 Objective functions
 ###################
 
-Net present value (NPV)
-***********************
+Short-, mid- and long-term oil production (FOPT)
+************************************************
 
 Three objective functions are utilized in this drilling delay sensitivity analysis tutorial. They refer to the oil production (FOPT) in three time-horizons: ``fopt1`` for oil production from 01-01-2023 until 01-01-2025, ``fopt2`` for oil production from 01-01-2025 until 01-01-2027, and ``fopt3`` for oil production from 01-01-2027 until 01-01-2030.
 
