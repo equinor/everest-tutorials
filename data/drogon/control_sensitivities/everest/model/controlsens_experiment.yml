@@ -1,0 +1,86 @@
+definitions: 
+  case_name: CONTROLSENS_EXP
+  realization_folder: r{{configpath}}/../../../fmu-drogon-flow-files/realization-r{{realization}}/iter-0/eclipse
+  eclbase: simulator/model/DROGON
+
+environment:
+  simulation_folder: r{{configpath}}/../output/r{{case_name}}/simulation_output
+  output_folder: r{{configpath}}/../output/r{{case_name}}
+  random_seed: 20250630
+
+wells:
+  - {name: A1, drill_time: 120}
+  - {name: A2, drill_time: 120}
+  - {name: A3, drill_time: 120}
+  - {name: A4, drill_time: 120}
+  - {name: A5, drill_time: 120}
+  - {name: A6, drill_time: 120}
+      
+controls:
+  - name: well_order
+    type: well_control
+    min: 0.0
+    max: 1.0
+    perturbation_magnitude: 0.05
+    variables:
+      - {name: A1, initial_guess: 0.60, enabled: False}
+      - {name: A2, initial_guess: 0.55, enabled: False}
+      - {name: A3, initial_guess: 0.50, enabled: False}
+      - {name: A4, initial_guess: 0.45, enabled: False}
+      - {name: A5, initial_guess: 0.40, enabled: False}
+      - {name: A6, initial_guess: 0.35, enabled: False}
+  - name: well_delay
+    type: generic_control
+    min: 0.0
+    max: 90.0
+    perturbation_magnitude: 36.0
+    variables:
+      - {name: A1, initial_guess: 18.0}
+      - {name: A2, initial_guess: 18.0}
+      - {name: A3, initial_guess: 18.0}
+      - {name: A4, initial_guess: 18.0}
+      - {name: A5, initial_guess: 18.0}
+      - {name: A6, initial_guess: 18.0}
+
+objective_functions:
+  - name: fopt1
+  - name: fopt2
+  - name: fopt3
+
+optimization:
+  max_batch_num: 1
+  perturbation_num: 1
+  speculative: True
+  min_realizations_success: 100
+  min_pert_success: 100
+
+model:
+  realizations: 0-99
+
+simulator:
+  queue_system:
+    name: lsf
+
+install_data:
+  - link: True
+    source: r{{realization_folder}}/include
+    target: simulator/include
+  - link: False
+    source: r{{configpath}}/../../simulator/model
+    target: simulator/model
+  - link: True
+    source: r{{configpath}}/../input
+    target: input
+
+forward_model:
+  - drill_date_planner -i wells.json -opt well_delay.json -o wells.json
+  - drill_planner -i wells.json -c input/drill_planner_config.yml -opt well_order.json -o wells.json
+  - add_templates -i wells.json -c input/template_config.yml -o wells.json
+  - schmerge -i wells.json -s simulator/model/CONTROLSENS.SCH -o simulator/model/SCHEDULE_OPT.SCH
+  - job: flow r{{eclbase}} --enable-tuning=True
+    results:
+      file_name: r{{eclbase}}
+      type: summary
+  - extract_summary_data -s simulator/model/DROGON.UNSMRY -o fopt1 -k FOPT -sd 2023-01-01 -ed 2025-01-01
+  - extract_summary_data -s simulator/model/DROGON.UNSMRY -o fopt2 -k FOPT -sd 2025-01-01 -ed 2027-01-01
+  - extract_summary_data -s simulator/model/DROGON.UNSMRY -o fopt3 -k FOPT -sd 2027-01-01 -ed 2030-01-01
