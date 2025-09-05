@@ -176,7 +176,7 @@ To launch EVEREST, we can execute the following command in the directory with co
    everest run wellorder_experiment.yml
 
 .. note::
-   The string ``r{{configpath}}`` will be interpreted asa directory path to the configuration file and the string ``r{{realization}}`` will be interpreted as integer number of the geological realization.
+   The string ``r{{configpath}}`` will be interpreted as a directory path to the configuration file and the string ``r{{realization}}`` will be interpreted as integer number of the geological realization.
 
 .. note::
    For more information on command line interface of EVEREST type ``everest --help``
@@ -212,7 +212,7 @@ The :ref:`figure_objectives_wo` shows average objective function at the iteratio
 
    Figure: Initial and optimal priorities
 
-The drilling order is defined by set of priority values. We can compare these values for the initial guess an optimal solution, see :ref:`figure_controls_wo`. Most notably, the priority value of the producer A4 and injector A5 increased placing them in front of producers A2 and A3. In addition, the priority values of injector A6 decreased, reinforcing its place at the end of the drilling sequnce, see :ref:`table_controls_wo`.
+The drilling order is defined by set of priority values. We can compare these values for the initial guess and optimal solution, see :ref:`figure_controls_wo`. Most notably, the priority value of the producer A4 and injector A5 increased placing them in front of producers A2 and A3. In addition, the priority values of injector A6 decreased, reinforcing its place at the end of the drilling sequnce, see :ref:`table_controls_wo`.
 
 .. _table_controls_wo:
 .. csv-table:: Table: Initial and optimal drilling order
@@ -245,7 +245,7 @@ While we increased total oil production, the total gas production has been sligh
    
    Figure: Field Gas Production Total
 
-By drilling injectory earlier, the cumulative values for water production and water injection increased compared to intitial strategy, see :ref:`figure_fwpt_wo` and :ref:`figure_fwit_wo`. It was again a beneficial trade-off for the NPV.
+By drilling injector earlier, the cumulative values for water production and water injection increased compared to intitial strategy, see :ref:`figure_fwpt_wo` and :ref:`figure_fwit_wo`. It was again a beneficial trade-off for the NPV.
 
 .. _figure_fwpt_wo:
 .. figure:: images/production/wo_FWPT.svg

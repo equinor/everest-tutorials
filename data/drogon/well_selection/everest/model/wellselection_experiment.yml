@@ -1,12 +1,12 @@
 definitions: 
-  case_name: WELLORDER_EXP
+  case_name: WELLSELECTION_EXP
   realization_folder: r{{configpath}}/../../../fmu-drogon-flow-files/realization-r{{realization}}/iter-0/eclipse
   eclbase: simulator/model/DROGON
 
 environment:
   simulation_folder: r{{configpath}}/../output/r{{case_name}}/simulation_output
   output_folder: r{{configpath}}/../output/r{{case_name}}
-  random_seed: 20250523
+  random_seed: 20250801
 
 wells:
   - {name: A1, drill_time: 120}
@@ -15,7 +15,7 @@ wells:
   - {name: A4, drill_time: 120}
   - {name: A5, drill_time: 120}
   - {name: A6, drill_time: 120}
-      
+
 controls:
   - name: well_order
     type: well_control
@@ -29,6 +29,14 @@ controls:
       - {name: A4, initial_guess: 0.45}
       - {name: A5, initial_guess: 0.4}
       - {name: A6, initial_guess: 0.35}
+  -
+    name: well_number
+    type: generic_control
+    min: 1
+    max: 5
+    perturbation_magnitude: 1
+    variables:
+        - { name: number_of_wells , initial_guess: 4 }
 
 objective_functions:
   - name: npv
@@ -39,14 +47,14 @@ optimization:
   max_batch_num: 10
   perturbation_num: 1
   options:
-    - "max_step = 0.3"
+    - "max_step = 0.2"
 
 model:
-  realizations: r{{range(100) | list()}}
-     
+  realizations: 0-99
+
 simulator:
-  queue_system:
-    name: lsf 
+ queue_system:
+   name: lsf
 
 install_data:
   - link: True
@@ -61,8 +69,9 @@ install_data:
 
 forward_model:
   - drill_planner -i wells.json -c input/drill_planner_config.yml -opt well_order.json -o wells.json
+  - select_wells -i wells.json -o wells.json file well_number.json
   - add_templates -i wells.json -c input/template_config.yml -o wells.json 
-  - schmerge -i wells.json -s simulator/model/WELLORDER.SCH -o simulator/model/SCHEDULE_OPT.SCH
+  - schmerge -i wells.json -s simulator/model/WELLSELECT.SCH -o simulator/model/SCHEDULE_OPT.SCH
   - job: flow r{{eclbase}} --enable-tuning=true
     results:
       file_name: r{{eclbase}}

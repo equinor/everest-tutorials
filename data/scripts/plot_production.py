@@ -320,7 +320,7 @@ keywords_to_be_plotted = [
 
 final_eclipse_simulation_date = pd.to_datetime("2030-01-01 00:00:00")
 batch_numbers = [0, 5]
-number_geo_realizations = 100
+number_geo_realizations = 99  # this is simulation index of last realization
 time_period = [2023, 2030]
 
 data_accumulator, common_dates = read_summaries(
