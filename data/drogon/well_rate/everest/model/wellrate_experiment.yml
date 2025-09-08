@@ -35,7 +35,7 @@ optimization:
   perturbation_num: 1
 
 model:
-  realizations: r{{range(100) | list()}}
+  realizations: "0-99"
 
 simulator:
   queue_system:
