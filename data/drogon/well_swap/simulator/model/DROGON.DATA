@@ -264,16 +264,16 @@ INCLUDE
 INCLUDE
  '../include/schedule/A2.sch' /
  
- INCLUDE
+INCLUDE
  '../include/schedule/A3.sch' /
  
- INCLUDE
+INCLUDE
  '../include/schedule/A4.sch' /
  
- INCLUDE
+INCLUDE
  '../include/schedule/A5.sch' /
  
- INCLUDE
+INCLUDE
  '../include/schedule/A6.sch' /
  
 INCLUDE

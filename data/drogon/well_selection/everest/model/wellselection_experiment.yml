@@ -76,4 +76,4 @@ forward_model:
     results:
       file_name: r{{eclbase}}
       type: summary
-  - npv -s simulator/model/DROGON.UNSMRY -o npv -c input/prices.yml -i wells.json -sd 2023-01-01 -ed 2030-01-01
+  - npv -s r{{eclbase}}.UNSMRY -o npv -c input/prices.yml -i wells.json -sd 2023-01-01 -ed 2030-01-01
