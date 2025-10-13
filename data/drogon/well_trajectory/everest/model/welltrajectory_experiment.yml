@@ -134,6 +134,7 @@ optimization:
   min_realizations_success: 50
   max_batch_num: 10
   perturbation_num: 1
+  speculative: True
   options:
     - "max_step = 0.1"
 
