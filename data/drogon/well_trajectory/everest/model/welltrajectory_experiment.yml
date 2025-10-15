@@ -128,13 +128,13 @@ controls:
 
 objective_functions:
   - name: npv
-    auto_scale: True
     
 optimization:
   min_realizations_success: 50
   max_batch_num: 10
   perturbation_num: 1
   speculative: True
+  auto_scale: True
   options:
     - "max_step = 0.1"
 
