@@ -13,7 +13,7 @@ Model Description
 
 The Drogon field is a new Equinor benchmark model, used for testing different algorithms and software.
 
-.. figure:: ../model_description/images/drogon_soil.png
+.. figure:: ../model_description/images/DROGON_INIT_SOIL.png
     :width: 1689px
     :height: 1047px
     :align: center
@@ -23,7 +23,7 @@ The Drogon field is a new Equinor benchmark model, used for testing different al
 
     The oil saturation map of one of the Drogon field realizations showing the location of the existing well targets and faults.
 
-A detailed description of the Drogon reservoir model can be found :doc:`here <model_description/1_drogon_description>`.
+A detailed description of the Drogon reservoir model can be found :ref:`here <drogon_description>`.
 
 Objective Function
 ##################
@@ -99,7 +99,7 @@ The following snippet illustrates the ``controls`` section of the configuration 
 
 	These time indexes have to be specified in the :file:`input/files/rate_constraints.yml` file, in the format of one entry per time index per well.
 
-.. literalinclude:: ../../../data/drogon/well_rate/everest/input/files/rates_constraints.yml
+.. literalinclude:: ../../../data/drogon/well_rate/everest/input/rates_constraints.yml
   :language: yaml
 
 The index key in the control definition is used in conjunction with a template file explained below to determine the time interval for which the control value is applicable. Therefore, a case with a single control time interval would be defined with a single index key value while a case with multiple time intervals will need multiple index key values. The number of index keys can be different for the different wells which means the number of control variables per well and the control time intervals can be different for different wells.
@@ -138,7 +138,7 @@ The final job in this sequence of forward models is the **schmerge** job which p
 
 .. important::
 
-	For more detailed information and examples regarding the forward models please refer to the detailed :doc:`forward model documentation <everest:forward_model_jobs>`.
+	For more detailed information and examples regarding the forward models please refer to the detailed `forward model documentation <https://everest.readthedocs.io/en/latest/forward_model_jobs.html>`_.
   
 .. _howto_wr:
 
@@ -159,7 +159,7 @@ Moreover, irrespective of the gradient quality, the algorithm used for optimizat
 
 .. important::
 
-	For more detailed information regarding the available algorithms please refer to the detailed :doc:`optimization backend documentation <everest:optimization_backends>`.
+	For more detailed information regarding the available algorithms please refer to the detailed `optimization backend documentation <https://everest.readthedocs.io/en/latest/optimization_algorithms.html>`_.
 
 .. _experiment_wr:
 
@@ -245,7 +245,7 @@ The Everviz application can be used to load the optimization results and plot th
 
 .. important::
 
-	For more detailed information regarding the Everviz usage please refer to the detailed :doc:`documentation <4_everviz>`.
+	For more detailed information regarding the Everviz usage please refer to the detailed :ref:`documentation <everviz>`.
 
 To quantify and comprehend the flow mechanisms that led to the observed increase in the objective function value, a comparison of the initial and optimal injection strategies is provided in the figures below. The field oil production and water injection rates, as well as the cumulative production and injection rates, are compared between the initial case (represented in purple) and the optimized case (represented in orange) for all model realizations. These results correspond to ''**batch 0**'' (initial case) and ''**batch 9**'' (optimized case) from the simulation output.
 
@@ -331,4 +331,4 @@ The figure below compares the initial and optimal values for the controls. The f
 
 .. important::
 
-	For more examples on how to add complexity to the setups please refer to the :doc:`multi-objective <well_rate_multi_objective>` and  :doc:`constrained optimization <well_rate_constraints>` topics.
+	For more examples on how to add complexity to the setups please refer to the :ref:`multi-objective <well_rate_multi_objective>` and constrained optimization topics.

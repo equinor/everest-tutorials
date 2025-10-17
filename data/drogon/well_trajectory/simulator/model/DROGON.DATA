@@ -27,9 +27,17 @@ VAPOIL
 -- Measurement unit used
 METRIC
 
+CPR
+/
+
 -- Options for equilibration
 EQLOPTS
  'THPRES'  /
+
+-- Dimensions and options for tracers
+-- 2 water tracers
+TRACERS
+ 1*  2 /
 
 -- Grid dimension
 INCLUDE
@@ -82,6 +90,7 @@ WSEGDIMS
 VFPPDIMS
 11 8 8 8 1 4 /
 
+
 -- Input and output files format
 UNIFIN
 UNIFOUT
@@ -128,6 +137,9 @@ INCLUDE
 INCLUDE
  '../include/grid/drogon.multregt' / --from ert template
 
+-- INCLUDE
+--  '../include/grid/drogon.multflt' / --from ert template
+
 -- =============================================================================
 EDIT
 -- =============================================================================
@@ -148,9 +160,23 @@ INCLUDE
 IMPORT
  '../include/props/drogon.swatinit' / --exported by rms
 
+IMPORT
+ '../include/props/drogon.swl' / --exported by rms
+
+IMPORT
+ '../include/props/drogon.swcr' / --exported by rms
+
+IMPORT
+ '../include/props/drogon.sgu' / --exported by rms
+
 INCLUDE
  '../include/props/drogon.pvt' /
 
+-- Set up tracers
+TRACER
+ WT1  WAT 'g' /
+ WT2  WAT 'g' /
+/
 
 EXTRAPMS
   4 /
@@ -187,18 +213,33 @@ INCLUDE
 INCLUDE
  '../include/solution/drogon.thpres' / --exported by rms
 
+-- Initial tracer concentration vs depth for tracer WT1
+TVDPFWT1
+ 1000  0.0
+ 2500  0.0 /
+
+-- Initial tracer concentration vs depth for tracer WT2
+TVDPFWT2
+ 1000  0.0
+ 2500  0.0 /
+
 RPTSOL
  RESTART=2  FIP=2  'THPRES'  'FIPRESV' /
 
 -- ALLPROPS --> fluid densities, viscosities , reciprocal formation volume factors and phase relative permeabilities
 -- NORST=1  --> output for visualization only
 RPTRST
- BASIC=2 ALLPROPS RVSAT RSSAT PBPD  NORST=1 RFIP RPORV /
+ ALLPROPS RVSAT RSSAT PBPD  NORST=1 RFIP RPORV /
 
 
 -- =============================================================================
 SUMMARY
 -- =============================================================================
+
+--RPTONLY
+
+SUMTHIN
+ 1 /
 
 INCLUDE
  '../include/summary/drogon.summary' /
@@ -217,202 +258,5 @@ INCLUDE
 INCLUDE
 '../include/schedule/vfp/A-4.inc'/                                           -- 4
  
-
 INCLUDE
- '../../A1.SCH' /
-
-INCLUDE
- '../../A2.SCH' /
-
-INCLUDE
- '../../A3.SCH' /
-
-INCLUDE
- '../../A4.SCH' /
-
-INCLUDE
- '../../A5.SCH' /
-
-INCLUDE
- '../../A6.SCH' /
-
-
-WCONPROD
---WELL OP/SH   CTL       ORAT       WRAT       GRAT       LRAT       RRAT        BHP        THP   VFP        ALQ
- 'A1'   OPEN  LRAT       3000       3000         1*       4000         1*        150         1*    1*         1* /
- 'A2'   OPEN  LRAT       4000       4000         1*       2500         1*        150         1*    1*         1* /
- 'A3'   OPEN  LRAT       4000       4000         1*       2500         1*        150         1*    1*         1* /
- 'A4'   OPEN  LRAT       4000       4000         1*       4000         1*        150         1*    1*         1* /
-/
-
-WCONINJE
---WELL PHASE OP/SH   CTL       SRAT       RRAT        BHP        THP   VFP
- 'A5'  WATER  OPEN  RATE       6500         1*        500         1*    1* /
- 'A6'  WATER  OPEN  RATE       6500         1*        500         1*    1* /
-/
-
-TUNING
--- TSINIT       TSMAXZ     TSMINZ     TSMCHP     TSFMAX     TSFMIN     TSFCNV     TFDIFF     THRUPT     TMAXWC
-          1         10         1*         1*         1*         1*         1*         1*         1*          1 /
--- TRGTTE       TRGCNV     TRGMBE     TRGLCV     XXXTTE     XXXCNV     XXXMBE     XXXLCV     XXXWFL
-         1*         1*         1*         1*         1*         1*         1*         1*         1* /
--- NEWTMX       NEWTMN     LITMAX     LITMIN     MXWSIT     MXWPIT
-         12          1         50          1         50         50 /
-
-DATES
- 1 OCT 2022 /
-/
-
-DATES
- 1 NOV 2022 /
-/
-
-DATES
- 1 DEC 2022 /
-/
-
-DATES
- 1 JAN 2023 /
-/
-
-DATES
- 1 FEB 2023 /
-/
-
-DATES
- 1 MAR 2023 /
-/
-
-DATES
- 1 APR 2023 /
-/
-
-DATES
- 1 MAY 2023 /
-/
-
-DATES
- 1 JUN 2023 /
-/
-
-DATES
- 1 JLY 2023 /
-/
-
-DATES
- 1 AUG 2023 /
-/
-
-DATES
- 1 SEP 2023 /
-/
-
-DATES
- 1 OCT 2023 /
-/
-
-DATES
- 1 NOV 2023 /
-/
-
-DATES
- 1 DEC 2023 /
-/
-
-DATES
- 1 JAN 2024 /
-/
-
-DATES
- 1 FEB 2024 /
-/
-
-DATES
- 1 MAR 2024 /
-/
-
-DATES
- 1 APR 2024 /
-/
-
-DATES
- 1 MAY 2024 /
-/
-
-DATES
- 1 JUN 2024 /
-/
-
-DATES
- 1 JLY 2024 /
-/
-
-DATES
- 1 AUG 2024 /
-/
-
-DATES
- 1 SEP 2024 /
-/
-
-DATES
- 1 OCT 2024 /
-/
-
-DATES
- 1 NOV 2024 /
-/
-
-DATES
- 1 DEC 2024 /
-/
-
-DATES
- 1 JAN 2025 /
-/
-
-DATES
- 1 APR 2025 /
-/
-
-DATES
- 1 JLY 2025 /
-/
-
-DATES
- 1 OCT 2025 /
-/
-
-DATES
- 1 JAN 2026 /
-/
-
-DATES
- 1 APR 2026 /
-/
-
-DATES
- 1 JLY 2026 /
-/
-
-DATES
- 1 OCT 2026 /
-/
-
-DATES
- 31 DEC 2026 /
-/
-
-RPTRST
- BASIC=2 NORST=1 /
-
-DATES
- 1 JAN 2027 /
-/
-
---------------
-END
---------------
-
-
-
+ './WELLTRAJECTORY.SCH' /

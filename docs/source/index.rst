@@ -50,3 +50,4 @@ EVEREST™ tutorials
    Changelog <development/changelog>
    Tutorial in Github <https://github.com/equinor/everest-tutorials>
    Issue tracker <https://github.com/equinor/everest-tutorials/issues>
+   Contributing <development/contributors_guide>

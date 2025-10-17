@@ -2,6 +2,8 @@
 Multi-objective optimization
 ***********************************
 
+.. _well_rate_multi_objective:
+
 Most real-world design and planning problems must also satisfy multiple objectives. Very often these objectives are in conflict with each other, which means that one objective must be decreased to increase the other objective. In such cases it is not trivial to find solutions which satisfy different objectives. When the problem includes two or more objectives, EVEREST employs the widely used weighted sum method to balance the objective functions. This approach aims to optimize a weighted objective function that combines multiple objectives in a single function according to:
 
 .. math::
@@ -20,7 +22,7 @@ Objective function section
 
 Following snippet shows the changes made to :code:`objective_functions` section of the config file for multi-objective optimization:
 
-.. literalinclude:: ../data/drogon/well_rate/everest/model/wellrate_multi_objective.yml
+.. literalinclude:: ../../../data/drogon/well_rate/everest/model/wellrate_multi_objective.yml
   :language: yaml
   :lines: 28-32
 
@@ -28,7 +30,7 @@ Forward model section
 ^^^^^^^^^^^^^^^^^^^^^^
 The forward model for calculating objective function NPV and FWPT needs to be active.
 
-.. literalinclude:: ../data/drogon/well_rate/everest/model/wellrate_multi_objective.yml
+.. literalinclude:: ../../../data/drogon/well_rate/everest/model/wellrate_multi_objective.yml
   :language: yaml
   :lines: 60-66
 

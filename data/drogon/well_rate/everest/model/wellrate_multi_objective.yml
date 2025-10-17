@@ -62,5 +62,5 @@ forward_model:
   - add_templates -i wells_constr_result.json -c input/template_config.yml -o wells_tmpl_result.json 
   - schmerge -i wells_tmpl_result.json -s simulator/model/WELLRATE.SCH -o simulator/model/SCHEDULE_OPT.SCH
   - flow r{{eclbase}} --enable-tuning=true
-  - npv -s simulator/model/DROGON.UNSMRY -o npv -c input/prices.yml -i wells_tmpl_result.json -sd 2023-01-01 -ed 2030-01-01
+  - npv -s r{{eclbase}}.UNSMRY -o npv -c input/prices.yml -i wells_tmpl_result.json -sd 2023-01-01 -ed 2030-01-01
   - extract_summary_data -s r{{eclbase}}.UNSMRY -sd 2023-01-01 -ed 2030-01-01 -k FWPT -o fwpt -m -1

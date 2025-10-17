@@ -4,8 +4,8 @@ interpolation:
 
 connections:
   type: resinsight
-  date: 2022-09-03
-  formations_file: ./files/drogon_formations.lyr
+  date: 2020-07-01
+  formations_file: ./input/formations.lyr
   perforations:
     - well: A1
       formations: [0]

@@ -19,7 +19,6 @@ prices:
 discount_rates:
     - { date: 2023-01-01, value: 0.08 }
 
-
 well_costs:
 - currency: USD
   value: 1.5e6
