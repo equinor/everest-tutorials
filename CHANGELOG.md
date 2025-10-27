@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/equinor/everest-tutorials/compare/v0.7.0...v1.0.0) (2025-10-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* add Drogon release with new well schedules ([#89](https://github.com/equinor/everest-tutorials/issues/89))
+
+### Features
+
+* add Drogon release with new well schedules ([#89](https://github.com/equinor/everest-tutorials/issues/89)) ([bcbfe54](https://github.com/equinor/everest-tutorials/commit/bcbfe54a63a91c8b10c9c96e755d77549f2c1bf6))
+
 ## [0.7.0](https://github.com/equinor/everest-tutorials/compare/v0.6.2...v0.7.0) (2025-10-27)
 
 
