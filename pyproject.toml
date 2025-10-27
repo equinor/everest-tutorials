@@ -1,6 +1,6 @@
 [project]
 name = "everest_tutorials"
-version = "0.6.2"
+version = "0.7.0"
 description = "EVEREST tutorials"
 authors = [{ name = "Equinor ASA", email = "fg_sib-scout@equinor.com" }]
 readme = "README.md"

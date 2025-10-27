@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.7.0](https://github.com/equinor/everest-tutorials/compare/v0.6.2...v0.7.0) (2025-10-27)
+
+
+### Features
+
+* add contributing guide to TOC ([9eab322](https://github.com/equinor/everest-tutorials/commit/9eab322a190263bdfdaac116da93d7242a4d9daa))
+* add EVEREST drilling delay sensitivity analysis ([[#52](https://github.com/equinor/everest-tutorials/issues/52)](https://github.com/equinor/everest-tutorials/issues/52)) ([c0330bc](https://github.com/equinor/everest-tutorials/commit/c0330bc773529a52ca09a73eb9406e926e817abb))
+* add well selection tutorial ([[#50](https://github.com/equinor/everest-tutorials/issues/50)](https://github.com/equinor/everest-tutorials/issues/50)) ([99525d6](https://github.com/equinor/everest-tutorials/commit/99525d60eee5c12901ccc36e34f14e5a8b564ffb))
+
+
+### Bug Fixes
+
+* changes `auto_scale` to `False` and typos for well order tutorial ([99525d6](https://github.com/equinor/everest-tutorials/commit/99525d60eee5c12901ccc36e34f14e5a8b564ffb))
+* realization index in the plotting script ([99525d6](https://github.com/equinor/everest-tutorials/commit/99525d60eee5c12901ccc36e34f14e5a8b564ffb))
+* standardized includes and config files ([9eab322](https://github.com/equinor/everest-tutorials/commit/9eab322a190263bdfdaac116da93d7242a4d9daa))
+
 ## [0.6.2](https://github.com/equinor/everest-tutorials/compare/v0.6.1...v0.6.2) (2025-08-13)
 
 
