@@ -14,20 +14,27 @@ permissions:
 jobs:
   release-please:
     runs-on: ubuntu-latest
+
     steps:
       - name: checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: true
+
+      - name: make scripts executable
+        run: chmod +x .github/scripts/pack.sh .github/scripts/upload.sh
+
       - name: create release
         uses: googleapis/release-please-action@v4
         id: release
         with:
           release-type: python
+
       - name: compress tutorial cases
-        run: tar -czvf everest-tutorials-drogon.tar.gz ./data/drogon
-      - name: upload release artifact
+        run: ./github/scripts/pack.sh
+
+      - name: upload release artifacts
         if: ${{ steps.release.outputs.release_created }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload ${{ steps.release.outputs.tag_name }} everest-tutorials-drogon.tar.gz
+        run: ./github/scripts/upload.sh ${{ steps.release.outputs.tag_name }}
