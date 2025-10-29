@@ -31,10 +31,10 @@ jobs:
           release-type: python
 
       - name: compress tutorial cases
-        run: ./github/scripts/pack.sh
+        run: .github/scripts/pack.sh
 
       - name: upload release artifacts
         if: ${{ steps.release.outputs.release_created }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./github/scripts/upload.sh ${{ steps.release.outputs.tag_name }}
+        run: .github/scripts/upload.sh ${{ steps.release.outputs.tag_name }}
