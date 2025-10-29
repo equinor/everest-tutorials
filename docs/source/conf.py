@@ -23,9 +23,10 @@ version = ".".join(dist_version.split(".")[:3])
 # The full version, including alpha/beta/rc tags
 release = dist_version
 
-rst_epilog = f"""
-.. |everest_tutorial_drogon_download| replace:: https://github.com/equinor/everest-tutorials/releases/download/v{version}/everest-tutorials-drogon.tar.gz
-"""
+
+with open('download_links.txt') as f:
+   rst_epilog = f.read()
+
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
