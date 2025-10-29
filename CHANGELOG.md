@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/equinor/everest-tutorials/compare/v1.0.1...v1.0.2) (2025-10-29)
+
+
+### Bug Fixes
+
+* typo in gha ([#97](https://github.com/equinor/everest-tutorials/issues/97)) ([124a052](https://github.com/equinor/everest-tutorials/commit/124a052f72af9541753d56778cff3d1e06387bee))
+
 ## [1.0.1](https://github.com/equinor/everest-tutorials/compare/v1.0.0...v1.0.1) (2025-10-29)
 
 
