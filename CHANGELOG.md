@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/equinor/everest-tutorials/compare/v1.0.0...v1.0.1) (2025-10-29)
+
+
+### Bug Fixes
+
+* update included artifacts and download page ([#92](https://github.com/equinor/everest-tutorials/issues/92)) ([7e2e4f8](https://github.com/equinor/everest-tutorials/commit/7e2e4f881b481911f9e47d616fb172c9eb48bb19))
+
 ## [1.0.0](https://github.com/equinor/everest-tutorials/compare/v0.7.0...v1.0.0) (2025-10-27)
 
 
