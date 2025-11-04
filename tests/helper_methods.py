@@ -1,3 +1,4 @@
+from logging import config
 import os
 from pathlib import Path
 import shutil
@@ -10,6 +11,8 @@ from ert.shared import __version__ as ert_version
 from everest.api import EverestDataAPI
 import polars as pl
 import io
+from ert.plugins import ErtPluginContext
+
 
 
 def setup_environment(snapshot, source_root: Path, experiment_name: str, config_file: str) -> Tuple[EverestConfig, str]:
@@ -42,8 +45,10 @@ def setup_environment(snapshot, source_root: Path, experiment_name: str, config_
 
 def run_and_assert_experiment(snapshot, snapshot_reference: str, config: EverestConfig) -> None:
     parsed_ert_version = parse_version(ert_version)
+    
+    with ErtPluginContext() as site_plugins:
+        run_model = EverestRunModel.create(config, runtime_plugins=site_plugins)
 
-    run_model = EverestRunModel.create(config)
     evaluator_server_config = EvaluatorServerConfig()
     run_model.run_experiment(evaluator_server_config)
 
@@ -76,7 +81,7 @@ def _read_opt_and_summary_data(ever_config: EverestConfig, parsed_ert_version: s
         from everest.everest_storage import EverestStorage
         ever_storage = EverestStorage(output_dir=Path(ever_config.optimization_output_dir))
         ever_storage.init(
-            formatted_control_names=ever_config.formatted_control_names,
+            formatted_control_names=ever_config.controls[0].formatted_control_names,
             objective_functions=ever_config.objective_functions,
             output_constraints=ever_config.output_constraints,
             realizations=ever_config.model.realizations,
