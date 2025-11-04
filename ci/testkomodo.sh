@@ -4,7 +4,7 @@ run_tests () {
         echo "Skip running everest tutorial integration test on azure for now"
         return 0
     elif [[ "$CI_RUNNER_LABEL" == "onprem" ]]; then
-        RUNNER_ROOT="/scratch/oompf/everest-integration-tests"
+        RUNNER_ROOT="/scratch/oompf/everest-tutorials-tests"
     else
         echo "Unsupported runner label: $CI_RUNNER_LABEL"
         return 1

@@ -39,7 +39,7 @@ model:
 
 simulator:
   queue_system:
-    name: lsf 
+    name: local 
 
 install_data:
   - link: True
