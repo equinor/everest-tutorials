@@ -1,6 +1,6 @@
 name: commit lint
 
-on: 
+on:
   workflow_dispatch:
   workflow_call:
   push:
