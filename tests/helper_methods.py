@@ -11,7 +11,10 @@ from ert.shared import __version__ as ert_version
 from everest.api import EverestDataAPI
 import polars as pl
 import io
-from ert.plugins import ErtPluginContext
+from ert.plugins import get_site_plugins
+from ert.base_model_context import use_runtime_plugins
+
+
 
 
 
@@ -46,8 +49,9 @@ def setup_environment(snapshot, source_root: Path, experiment_name: str, config_
 def run_and_assert_experiment(snapshot, snapshot_reference: str, config: EverestConfig) -> None:
     parsed_ert_version = parse_version(ert_version)
     
-    with ErtPluginContext() as site_plugins:
-        run_model = EverestRunModel.create(config, runtime_plugins=site_plugins)
+    runtime_plugins = get_site_plugins() 
+    with use_runtime_plugins(runtime_plugins): 
+        run_model = EverestRunModel.create(config, runtime_plugins=runtime_plugins)
 
     evaluator_server_config = EvaluatorServerConfig()
     run_model.run_experiment(evaluator_server_config)
