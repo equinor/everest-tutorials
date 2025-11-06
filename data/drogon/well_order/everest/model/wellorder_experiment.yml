@@ -32,7 +32,6 @@ controls:
 
 objective_functions:
   - name: npv
-    auto_scale: False
 
 optimization:
   min_realizations_success: 50
