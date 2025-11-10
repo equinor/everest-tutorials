@@ -38,7 +38,6 @@ optimization:
 
 model:
   realizations: r{{range(100) | list()}}
-  data_file: r{{flow_folder}}/model/EGG_MODEL_FLOW.DATA
 
 install_data:
   - link: False
