@@ -8,8 +8,7 @@ import matplotlib.pyplot as plt
 
 
 RESULTS_FILE = (
-    "optimization_output/ensembles/batch_{batch}/"
-    "optimizer/realization_controls.parquet"
+    "optimization_output/ensembles/batch_{batch}/optimizer/realization_controls.parquet"
 )
 PATH_PLOTS = "docs/source/well_order/images/optimization"
 FONTSIZE = 15
