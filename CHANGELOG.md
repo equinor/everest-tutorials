@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/equinor/everest-tutorials/compare/v1.0.2...v1.0.3) (2025-11-14)
+
+
+### Bug Fixes
+
+* use get-site-plugins() ([#102](https://github.com/equinor/everest-tutorials/issues/102)) ([40c29ac](https://github.com/equinor/everest-tutorials/commit/40c29acf2f6279d38684b8f2b97b0f2d3312f474))
+
 ## [1.0.2](https://github.com/equinor/everest-tutorials/compare/v1.0.1...v1.0.2) (2025-10-29)
 
 
