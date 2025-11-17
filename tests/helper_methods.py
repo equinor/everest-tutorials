@@ -71,7 +71,7 @@ def _read_opt_and_summary_data(ever_config: EverestConfig, parsed_ert_version: s
         ever_storage = EverestStorage(output_dir=Path(ever_config.optimization_output_dir))
         ever_storage.init(
             formatted_control_names=ever_config.controls[0].formatted_control_names,
-            objective_functions=ever_config.objective_functions,
+            objective_functions=ever_config.create_ert_objectives_config(),
             output_constraints=ever_config.output_constraints,
             realizations=ever_config.model.realizations,
         )
