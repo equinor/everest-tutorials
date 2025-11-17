@@ -1,6 +1,6 @@
-#######################
+##########################
 Well Swapping Optimization
-#######################
+##########################
 
 This tutorial aims to demonstrate how to optimize the dynamic operational schedule of wells by swapping the status to be assigned to each well over time in order to maximize (or minimize) a user-defined objective function. This can be used to determine the schedule of wells alternating between open/closed status (as the example described in this tutorial), but it can also be applied to more general cases with more possible statuses (e.g., conversion of well types producer/injector/shut over time). The well swapping optimization functionality is also based on the priority-based parametrization used for drilling order and well selection optimization, but the approach is extended to multiple sets of priority controls to enable the determination of well statuses at multiple time-intervals throughout the field production life-cycle. Therefore, this tutorial builds upon the knowledge presented in the :doc:`drilling order optimization <well_order>` and :doc:`well selection optimization <well_select>` by adding new complexity to the workflow presented there.
 
@@ -21,12 +21,14 @@ First, we formulate an example optimization problem and we explain the configura
 * :ref:`Run EVEREST and analyze results <results_wsw>`
 
 .. _problem_wsw:
+
 ***************************
 Define optimization problem
 ***************************
 We are interested in finding the operational schedule of producers for the Drogon field (alternating between open/closed status) that maximizes a certain objective function over a certain set of geological scenarios and over a certain time period. The field is developed with 6 wells; 4 producers: A1, A2, A3, A4 and 2 injectors A5, A6. For the sake of this particular tutorial, we assume operations to be limited by surface facility constraints, allowing only 3 out of the 4 producers to be put on stream simultaneously, which means that, at all times, one of the producers needs to be set to status closed. In other words, in order to utilize all producers throughout the production life-cycle, their statuses (open/closed) must be smartly scheduled over time. We assume that the status of the producers can be determined over 3 time periods, whose durations may vary, and that the open/closed statuses may be alternated as many times as required. The starting date for planning the swapping schedule of the producers is chosen to be 2023-01-01, considering all 4 producers as eligible to be open from that date onwards. We assume that the status of the wells can be switched instantaneously and that the status switching moment is synchronized.
 
 .. _controls_wo:
+
 Optimization variables
 ######################
 
@@ -42,7 +44,7 @@ Let's assume, we want to start optimization with the first 3 producers (in alpha
 
 .. _table_initial_controls_wsw:
 .. csv-table:: Table: Initial control values
-   :widths: 20, 20, 20, 20, 20, 20, 20
+   :widths: 20, 20, 20, 20
    :align: center
 
    "Time period","#1","#2","#3"
@@ -56,7 +58,7 @@ The resulting schedule for the initial control values from :ref:`table_initial_c
   
 .. _table_initial_schedule_wsw:
 .. csv-table:: Table: Initial well status schedule
-   :widths: 20, 20, 20, 20, 20, 20, 20
+   :widths: 20, 20, 20, 20
    :align: center
 
    "Time period","#1","#2","#3"
@@ -67,9 +69,9 @@ The resulting schedule for the initial control values from :ref:`table_initial_c
    "Date","2023-01-01","2024-03-26","2025-06-19"
 
 .. _objectives_wo:
+
 Objective functions
 ###################
-
 Net present value (NPV)
 ***********************
 
@@ -86,6 +88,7 @@ Where :math:`q_{o,k}` is the oil production rate in :math:`\frac{Sm^3}{day}`, :m
    We assume here no costs to be associated with the operations to switch the status of the wells.
 
 .. _simulation_wsw:
+
 Simulation models
 #################
 
@@ -105,6 +108,7 @@ The Equinor Drogon model is a synthetic reservoir model designed for testing and
 The model contains four production wells (A1 to A4) and two water injection wells (A5 to A6). In this tutorial, the production and injection starts in September 2022 and is simulated until January 2030. The average oil saturation across the 100 geological realizations for September 2022 is shown in :ref:`drogon-figure-init-soil-wsw`. The production wells A1 to A4 are located within the oil-bearing zone, while the injection wells A5 and A6 are placed below oil-water contact.
 
 .. _configuration_wsw:
+
 *********************
 Prepare configuration
 *********************
@@ -112,6 +116,7 @@ Prepare configuration
 The downloaded material is already complete and ready to be launched, however it is still useful to understand how the defined problem was configured. Information related to initial guess, objective functions and the model needs to be specified in main EVEREST configuration file. After downloading tutorial files from :ref:`download_material` this file will be located at ``well_swap/everest/model/wellswap_experiment.yml``.
 
 .. _config_main_wsw:
+
 Main configuration
 ##################
 
@@ -143,6 +148,7 @@ We also need to specify the name of the objective function in the ``objective_fu
    These settings are case-dependent, well swapping optimization in other cases may require adjusting this ``max_step`` value.
 
 .. _configs_forward_jobs_wsw:
+
 Configuration of forward jobs
 #############################
 
@@ -172,6 +178,7 @@ where EVEREST will replace ``{{name}}`` with the name of the well. Finally the `
 are responsible for launching reservoir simulator and calculating NPV. The NPV input file ``well_swap/everest/input/prices.yml`` contains economic input parameters such as unit prices for oil production, water production and injection, drilling costs, discount factor, etc. For more detailed information and examples regarding the forward models please refer to the `EVEREST Documentation <https://everest.readthedocs.io/en/latest/forward_model_jobs.html>`_.
 
 .. _schedule_wsw:
+
 Simulation schedule template
 ############################
 
@@ -187,6 +194,7 @@ Updated schedule files for two different perturbations can be open to see the di
    In this tutorial case, only the producers are subject to the well swapping optimization. Therefore, only those are set with ``SHUT`` status in the original schedule template ``WELLSWAP.SCH``. The injectors (A5 and A6) are set to ``OPEN`` status.
 
 .. _results_wsw:
+
 Run EVEREST and analyze results
 #########################################
 
@@ -260,7 +268,7 @@ The well swapping schedule is defined by a set of priority and duration values. 
 
 .. _table_controls_wsw:
 .. csv-table:: Table: Optimized well status schedule
-   :widths: 20, 20, 20, 20, 20, 20, 20
+   :widths: 20, 20, 20, 20
    :align: center
 
    "Time period","#1","#2","#3"
