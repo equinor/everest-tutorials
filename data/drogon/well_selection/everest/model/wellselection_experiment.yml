@@ -52,8 +52,8 @@ model:
   realizations: 0-99
 
 simulator:
- queue_system:
-   name: lsf
+  queue_system:
+    name: lsf
 
 install_data:
   - link: True
