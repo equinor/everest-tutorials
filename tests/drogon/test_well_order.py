@@ -12,7 +12,7 @@ def test_well_order_simulation(capsys):
         config_path.read_text()
         .replace("max_batch_num: 10", "max_batch_num: 2")
         .replace("realizations: r{{range(100) | list()}}", "realizations: 0-9")
-        .replace("name: lsf", "name: local")
+        .replace("name: lsf", "name: lsf\n    lsf_queue: test")
     )
     try:
         everest_entry([str(config_path), "--skip-prompt"])

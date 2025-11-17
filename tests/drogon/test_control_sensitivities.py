@@ -11,7 +11,7 @@ def test_control_sensitivities_simulation(capsys):
     config_path.write_text(
         config_path.read_text()
         .replace("realizations: 0-99", "realizations: 0-9")
-        .replace("name: lsf", "name: local")
+        .replace("name: lsf", "name: lsf\n    lsf_queue: test")
     )
 
     try:
