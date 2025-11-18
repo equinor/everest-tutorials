@@ -19,12 +19,14 @@ In this section we introduce the reader to preparing, launching and analyzing re
 * :ref:`Run EVEREST and analyze results <results_wo>`
 
 .. _problem_wo:
+
 ***************************
 Define optimization problem
 ***************************
 We are interested in finding drilling sequence of several wells that maximizes a certain objective function over a certain set of geological scenarios and over a certain time period.
 
 .. _controls_wo:
+
 Optimization variables
 ######################
 
@@ -45,6 +47,7 @@ We plan to drill 6 wells; 4 producers: A1, A2, A3, A4 and 2 injectors A5, A6. We
 Let's assume, we want to start optimization with wells drilled in alphabetical order. We need to assign drilling priority value for each well. The higher the probability value the earlier the well will be drilled. This means, we need to choose the highest priority value for the first well (A1) and lowest priority for the last well (A6). See the :ref:`table_initial_controls_do` for chosen well priority values. We recommend spacing priority values evenly. We also need to specify what standard deviation to use when randomizing priorities for perturbations. We recommend setting standard deviation to be equal to difference between the priority values (0.05 for the example in :ref:`table_initial_controls_do`). For information on how to define a more complex time scheduling constraints with rig and slot availability, see relevant documentation section `(Everest documentation <https://everest.readthedocs.io/en/latest/forward_model_jobs.html#drill_planner-category>`_)
 
 .. _objectives_wo:
+
 Objective functions
 ###################
 
@@ -62,6 +65,7 @@ Where :math:`q_{o,k}` is the oil production rate in :math:`\frac{Sm^3}{day}`, :m
 
 
 .. _simulation_wo:
+
 Simulation models
 #################
 
@@ -81,6 +85,7 @@ The Equinor Drogon model is a synthetic reservoir model designed for testing and
 The model contains four production wells (A1 to A4) and two water injection wells (A5 to A6). In this tutorial, the production and injection starts in September 2022 and is simulated until January 2030. The average oil saturation across the 100 geological realizations for September 2022 is shown in :ref:`drogon-figure-init-soil-wo`. The production wells A1 to A4 are located within the oil-bearing zone, while the injection wells A5 and A6 are placed below oil-water contact.
 
 .. _configuration_wo:
+
 *********************
 Prepare configuration
 *********************
@@ -88,6 +93,7 @@ Prepare configuration
 The downloaded material is already complete and ready to be launched, however it is still useful to understand how the defined problem was configured. Information related to initial guess, objective functions and the model needs to be specified in main EVEREST configuration file. After downloading tutorial files from :ref:`download_material` this file will be located at ``well_order/everest/model/wellorder_experiment.yml``.
 
 .. _config_main_wo:
+
 Main configuration
 ##################
 
@@ -110,6 +116,7 @@ We also need to specify the name of the objective function in the ``objective_fu
    :lines: 33-34
 
 .. _configs_forward_jobs_wo:
+
 Configuration of forward jobs
 #############################
 
@@ -137,6 +144,7 @@ where EVEREST will replace ``{{name}}`` with the name of the well. Finally the `
 are responsible for launching reservoir simulator and calculating NPV. The NPV input file ``well_order/everest/input/prices.yml`` contains economic input parameters such as unit prices for oil production, water production and injection, drilling costs, discount factor, etc. For more detailed information and examples regarding the forward models please refer to the `EVEREST Documentation <https://everest.readthedocs.io/en/latest/forward_model_jobs.html>`_.
 
 .. _schedule_wo:
+
 Simulation schedule template
 ############################
 
@@ -149,6 +157,7 @@ Before the optimization, the schedule file for simulation needs to be adapted. F
 Updated schedule files for two different perturbations can be open to see the differences.
 
 .. _results_wo:
+
 Run EVEREST and analyze results
 #########################################
 
