@@ -27,7 +27,7 @@ Define optimization problem
 ***************************
 We are interested in finding the operational schedule of producers for the Drogon field (alternating between open/closed status) that maximizes a certain objective function over a certain set of geological scenarios and over a certain time period. The field is developed with 6 wells; 4 producers: A1, A2, A3, A4 and 2 injectors A5, A6. For the sake of this particular tutorial, we assume operations to be limited by surface facility constraints, allowing only 3 out of the 4 producers to be put on stream simultaneously, which means that, at all times, one of the producers needs to be set to status closed. In other words, in order to utilize all producers throughout the production life-cycle, their statuses (open/closed) must be smartly scheduled over time. We assume that the status of the producers can be determined over 3 time periods, whose durations may vary, and that the open/closed statuses may be alternated as many times as required. The starting date for planning the swapping schedule of the producers is chosen to be 2023-01-01, considering all 4 producers as eligible to be open from that date onwards. We assume that the status of the wells can be switched instantaneously and that the status switching moment is synchronized.
 
-.. _controls_wo:
+.. _controls_wsw:
 
 Optimization variables
 ######################
@@ -68,7 +68,7 @@ The resulting schedule for the initial control values from :ref:`table_initial_c
    "Status A4","closed","closed","closed"
    "Date","2023-01-01","2024-03-26","2025-06-19"
 
-.. _objectives_wo:
+.. _objectives_wsw:
 
 Objective functions
 ###################
