@@ -21,12 +21,14 @@ First, we describe the sensitivity analysis problem and we explain the configura
 * :ref:`Run EVEREST and analyze results <results_cs>`
 
 .. _problem_cs:
+
 ***********************************
 Define sensitivity analysis problem
 ***********************************
 We are interested in determining the influence of drilling delays on the performance of the field in terms of a certain quantity of interest over a certain set of geological scenarios and over a certain time period.
 
 .. _controls_cs:
+
 Uncertain control variables
 ###########################
 
@@ -64,6 +66,7 @@ In order to generate samples of the uncertain well drilling delays, we introduce
    "Maximum delay (days)","90","90","90","90","90","90"
 
 .. _objectives_cs:
+
 Objective functions
 ###################
 
@@ -73,6 +76,7 @@ Short-, mid- and long-term oil production (FOPT)
 Three objective functions are utilized in this drilling delay sensitivity analysis tutorial. They refer to the oil production (FOPT) in three time-horizons: ``fopt1`` for oil production from 01-01-2023 until 01-01-2025, ``fopt2`` for oil production from 01-01-2025 until 01-01-2027, and ``fopt3`` for oil production from 01-01-2027 until 01-01-2030.
 
 .. _simulation_cs:
+
 Simulation models
 #################
 
@@ -92,6 +96,7 @@ The Equinor Drogon model is a synthetic reservoir model designed for testing and
 The model contains four production wells (A1 to A4) and two water injection wells (A5 to A6). In this tutorial, the production and injection starts in September 2022 and is simulated until January 2030. The average oil saturation across the 100 geological realizations for September 2022 is shown in :ref:`drogon-figure-init-soil`. The production wells A1 to A4 are located within the oil-bearing zone, while the injection wells A5 and A6 are placed below oil-water contact.
 
 .. _configuration_cs:
+
 *********************
 Prepare configuration
 *********************
@@ -99,6 +104,7 @@ Prepare configuration
 The downloaded material is already complete and ready to be launched, however it is still useful to understand how the defined problem was configured. Information related to initial guess, objective functions and the model needs to be specified in main EVEREST configuration file. After downloading tutorial files from :ref:`download_material` this file will be located at ``control_sensitivities/everest/model/controlsens_experiment.yml``.
 
 .. _config_main_cs:
+
 Main configuration
 ##################
 
@@ -127,6 +133,7 @@ The name of the objective functions can be defined in the ``objective_functions`
    :lines: 45-48
 
 .. _configs_forward_jobs_cs:
+
 Configuration of forward jobs
 #############################
 
@@ -156,6 +163,7 @@ where EVEREST will replace ``{{name}}`` with the name of the well. Finally the `
 are responsible for launching reservoir simulator and calculating objective functions. The ``fopt1``, ``fopt2`` and ``fopt3`` objectives are obtained using the ``extract_summary_data`` forward model, which essentially reads and filters data from the simulation summary output files (``DROGON.UNSMRY``) for the selected date range. For more detailed information and examples regarding the forward models please refer to the `EVEREST Documentation <https://everest.readthedocs.io/en/latest/forward_model_jobs.html>`_.
 
 .. _schedule_cs:
+
 Simulation schedule template
 ############################
 
@@ -168,6 +176,7 @@ Before the optimization, the schedule file for simulation needs to be adapted. F
 Updated schedule files for two different perturbations can be open to see the differences.
 
 .. _results_cs:
+
 Run EVEREST and analyze results
 #########################################
 
