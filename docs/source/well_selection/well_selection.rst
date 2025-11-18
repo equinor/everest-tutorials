@@ -19,12 +19,14 @@ In this section we introduce the reader to preparing, launching and analyzing re
 * :ref:`Run EVEREST and analyze results <results_ws>`
 
 .. _problem_ws:
+
 ***************************
 Define optimization problem
 ***************************
 We are interested in finding drilling sequence of several wells that maximizes a certain objective function over a certain set of geological scenarios and over a certain time period.
 
 .. _controls_ws:
+
 Optimization variables
 ######################
 
@@ -48,6 +50,7 @@ Let's assume, we want to start optimization with the first 4 wells selected base
    This tutorial extends on the well order tutorial where priority values were used to define drilling order of the wells. Here, meaning of the priority is similar, i.e. the higher the priority value for the well is, the earlier the well will be drillied. However, in addition, the more likely that well will be selected. The number of wells variable acts as a cut-off for the number of wells selected with the highest priorities. 
 
 .. _objectives_ws:
+
 Objective functions
 ###################
 
@@ -65,6 +68,7 @@ Where :math:`q_{o,k}` is the oil production rate in :math:`\frac{Sm^3}{day}`, :m
 
 
 .. _simulation_ws:
+
 Simulation models
 #################
 
@@ -85,6 +89,7 @@ The model contains four production wells (A1 to A4) and two water injection well
 
 
 .. _configuration_ws:
+
 *********************
 Prepare configuration
 *********************
@@ -92,6 +97,7 @@ Prepare configuration
 The downloaded material is already complete and ready to be launched, however it is still useful to understand how the defined problem was configured. Information related to initial guess, objective functions and the model needs to be specified in main EVEREST configuration file. After downloading tutorial files from :ref:`download_material` this file will be located at ``well_selection/everest/model/wellselection_experiment.yml``.
 
 .. _config_main_ws:
+
 Main configuration
 ##################
 
@@ -114,6 +120,7 @@ We also need to specify the name of the objective function in the ``objective_fu
    :lines: 41-42
 
 .. _configs_forward_jobs_ws:
+
 Configuration of forward jobs
 #############################
 
@@ -143,6 +150,7 @@ where EVEREST will replace ``{{name}}`` with the name of the well. Finally the `
 are responsible for launching reservoir simulator and calculating NPV. The NPV input file ``well_selection/everest/input/prices.yml`` contains economic input parameters such as unit prices for oil production, water production and injection, drilling costs, discount factor, etc. For more detailed information and examples regarding the forward models please refer to the `EVEREST Documentation <https://everest.readthedocs.io/en/latest/forward_model_jobs.html>`_.
 
 .. _schedule_ws:
+
 Simulation schedule template
 ############################
 
@@ -156,6 +164,7 @@ Updated schedule files for two different perturbations can be open to see the di
 
 
 .. _results_ws:
+
 Run EVEREST and analyze results
 ###############################
 
