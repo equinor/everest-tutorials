@@ -115,7 +115,15 @@ The initial guess for EVEREST is located in the section ``controls`` in main con
    :lines: 19-43
 
 .. note::
-   In this particular example, the fixed drilling sequence has been defined through a series of disabled priority control variables using the option ``enabled: False``. These are the same priority controls used when optimizing the drilling order (see :doc:`drilling order optimization tutorial <../well_order/well_order>`), but here they are disabled, meaning that they will not be perturbed nor optimized. Alternatively, one can remove the priority controls altogether from the ``enabled: False`` and provide a user-defined ``well_order.json`` file to be used as input for the ``drill_planner`` forward job.
+   In this particular example, the fixed drilling sequence has been defined
+   through a series of disabled priority control variables using the option
+   ``enabled: False``. These are the same priority controls used when
+   optimizing the drilling order (see :doc:`drilling order optimization
+   tutorial <../well_order/well_order>`), but here they are disabled, meaning
+   that they will not be perturbed nor optimized. Alternatively, one can
+   remove the priority controls altogether from the ``enabled: False``and
+   provide a user-defined ``well_order.json`` file to be used as input for the
+   ``drill_planner`` forward job.
 
 The size of the perturbations to be assigned to the well drilling delay variables can be defined as standard deviation input in the ``perturbation_magnitude`` entry of the ``controls`` section. We also need to choose number of perturbations for each geological realization, see keyword ``perturbation_num`` in ``optimization`` section:
 

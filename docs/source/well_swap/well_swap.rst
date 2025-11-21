@@ -2,7 +2,21 @@
 Well Swapping Optimization
 ##########################
 
-This tutorial aims to demonstrate how to optimize the dynamic operational schedule of wells by swapping the status to be assigned to each well over time in order to maximize (or minimize) a user-defined objective function. This can be used to determine the schedule of wells alternating between open/closed status (as the example described in this tutorial), but it can also be applied to more general cases with more possible statuses (e.g., conversion of well types producer/injector/shut over time). The well swapping optimization functionality is also based on the priority-based parametrization used for drilling order and well selection optimization, but the approach is extended to multiple sets of priority controls to enable the determination of well statuses at multiple time-intervals throughout the field production life-cycle. Therefore, this tutorial builds upon the knowledge presented in the :doc:`drilling order optimization <../well_order/well_order>` and :doc:`well selection optimization <../well_selection/well_selection>` by adding new complexity to the workflow presented there.
+This tutorial aims to demonstrate how to optimize the dynamic operational
+schedule of wells by swapping the status to be assigned to each well over time
+in order to maximize (or minimize) a user-defined objective function. This can
+be used to determine the schedule of wells alternating between open/closed
+status (as the example described in this tutorial), but it can also be applied
+to more general cases with more possible statuses (e.g., conversion of well
+types producer/injector/shut over time). The well swapping optimization
+functionality is also based on the priority-based parametrization used for
+drilling order and well selection optimization, but the approach is extended to
+multiple sets of priority controls to enable the determination of well statuses
+at multiple time-intervals throughout the field production life-cycle.
+Therefore, this tutorial builds upon the knowledge presented in the
+:doc:`drilling order optimization <../well_order/well_order>` and
+:doc:`well selection optimization <../well_selection/well_selection>`
+by adding new complexity to the workflow presented there.
 
 First, we formulate an example optimization problem and we explain the configuration files. Next, we show how to launch an optimization experiment and then we analyze the results:
 
@@ -35,7 +49,16 @@ Optimization variables
 Swapping priority values
 ************************
 
-In order to determine the status of the wells at each time period, a priority-based parametrization is used to assist in selecting which wells should be switched to a higher hierarchy status (in this case, the open status). This follows the same approach as in :doc:`well selection optimization <../well_selection/well_selection>`, where the subset of wells to be selected is determined by the set of priority values of all wells, together with the exact number of wells to be selected. The main difference here is that well swapping optimization entails a dynamic selection of wells over time. Therefore, multiple sets of priority values are needed, i.e. one set of well priorities for each time period.
+In order to determine the status of the wells at each time period,
+a priority-based parametrization is used to assist in selecting which wells
+should be switched to a higher hierarchy status (in this case, open status).
+This follows the same approach as in :doc:`well selection optimization
+<../well_selection/well_selection>`, where the subset of wells to be
+selected is determined by the set of priority values of all wells, together
+with the exact number of wells to be selected. The main difference here is
+that well swapping optimization entails a dynamic selection of wells over time.
+Therefore, multiple sets of priority values are needed, i.e. one set of well
+priorities for each time period.
 
 .. note::
    Another difference with respect to well selection optimization is that some changes in status may not be allowed. This is not applicable to the simple example in this tutorial, but it may be relevant in cases with more possible statuses and irreversible changes in status. In those situations, the logic to select well statuses becomes more involved, requiring the tracking of the history of statuses in order to determine the possible status changes for the subsequent time periods. For information on how to define more complex well swapping constraints, see relevant documentation section `(EVEREST documentation <https://everest.readthedocs.io/en/latest/forward_model_jobs.html#well_swapping-category>`_)
@@ -244,7 +267,10 @@ In our case we can find optimization results in ``r{{configpath}}/../output/r{{c
 .. note::
    Depending on the choice of ``speculative`` option in ``optimization`` section, the calculations for current best solution and for the gradient might be split in multiple batches, see `EVEREST documentation <https://everest.readthedocs.io/en/latest/config_reference.html#>`_.
 
-The :ref:`figure_objectives_wsw` shows average objective function at the iterations of the optimization experiment (average NPV over all geological realizations). The increase in objective function value of $1.09e+09 was achieved by changing the well swapping schedule from the initial guess. 
+The :ref:`figure_objectives_wsw` shows average objective function at the
+iterations of the optimization experiment (average NPV over all geological realizations).
+The increase in objective function value of $1.09e+09 was achieved by changing
+the well swapping schedule from the initial guess.
 
 .. _figure_objectives_wsw:
 .. figure:: images/optimization/wsw_objectives.svg
