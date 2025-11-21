@@ -207,7 +207,10 @@ In our case we can find optimization results in ``r{{configpath}}/../output/r{{c
 .. note::
    Depending on the choice of ``speculative`` option in ``optimization`` section, the calculations for current best solution and for the gradient might be split in multiple batches, see `Everest documentation <https://everest.readthedocs.io/en/latest/config_reference.html#>`_.
 
-The :ref:`figure_objectives_wo` shows average objective function at the iterations of the optimization experiment (average NPV over all geological realizations). The increase in objective function value of $6.24e+07 was achieved by changing a drilling order from the initial guess. 
+The :ref:`figure_objectives_wo` shows average objective function at the
+iterations of the optimization experiment (average NPV over all geological realizations).
+The increase in objective function value of $6.24e+07 was achieved by changing
+a drilling order from the initial guess.
 
 .. _figure_objectives_wo:
 .. figure:: images/optimization/wo_objectives.svg
