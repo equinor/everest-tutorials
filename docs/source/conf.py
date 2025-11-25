@@ -25,8 +25,7 @@ release = dist_version
 
 
 with open('download_links.txt') as f:
-   rst_epilog = f.read()
-
+   rst_epilog = f.read().format(version=release)
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
