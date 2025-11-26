@@ -32,7 +32,14 @@ def test_well_trajectory_simulation(capsys):
         .replace("realizations: 0-99", "realizations: 0-9")
         .replace("name: lsf", "name: lsf\n    lsf_queue: test")
     )
-    
+
+    well_trajectory_config_path = Path(
+        "data/drogon/well_trajectory/everest/input/well_trajectory_config.yml"
+    )
+    well_trajectory_config_path.write_text(
+        well_trajectory_config_path.read_text()
+        .replace("  date: 2020-07-01\n", "")
+    )
     try:
         everest_entry([str(config_path), "--skip-prompt"])
     except SystemExit as e:
