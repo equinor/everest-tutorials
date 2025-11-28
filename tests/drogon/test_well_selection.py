@@ -2,12 +2,15 @@ from pathlib import Path
 import pytest
 from everest.bin.everest_script import everest_entry
 
+
 def test_well_selection_simulation(capsys):
     """
     Run a modified Drogon well_selection tutorial test case.
     """
 
-    config_path = Path("data/drogon/well_selection/everest/model/wellselection_experiment.yml")
+    config_path = Path(
+        "data/drogon/well_selection/everest/model/wellselection_experiment.yml"
+    )
     config_path.write_text(
         config_path.read_text()
         .replace("max_batch_num: 10", "max_batch_num: 2")
@@ -20,5 +23,5 @@ def test_well_selection_simulation(capsys):
     except SystemExit as e:
         pytest.fail(f"Everest exited with SystemExit: {e}")
 
-    captured = capsys.readouterr()    
+    captured = capsys.readouterr()
     assert "Everest run finished with" in captured.out

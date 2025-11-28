@@ -9,9 +9,9 @@ from importlib import metadata
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'everest_tutorials'
-copyright = '2025, Equinor ASA'
-author = 'Equinor ASA'
+project = "everest_tutorials"
+copyright = "2025, Equinor ASA"
+author = "Equinor ASA"
 
 try:
     dist_version = metadata.version("everest_tutorials")
@@ -24,8 +24,8 @@ version = ".".join(dist_version.split(".")[:3])
 release = dist_version
 
 
-with open('download_links.txt') as f:
-   rst_epilog = f.read().format(version=release)
+with open("download_links.txt") as f:
+    rst_epilog = f.read().format(version=release)
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -38,9 +38,8 @@ extensions = [
     "sphinx.ext.viewcode",
 ]
 
-templates_path = ['_templates']
+templates_path = ["_templates"]
 exclude_patterns = []
-
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -54,7 +53,7 @@ html_theme_options = {
     "source_directory": "source/",
 }
 
-html_static_path = ['_static']
+html_static_path = ["_static"]
 
 intersphinx_mapping = {
     "everest": ("https://everest.readthedocs.io/en/latest/", None),
