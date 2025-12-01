@@ -2,6 +2,7 @@ import pytest
 from pathlib import Path
 from everest.bin.everest_script import everest_entry
 
+
 def test_well_order_simulation(capsys):
     """
     Run a modified Drogon well_order tutorial test case.
@@ -19,5 +20,5 @@ def test_well_order_simulation(capsys):
     except SystemExit as e:
         pytest.fail(f"Everest exited with SystemExit: {e}")
 
-    captured = capsys.readouterr()    
+    captured = capsys.readouterr()
     assert "Everest run finished with" in captured.out

@@ -58,7 +58,6 @@ def read_summaries(
     all_dates_sets = []
 
     for batch_number in batch_numbers:
-
         smspec_files = find_smspec_files(simulation_folder, batch_number)
 
         filtered_files = [
@@ -68,7 +67,6 @@ def read_summaries(
         ]
 
         for file_path in filtered_files:
-
             # Load data including production rates and dates
             values_npv = summary.df(
                 ResdataFiles(file_path),
@@ -116,34 +114,24 @@ def plot_summaries(
     percentile = 0.1
 
     color_start = 0.5  # Start from 30% into the colormap to avoid very light colors
-    color_end = 1.0  # End at the darkest color
 
     batch_colors = [plt.cm.Blues(color_start), "red"]
     batch_colors = ["#00B7EB", "#FFFF00"]
     batch_colors = ["#58508d", "#ffa600"]
 
     for keyword in keywords_to_be_plotted:
-
         print(f"Plotting: {keyword}")
 
-        fig, ax = plt.subplots(figsize=(16, 9))
+        _, ax = plt.subplots(figsize=(16, 9))
         max_means = []
 
         for batch_index, batch in enumerate(batch_numbers):
-
             if data_accumulator[batch][keyword]:
                 # Concatenate and filter the data
                 combined_data = pd.concat(
                     data_accumulator[batch][keyword], ignore_index=True
                 )
                 combined_data = combined_data[combined_data["DATE"].isin(common_dates)]
-
-                # Group and calculate min/max
-                min_max_grouped = (
-                    combined_data.groupby("DATE")[keyword]
-                    .agg(["min", "max"])
-                    .reset_index()
-                )
 
                 if not combined_data.empty:
                     combined_data.set_index("DATE", inplace=True)
@@ -156,8 +144,6 @@ def plot_summaries(
                     mean_10_curve = combined_data.groupby(level=0)[keyword].quantile(
                         percentile
                     )
-                    max_mean_10_curve = max(mean_10_curve)
-                    max_mean_90_curve = max(mean_90_curve)
                     max_mean_curve = max(mean_curve)
                     max_means.append((batch_index, max_mean_curve))
                     if keyword.startswith(("FWIT", "WWIR")):
@@ -215,29 +201,15 @@ def plot_summaries(
                         label=label,
                     )
 
-        if len(batch_numbers) == 1:
-
-            a = 1
-        else:
+        if len(batch_numbers) != 1:
             ## if error, most prob. eclipse keyword or date not present in eclipse output
             try:
                 if max_means[0][1] == 0:
                     continue
-                else:
-                    percentage_change = abs(max_means[1][1] - max_means[0][1])
-                    if max_means[1][1] < max_means[0][1]:
-                        pre_sign = "+"
-                    else:
-                        pre_sign = ""
-                    # print("percentage_change", percentage_change)
             except IndexError:
                 print(
                     "Plot will remain blank. Most probably, KEYWORD or DATE not present"
                 )
-
-            max_means_str = ", ".join(
-                f"Batch {idx}: {mean:,.1f}" for idx, mean in max_means
-            )
 
         ax.set_title(f"{keyword}", fontsize=24, fontweight="bold")
         ax.set_xlabel("Date", fontsize=26, fontweight="bold")
@@ -286,9 +258,7 @@ def plot_summaries(
 
 casename = "wo"
 simulation_folder = (
-    "../optimization/drogon/well_order/everest/output/"
-    "WELLORDER_EXP"
-    "/simulation_output/"
+    "../optimization/drogon/well_order/everest/output/WELLORDER_EXP/simulation_output/"
 )
 plots_folder = "docs/source/well_order/images/production/"
 

@@ -5,7 +5,6 @@ from everest.bin.everest_script import everest_entry
 from ert.resources.forward_models import run_reservoirsimulator
 
 
-
 def test_well_trajectory_simulation(capsys):
     """
     Run a modified Drogon well_trajectory tutorial test case.
@@ -25,18 +24,20 @@ def test_well_trajectory_simulation(capsys):
         erun.run_flow()
         os.chdir(original_path)
 
-    config_path = Path("data/drogon/well_trajectory/everest/model/welltrajectory_experiment.yml")
+    config_path = Path(
+        "data/drogon/well_trajectory/everest/model/welltrajectory_experiment.yml"
+    )
     config_path.write_text(
         config_path.read_text()
         .replace("max_batch_num: 10", "max_batch_num: 2")
         .replace("realizations: 0-99", "realizations: 0-9")
         .replace("name: lsf", "name: lsf\n    lsf_queue: test")
     )
-    
+
     try:
         everest_entry([str(config_path), "--skip-prompt"])
     except SystemExit as e:
         pytest.fail(f"Everest exited with SystemExit: {e}")
 
-    captured = capsys.readouterr()    
+    captured = capsys.readouterr()
     assert "Everest run finished with" in captured.out

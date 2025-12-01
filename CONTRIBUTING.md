@@ -1,9 +1,9 @@
 # Contributors Guide
 
-Welcome to the **EVEREST™ Tutorials** repository! 
-We appreciate your interest in contributing to this project. 
+Welcome to the **EVEREST™ Tutorials** repository!
+We appreciate your interest in contributing to this project.
 
-We expect all contributors to adhere to the [Code of Conduct](CODE_OF_CONDUCT.md). 
+We expect all contributors to adhere to the [Code of Conduct](CODE_OF_CONDUCT.md).
 Be respectful and inclusive in all interactions.
 
 Below are the guidelines to help you contribute effectively.
@@ -21,8 +21,8 @@ Below are the guidelines to help you contribute effectively.
 
 ## Introduction
 
-The EVEREST Tutorials repository is focused on providing reproducible tutorials for EVEREST. 
-This is a documentation-based repository with examples and configuration files that focus on practical usage. 
+The EVEREST Tutorials repository is focused on providing reproducible tutorials for EVEREST.
+This is a documentation-based repository with examples and configuration files that focus on practical usage.
 Contributors are welcome to improve the tutorials, fix bugs, and suggest enhancements to the documentation.
 
 
@@ -68,7 +68,7 @@ We enforce this linting all commit and pull request messages using the [commitli
 
 #### Commit Message Format
 
-Each commit message consists of a `header`, a `body` and a `footer`. 
+Each commit message consists of a `header`, a `body` and a `footer`.
 The header has a special format that includes a `type`, a `scope` and a `subject`:
 
 ```
@@ -83,7 +83,7 @@ The `header` and the `subject` are mandatory and the rest are optional.
 If there is a `body` you need to add a blank line between the header and the body.
 If there is `footer` you need to add a blank line between the body and the footer.
 
-The footer can contain a `close` or `fixes` keyword to link to the issue and close it when the pull request is merged. 
+The footer can contain a `close` or `fixes` keyword to link to the issue and close it when the pull request is merged.
 This behavior is described in [Linking a pull request to an issue using a keyword](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword).
 
 The accepted types follow the [Angular convention](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional#type-enum) and can be:
@@ -119,7 +119,7 @@ chore(main): release 0.4.1
 
 ### Pull Request Guidelines
 
-The format of the pull request message is the same as the commit message. 
+The format of the pull request message is the same as the commit message.
 Ensure your pull request is based on the latest main branch.
 Follow the repository's commit message format.
 Provide a clear description of the changes in the pull request.
