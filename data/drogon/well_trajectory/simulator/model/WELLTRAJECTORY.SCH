@@ -1,3 +1,7 @@
+
+RPTRST
+  BASIC=4 / 
+
 TUNING
  1* 30 /
 /
@@ -24,40 +28,24 @@ INCLUDE
 
 WCONPROD
 --WELL OP/SH   CTL       ORAT       WRAT       GRAT       LRAT       RRAT        BHP        THP   VFP        ALQ
- 'A1'   OPEN  LRAT       3000       3000         1*       4000         1*        150         1*    1*         1* /
- 'A2'   OPEN  LRAT       4000       4000         1*       2500         1*        150         1*    1*         1* /
- 'A3'   OPEN  LRAT       4000       4000         1*       2500         1*        150         1*    1*         1* /
- 'A4'   OPEN  LRAT       4000       4000         1*       4000         1*        150         1*    1*         1* /
+ 'A1'   SHUT  LRAT       3000       3000         1*       4000         1*        150         1*    1*         1* /
+ 'A2'   SHUT  LRAT       4000       4000         1*       2500         1*        150         1*    1*         1* /
+ 'A3'   SHUT  LRAT       4000       4000         1*       2500         1*        150         1*    1*         1* /
+ 'A4'   SHUT  LRAT       4000       4000         1*       4000         1*        150         1*    1*         1* /
 /
 
 WCONINJE
 --WELL PHASE OP/SH   CTL       SRAT       RRAT        BHP        THP   VFP
- 'A5'  WATER  OPEN  RATE       6500         1*        500         1*    1* /
- 'A6'  WATER  OPEN  RATE       6500         1*        500         1*    1* /
-/
-
-DATES
- 1 OCT 2022 /
-/
-
-DATES
- 1 NOV 2022 /
-/
-
-DATES
- 1 DEC 2022 /
+ 'A5'  WATER  SHUT  RATE       6500         1*        500         1*    1* /
+ 'A6'  WATER  SHUT  RATE       6500         1*        500         1*    1* /
 /
 
 DATES
  1 JAN 2023 /
 /
 
-DATES
- 1 FEB 2023 /
-/
-
-DATES
- 1 MAR 2023 /
+WELOPEN
+  'A1' 'OPEN' /
 /
 
 DATES
@@ -65,11 +53,11 @@ DATES
 /
 
 DATES
- 1 MAY 2023 /
+ 02 MAY 2023 /
 /
 
-DATES
- 1 JUN 2023 /
+WELOPEN
+  'A2' 'OPEN' /
 /
 
 DATES
@@ -77,11 +65,11 @@ DATES
 /
 
 DATES
- 1 AUG 2023 /
+ 31 AUG 2023 /
 /
 
-DATES
- 1 SEP 2023 /
+WELOPEN
+  'A3' 'OPEN' /
 /
 
 DATES
@@ -89,11 +77,11 @@ DATES
 /
 
 DATES
- 1 NOV 2023 /
+ 30 DEC 2023 /
 /
 
-DATES
- 1 DEC 2023 /
+WELOPEN
+  'A4' 'OPEN' /
 /
 
 DATES
@@ -101,23 +89,15 @@ DATES
 /
 
 DATES
- 1 FEB 2024 /
-/
-
-DATES
- 1 MAR 2024 /
-/
-
-DATES
  1 APR 2024 /
 /
 
 DATES
- 1 MAY 2024 /
+ 29 APR 2024 /
 /
 
-DATES
- 1 JUN 2024 /
+WELOPEN
+  'A5' 'OPEN' /
 /
 
 DATES
@@ -125,23 +105,15 @@ DATES
 /
 
 DATES
- 1 AUG 2024 /
+ 28 AUG 2024 /
 /
 
-DATES
- 1 SEP 2024 /
+WELOPEN
+  'A6' 'OPEN' /
 /
 
 DATES
  1 OCT 2024 /
-/
-
-DATES
- 1 NOV 2024 /
-/
-
-DATES
- 1 DEC 2024 /
 /
 
 DATES
@@ -177,18 +149,58 @@ DATES
 /
 
 DATES
- 31 DEC 2026 /
-/
-
-RPTRST
- BASIC=2 NORST=1 /
-
-DATES
  1 JAN 2027 /
 /
 
---------------
+DATES
+ 1 APR 2027 /
+/
+
+DATES
+ 1 JLY 2027 /
+/
+
+DATES
+ 1 OCT 2027 /
+/
+
+DATES
+ 1 JAN 2028 /
+/
+
+DATES
+ 1 APR 2028 /
+/
+
+DATES
+ 1 JLY 2028 /
+/
+
+DATES
+ 1 OCT 2028 /
+/
+
+DATES
+ 1 JAN 2029 /
+/
+
+DATES
+ 1 APR 2029 /
+/
+
+DATES
+ 1 JLY 2029 /
+/
+
+DATES
+ 1 OCT 2029 /
+/
+
+DATES
+ 1 JAN 2030 /
+/
+
 END
---------------
+
 
 

@@ -134,7 +134,6 @@ optimization:
   max_batch_num: 10
   perturbation_num: 1
   speculative: True
-  auto_scale: True
   options:
     - "max_step = 0.1"
 
@@ -165,4 +164,4 @@ forward_model:
     results:
       file_name: r{{eclbase}}
       type: summary
-  - npv -s r{{eclbase}}.UNSMRY -o npv -c prices.yml -i input/readydates.json -sd 2022-09-03 -ed 2027-01-01 
+  - npv -s r{{eclbase}}.UNSMRY -o npv -c prices.yml -i input/readydates.json -sd 2023-01-01 -ed 2030-01-01

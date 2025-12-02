@@ -1,40 +1,21 @@
 prices:
-  FOPT:
-  - currency: USD
-    date: 2023-01-01
-    value: 440
-  FGPT:
-  - currency: USD
-    date: 2023-01-01
-    value: 0.4
-  FWPT:
-  - currency: USD
-    date: 2023-01-01
-    value: -6.3
-  FWIT:
-  - currency: USD
-    date: 2023-01-01
-    value: -6.3
-  
+    FOPT:
+        - { date: 2023-01-01, value: 440, currency: USD }
+    FWPT:
+        - { date: 2023-01-01, value: -6.3, currency: USD }
+    FGPT:
+        - { date: 2023-01-01, value: 0.4, currency: USD }
+    FWIT:
+        - { date: 2023-01-01, value: -6.3, currency: USD }
+
 discount_rates:
     - { date: 2023-01-01, value: 0.08 }
 
+# drilling costs will be updated based on well lengths
 well_costs:
-- currency: USD
-  value: 1.5e6
-  well: A1
-- currency: USD
-  value: 1.5e6
-  well: A2
-- currency: USD
-  value: 1.5e6
-  well: A3
-- currency: USD
-  value: 1.5e6
-  well: A4
-- currency: USD
-  value: 1.5e6
-  well: A5
-- currency: USD
-  value: 1.5e6
-  well: A6
+    - { well: A1, value: 0, currency: USD }
+    - { well: A2, value: 0, currency: USD }
+    - { well: A3, value: 0, currency: USD }
+    - { well: A4, value: 0, currency: USD }
+    - { well: A5, value: 0, currency: USD }
+    - { well: A6, value: 0, currency: USD }

@@ -4,7 +4,7 @@ interpolation:
 
 connections:
   type: resinsight
-  date: 2020-07-01
+  date: 2022-09-03
   formations_file: ./input/formations.lyr
   perforations:
     - well: A1
@@ -27,7 +27,7 @@ wells:
     skin: 0.0
     radius: 0.15
     dogleg: 4.0
-    cost: 7.0e6
+    cost: 1.5e6
     platform: platform1
   - name: A2
     group: OP
@@ -35,7 +35,7 @@ wells:
     skin: 0.0
     radius: 0.15
     dogleg: 4.0
-    cost: 7.0e6
+    cost: 1.5e6
     platform: platform1
   - name: A3
     group: OP
@@ -43,7 +43,7 @@ wells:
     skin: 0.0
     radius: 0.15
     dogleg: 4.0
-    cost: 7.0e6
+    cost: 1.5e6
     platform: platform1
   - name: A4
     group: OP
@@ -51,7 +51,7 @@ wells:
     skin: 0.0
     radius: 0.15
     dogleg: 4.0
-    cost: 7.0e6
+    cost: 1.5e6
     platform: platform1
   - name: A5
     group: WI
@@ -59,7 +59,7 @@ wells:
     skin: 0.0
     radius: 0.15
     dogleg: 4.0
-    cost: 7.0e6
+    cost: 1.5e6
     platform: platform1
   - name: A6
     group: WI
@@ -67,7 +67,7 @@ wells:
     skin: 0.0
     radius: 0.15
     dogleg: 4.0
-    cost: 7.0e6
+    cost: 1.5e6
     platform: platform1
 
 platforms:
