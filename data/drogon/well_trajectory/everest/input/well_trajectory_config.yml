@@ -26,7 +26,7 @@ wells:
     skin: 0.0
     radius: 0.15
     dogleg: 4.0
-    cost: 7.0e6
+    cost: 1.5e6
     platform: platform1
   - name: A2
     group: OP
@@ -34,7 +34,7 @@ wells:
     skin: 0.0
     radius: 0.15
     dogleg: 4.0
-    cost: 7.0e6
+    cost: 1.5e6
     platform: platform1
   - name: A3
     group: OP
@@ -42,7 +42,7 @@ wells:
     skin: 0.0
     radius: 0.15
     dogleg: 4.0
-    cost: 7.0e6
+    cost: 1.5e6
     platform: platform1
   - name: A4
     group: OP
@@ -50,7 +50,7 @@ wells:
     skin: 0.0
     radius: 0.15
     dogleg: 4.0
-    cost: 7.0e6
+    cost: 1.5e6
     platform: platform1
   - name: A5
     group: WI
@@ -58,7 +58,7 @@ wells:
     skin: 0.0
     radius: 0.15
     dogleg: 4.0
-    cost: 7.0e6
+    cost: 1.5e6
     platform: platform1
   - name: A6
     group: WI
@@ -66,7 +66,7 @@ wells:
     skin: 0.0
     radius: 0.15
     dogleg: 4.0
-    cost: 7.0e6
+    cost: 1.5e6
     platform: platform1
 
 platforms:

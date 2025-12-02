@@ -259,7 +259,23 @@ INCLUDE
 '../include/schedule/vfp/A-4.inc'/                                           -- 4
 
 INCLUDE
- './WELLS.SCH' /
+ '../include/schedule/A1.sch' /
+
+INCLUDE
+ '../include/schedule/A2.sch' /
  
+ INCLUDE
+ '../include/schedule/A3.sch' /
+ 
+ INCLUDE
+ '../include/schedule/A4.sch' /
+ 
+ INCLUDE
+ '../include/schedule/A5.sch' /
+ 
+ INCLUDE
+ '../include/schedule/A6.sch' /
+
 INCLUDE
  './SCHEDULE_OPT.SCH' /
+

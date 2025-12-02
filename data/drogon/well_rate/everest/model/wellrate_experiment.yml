@@ -21,21 +21,20 @@ controls:
       - {name: A6, index: 1, initial_guess: 4000}
       - {name: A6, index: 2, initial_guess: 4000}
       - {name: A6, index: 3, initial_guess: 4000}
-      - {name: A7, index: 1, initial_guess: 4000}
-      - {name: A7, index: 2, initial_guess: 4000}
-      - {name: A7, index: 3, initial_guess: 4000}
 
 objective_functions:
   - name: npv
 
 optimization:
-  algorithm: conmin_mfd
-  min_realizations_success: 80
+  min_realizations_success: 50
   max_batch_num: 10
   perturbation_num: 1
+  speculative: True
+  options:
+    - "max_step = 0.3"
 
 model:
-  realizations: r{{range(100) | list()}}
+  realizations: 0-99
 
 simulator:
   queue_system:
@@ -53,12 +52,11 @@ install_data:
     target: input
 
 forward_model:
-  - well_constraints -i input/wells_readydate.json -c input/rates_constraints.yml -rc well_rate.json -o wells_constr_result.json
-  - add_templates -i wells_constr_result.json -c input/template_config.yml -o wells_tmpl_result.json 
-  - schmerge -i wells_tmpl_result.json -s simulator/model/WELLRATE.SCH -o simulator/model/SCHEDULE_OPT.SCH
+  - well_constraints -i input/readydates.json -c input/constraints_config.yml -rc well_rate.json -o wells.json
+  - add_templates -i wells.json -c input/template_config.yml -o wells.json 
+  - schmerge -i wells.json -s simulator/model/WELLRATE.SCH -o simulator/model/SCHEDULE_OPT.SCH
   - job: flow r{{eclbase}} --enable-tuning=true
     results:
       file_name: r{{eclbase}}
       type: summary
-      keys: ['FOPR', 'WOPR']
-  - npv -s simulator/model/DROGON.UNSMRY -o npv -c input/prices.yml -i wells_tmpl_result.json -sd 2023-01-01 -ed 2030-01-01
+  - npv -s r{{eclbase}}.UNSMRY -o npv -c input/prices.yml -i input/readydates.json -sd 2023-01-01 -ed 2030-01-01
