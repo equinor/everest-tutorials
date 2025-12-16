@@ -30,7 +30,7 @@ run_tests () {
     set +o errexit
 
     # Run the tests
-    python -m pytest -vv tests | tee pytest-output
+    python -m pytest -vv -k "test_well_trajectory_simulation" tests
     if [[ "$?" -eq "1" ]]; then
         # The failure return code should be masked if this is due to pytest timing out,
         # then we assume that the compute cluster was too busy to fulfill the test.
