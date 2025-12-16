@@ -24,9 +24,9 @@ controls:
 
 objective_functions:
   - name: npv
-    weight: 0.3
-  - name: fwpt
     weight: 0.7
+  - name: fwpt
+    weight: 0.3
 
 optimization:
   min_realizations_success: 50

@@ -45,7 +45,8 @@ def plot_columns_from_parquet(
     batches,
     columns,
     bounds,
-    label,
+    xlabel,
+    ylabel,
     casename="opt",
 ):
     """Plot columns for initial and optimal batch"""
@@ -82,12 +83,12 @@ def plot_columns_from_parquet(
         facecolor="white",
     )
     plt.xlabel(
-        label,
+        xlabel,
         fontsize=20,
         fontweight="bold",
     )
     plt.ylabel(
-        "Value",
+        ylabel,
         fontsize=20,
         fontweight="bold",
     )
@@ -107,27 +108,44 @@ def plot_columns_from_parquet(
     plt.close()
 
 
-casename = "wo"
-path_results = os.path.join(
-    "../optimization/drogon/well_order/everest/output/WELLORDER_EXP"
-)
+# casename = "wo"
+# path_results = os.path.join(
+#     "../optimization/drogon/well_order/everest/output/WELLORDER_EXP"
+# )
+# columns = [
+#     "well_order.A1",
+#     "well_order.A2",
+#     "well_order.A3",
+#     "well_order.A4",
+#     "well_order.A5",
+#     "well_order.A6",
+# ]
+# batches = [0, 5]
+# bounds = [0, 1]
+# xlabel = "Optimization Variables"
+# ylabel = "Value"
+
+casename = "wr"
+path_results = os.path.join("../drogon/well_rate/everest/output/WELLRATE_EXP")
 columns = [
-    "well_order.A1",
-    "well_order.A2",
-    "well_order.A3",
-    "well_order.A4",
-    "well_order.A5",
-    "well_order.A6",
+    "well_rate.A5.1",
+    "well_rate.A5.2",
+    "well_rate.A5.3",
+    "well_rate.A6.1",
+    "well_rate.A6.2",
+    "well_rate.A6.3",
 ]
-batches = [0, 5]
-bounds = [0, 1]
-label = "Optimization Variables"
+batches = [0, 9]
+bounds = [-200, 8200]
+xlabel = "Optimization Variables"
+ylabel = "Well rate constraint [SM3/day]"
 
 plot_columns_from_parquet(
     path_results,
     batches,
     columns,
     bounds,
-    label,
+    xlabel,
+    ylabel,
     casename=casename,
 )
