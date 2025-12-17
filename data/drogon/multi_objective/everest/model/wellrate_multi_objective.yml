@@ -21,6 +21,9 @@ controls:
       - {name: A6, index: 1, initial_guess: 4000}
       - {name: A6, index: 2, initial_guess: 4000}
       - {name: A6, index: 3, initial_guess: 4000}
+      - {name: A7, index: 1, initial_guess: 4000}
+      - {name: A7, index: 2, initial_guess: 4000}
+      - {name: A7, index: 3, initial_guess: 4000}
 
 objective_functions:
   - name: npv
