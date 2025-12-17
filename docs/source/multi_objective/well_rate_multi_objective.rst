@@ -1,6 +1,6 @@
-***********************************
+****************************
 Multi-objective optimization
-***********************************
+****************************
 
 .. _well_rate_multi_objective:
 
@@ -18,11 +18,11 @@ Objective function section
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **The weight setting for each objective function:**
-    Users can specify a higher weight for the preferred objective function. In the following example, we chose to prioritize FWPT over NPV.
+    Users can specify a higher weight for the preferred objective function. In the following example, we chose to prioritize maximizing NPV (Net Present Value) over minimizing FWPT (Field Water Production Total).
 
 Following snippet shows the changes made to :code:`objective_functions` section of the config file for multi-objective optimization:
 
-.. literalinclude:: ../../../data/drogon/well_rate/everest/model/wellrate_multi_objective.yml
+.. literalinclude:: ../../../data/drogon/multi_objective/everest/model/wellrate_multi_objective.yml
   :language: yaml
   :lines: 28-32
 
@@ -30,9 +30,9 @@ Forward model section
 ^^^^^^^^^^^^^^^^^^^^^^
 The forward model for calculating objective function NPV and FWPT needs to be active.
 
-.. literalinclude:: ../../../data/drogon/well_rate/everest/model/wellrate_multi_objective.yml
+.. literalinclude:: ../../../data/drogon/multi_objective/everest/model/wellrate_multi_objective.yml
   :language: yaml
-  :lines: 60-66
+  :lines: 60,68-69
 
 After completing the optimization procedure, we can plot the results in a similar manner as in the previous experiments. The objective function (a weighted sum equation) is shown with iterations in the figure below. The weighted sum equation shown here is:
 
@@ -43,93 +43,72 @@ After completing the optimization procedure, we can plot the results in a simila
 where :math:`x` is the control vector containing the rates being optimized.
 
 .. note::
+    Note that there is multiplier of -1 defined for the FWPT objective function, this is because EVEREST by default maximizes while the FWPT is to be minimized.
 
-	All other steps of the setup (file save, syntax check and run) are identical to the previous experiments and can be followed :ref:`there <experiment_wr>`.
+.. note::
+
+	All other steps of the setup (file save, syntax check and run) are similar to the previous experiments and can be followed :ref:`there <experiment_wr>`. The only difference is that there is one more injector considered, i.e., well A7. 
 
 Experiment
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^
 
-In this experiment, we will alter well rates such that NPV of the field is maximized while simultaneously minimizing field water production.
-The optimal results will highly depend on the weights selected from the users. For example, if the weight of NPV is much lower than the weight specified for FWPT, the optimal well rates would honor the rates at which the total water production are minimized (as shown in the experiment below).
+In this experiment, we will optimize well rate targets such that NPV of the field is maximized while simultaneously minimizing field water production.
+The optimal results will highly depend on the weights selected from the users. For example, if the weight of NPV is much lower than the weight specified for FWPT, the optimal well rates would honor the rates at which the total water production are minimized (as shown in the experiment below). First we show results for the case with :math:`w_1 = 0.7` and :math:`w_2 = 0.3`.
 
-.. figure:: images_mo/30_70/obj_fct.svg
-    :width: 529px
-    :height: 431px
+.. _figure_objectives_wrm73:
+.. figure:: images/optimization/wrm73_objectives.svg
     :align: center
-    :alt: obj fct exp1
-    :scale: 100
-    :figclass: align-center
+    :width: 90%
 
-    The best total objective (batch 7) yields an NPV of 4.16bn USD. The optimal well rate configuration provides an NPV improvement of 7% from an initial estimate of 3.89bn USD, while accounting for an only 2% increase in water production.
+    Figure: Objective function over the iterations
 
-.. figure:: images_mo/30_70/fopt.svg
-    :width: 1430px
-    :height: 802px
+The :ref:`figure_objectives_wrm73` shows average total objective function at the
+iterations of the optimization experiment. The increase in total objective function value of $2.03e+08 was achieved by changing
+injection well rate targets over time from the initial guess. The increase in water production was approximately 12%.
+
+.. figure:: images/production/wrm73_FOPT.svg
     :align: center
-    :alt: fopt
-    :scale: 60
-    :figclass: align-center
+    :width: 90%
 
-    Cumulative oil production over time
+    Figure: Cumulative oil production over time
 
-.. figure:: images_mo/30_70/fwpt.svg
-    :width: 1430px
-    :height: 802px
+.. figure:: images/production/wrm73_FWPT.svg
     :align: center
-    :alt: fwpt
-    :scale: 60
-    :figclass: align-center
+    :width: 90%
 
-    Cumulative water production over time
+    Figure: Cumulative water production over time
 
-.. figure:: images_mo/30_70/controls.svg
-    :width: 1430px
-    :height: 802px
+.. figure:: images/optimization/wrm73_controls.svg
     :align: center
-    :alt: fwit
-    :scale: 60
-    :figclass: align-center
+    :width: 90%
 
-    Initial versus optimal controls
+    Figure: Initial versus optimal controls
 
-Presented below are the results from an experiment where we chose to prioritize NPV over FWPT. As expected, the optimal injection rates is prescribed to maximize the oil production.
+Presented below are the results from an experiment with increased weight for total field water production, i.e., for the case with :math:`w_1 = 0.3` and :math:`w_2 = 0.7`.
 
-.. figure:: images_mo/70_30/obj_fct.svg
-    :width: 529px
-    :height: 431px
+.. _figure_objectives_wrm2:
+.. figure:: images/optimization/wrm37_objectives.svg
     :align: center
-    :alt: obj fct exp1
-    :scale: 100
-    :figclass: align-center
+    :width: 90%
 
-    The best total objective (batch 9) yields an NPV of 4.18bn USD. The optimal well rate configuration provides an NPV improvement of 7.5% from an initial estimate of 3.89bn USD, while accounting for an 14.2% increase in water production, in this case.
+    Figure: Objective function over the iterations.
 
-.. figure:: images_mo/70_30/fopt.svg
-    :width: 1430px
-    :height: 802px
+The :ref:`figure_objectives_wrm2` shows average total objective function at the iterations of the optimization experiment. The increase in total objective function value of $8.96e+07 was achieved by changing injection well rate targets over time from the initial guess. The increase in water production was approximately 5%, which is lower than in the previous case when with lower weight for FWPT objective.
+
+.. figure:: images/production/wrm37_FOPT.svg
     :align: center
-    :alt: fopt
-    :scale: 60
-    :figclass: align-center
+    :width: 90%
 
-    Cumulative oil production over time
+    Figure: Cumulative oil production over time
 
-.. figure:: images_mo/70_30/fwpt.svg
-    :width: 1430px
-    :height: 802px
+.. figure:: images/production/wrm37_FWPT.svg
     :align: center
-    :alt: fwpt
-    :scale: 60
-    :figclass: align-center
+    :width: 90%
 
-    Cumulative water production over time
+    Figure: Cumulative water production over time
 
-.. figure:: images_mo/70_30/controls.svg
-    :width: 1430px
-    :height: 802px
+.. figure:: images/optimization/wrm37_controls.svg
     :align: center
-    :alt: fwit
-    :scale: 60
-    :figclass: align-center
+    :width: 90%
 
-    Initial versus optimal controls
+    Figure: Initial versus optimal controls

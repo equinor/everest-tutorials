@@ -18,3 +18,4 @@ well_costs:
     - { well: A4, value: 5e6, currency: USD }
     - { well: A5, value: 5e6, currency: USD }
     - { well: A6, value: 5e6, currency: USD }
+    - { well: A7, value: 5e6, currency: USD }  

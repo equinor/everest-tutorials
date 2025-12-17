@@ -21,16 +21,15 @@ Drogon model description
 
 The Equinor Drogon model is a synthetic reservoir model designed for testing and demonstrating ensemble-based workflows, including uncertainty quantification and optimization in subsurface projects. The model features a complete Fast Model Update (FMU) setup and is publicly available on GitHub to facilitate reproducible research and training. 
 
-The EVEREST well trajectory optimization case consists of four production wells (A1 to A4) and two water injection wells (A5 to A6). In this tutorial, the production and injection history starts in September 2022 and is simulated until January 2027. The average oil saturation across the 100 geological realizations for September 2022 is shown in :ref:`drogon-figure-init-soil`. The production wells A1 to A4 are located within the oil-bearing zone, while the injection wells A5 and A6 are placed below oil-water contact.
+The EVEREST well trajectory optimization case consists of four production wells (A1 to A4) and two water injection wells (A5 to A6). In this tutorial, the production and injection period starts in January 2023 and is simulated until January 2030. The average oil saturation across the 100 geological realizations for January 2023 is shown in :ref:`drogon-figure-init-soil`. The production wells A1 to A4 are located within the oil-bearing zone, while the injection wells A5 and A6 are placed below oil-water contact.
 
 .. _drogon-figure-init-soil:
 
 .. figure:: images/drogon/DROGON_INIT_SOIL.png
     :align: center
-    :alt: model zones
     :figclass: align-center
 
-    Drogon model: Average initial oil saturation across the ensemble in September 2022
+    Drogon model: Average initial oil saturation across the ensemble
 
 Objective function - Optimizing Net present value 
 -------------------------------------------------
@@ -65,12 +64,15 @@ A snippet of the price input file is displayed below. The following input parame
 
 * **well_costs**:
     * *currency (default)*: USD
-    * *value*: Drilling cost specified in $/km of well length.
+    * *value*: Total drilling cost 
     * *well*: Specifies which well the cost applies to.
 
 .. literalinclude:: ../../../data/drogon/well_trajectory/everest/input/prices.yml
     :language: yaml
-    :lines: 1-40
+
+.. note::
+    Since well trajectories are optimized, the total drilling cost is not specified in this input file. Instead, the drilling cost per kilometer of well length will be specified in the input file to well trajectory forward job. 
+
 
 .. _EVEREST_workflow_description:
 
@@ -88,7 +90,6 @@ The EVEREST well trajectory module uses five points per well trajectory to descr
 
 .. figure:: images/well_trajectory/guide_points.png
     :align: center
-    :alt: model zones
     :figclass: align-center
 
     Well path parametrization using guide points.
@@ -113,19 +114,20 @@ The default values of (:math:`P_2`\_a), (:math:`P_2`\_b), and (:math:`P_2`\_c) a
 
 .. figure:: images/well_trajectory/workflow_2.png
     :align: center
-    :alt: box
     :figclass: align-center
 
     Well trajectory three guide point parametrization. The midpoint :math:`P_2`, parameterized by :math:`P_{2a} \in [0, 1]` (horizontal position), :math:`P_{2b} \in [-0.3, 0.3]` (curvature), and :math:`P_{2c} \in [0, 1]` (vertical position), represents a projected point along the path from :math:`P_1` to :math:`P_3`.
 
-After parametrizing the well trajectories with a set of guide points, EVEREST extrapolates the corresponding well paths and writes them in a format readable by the reservoir simulator. During the optimization process, EVEREST moves the guide points within the given coordinate limits and selected perturbation magnitudes. Based on the updated guide points, the well trajectory module extrapolates the well paths and calculates the corresponding well geometry and perforations to be passed to the reservoir simulator. The data is written to the Eclipse/OPM keywords WELSPECS and COMPDAT. To retrieve the required geometrical input, the .EGRID and .INIT files must be present. In the case of multi-segment wells, the well trajectory module can also generate WELSEGS and COMPSEGS keywords.
+After parametrizing the well trajectories with a set of guide points, EVEREST extrapolates the corresponding well paths and writes them in a format readable by the reservoir simulator. During the optimization process, EVEREST moves the guide points within the given coordinate limits and selected perturbation magnitudes. Based on the updated guide points, the well trajectory module extrapolates the well paths and calculates the corresponding well geometry and perforations to be passed to the reservoir simulator. The data is written to the Eclipse/OPM keywords WELSPECS and COMPDAT. To retrieve the required geometrical and geological input, the .EGRID and .INIT files must be present. In the case of multi-segment wells, the well trajectory module can also generate WELSEGS and COMPSEGS keywords.
+
+.. attention::
+   Since the .EGRID and .INIT files are required as input for the well trajectory forward job, the previously unzipped Drogon ensemble models need to be simulated before launching the optimization. 
 
 .. figure:: images/well_trajectory/workflow_1.png
     :width: 4161px
     :height: 931px
     :align: center
     :scale: 20
-    :alt: interpolation
     :figclass: align-center
 
     EVEREST forward mode: (1) Defining and optimizing guide points, (2) Interpolating well paths, (3) Determining well connectivity in ResInsight, and (4) Passing corresponding keywords to the reservoir simulator.
@@ -137,7 +139,6 @@ To determine the grid blocks intersected by the well trajectories, well connecti
     :height: 350px
     :align: center
     :scale: 60
-    :alt: math ref
     :figclass: align-center
 
     Computing connectivities using ResInsight
@@ -148,7 +149,6 @@ To restrict well trajectory perturbations to geologically meaningful areas, the 
 
 .. figure:: images/well_trajectory/bounding_box.png
     :align: center
-    :alt: model zones
     :figclass: align-center
 
     Drogon model with a bounding box to restrict the optimization process within the target formation or area. 
@@ -181,7 +181,7 @@ A summary of the modified WELLTRAJECTORY.SCH file is provided below, which inclu
       $ gedit WELLTRAJECTORY.SCH
 
 .. literalinclude:: ../../../data/drogon/well_trajectory/simulator/model/WELLTRAJECTORY.SCH
-    :lines:  5-38
+    :lines:  9-42
 
 .. _EVEREST_input:
 
@@ -224,7 +224,7 @@ Besides defining the control variables section, the :file:`welltrajectory_experi
     :language: yaml
     :lines: 161-167
 
-After completing the simulation runs and calculating the objective function, EVEREST applies the Stochastic Simplex Approximate Gradient (StoSAG) method to optimize well trajectories toward improved NPV (not shown under **forward _model** snippet above). Following this, EVEREST extrapolates well perturbations around the initial or optimized well coordinates to explore the NPV objective further. The process continues until either the maximum number of batches is reached or a stopping criterion is met.
+After completing the simulation runs and calculating the objective function, EVEREST applies the Stochastic Simplex Approximate Gradient (StoSAG) method to optimize well trajectories towards improved NPV. Following this, EVEREST extrapolates well perturbations around the initial or optimized well coordinates to explore the NPV objective further. The process continues until it either converged to a solution or another stopping criterion is met e.g. a maximum number of batches.
 
 In addition to the EVEREST main configuration file, :file:`well_trajectory_config.yml` defines the well trajectory forward job. The following parameters are specified in the file:
 
@@ -299,54 +299,51 @@ The results of the optimization process can be visualized using the built-in sol
 
       $ everest results welltrajectory_experiment.yml
 
-The Figure below displays the evolution of the objective function (NPV) over eight optimization batches. Starting from an initial NPV of $ 2.68 B, the optimizer rapidly improves the value in the early batch iterations, reaching approximately  $ 3.45 B by batch 5. This corresponds to a total increase of $0.78 billion, representing a 29% improvement over the initial value.
+The Figure below displays the evolution of the objective function (NPV) over eight optimization batches. Starting from an initial NPV, the optimizer rapidly improves the value in the early batch iterations, reaching improvement of $1 B in batch 8.
 
-.. figure:: images/well_trajectory/Objective_Function_summary.svg
+.. figure:: images/optimization/wt_objectives.svg
     :align: center
-    :alt: model zones
     :figclass: align-center
+    :width: 90%
 
-    Development the objective function (NPV) over eight optimization batches. The optimizer increases NPV from $2.8 billion to approximately $3.7 billion by batch 5.
+    Figure: Development the objective function (NPV) over eight optimization batches.
 
-The Figures below compare the cumulative production between the initial well configuration (Batch 0) and the optimized well trajectory result (Batch 5). Both cumulative oil production and gas production have increased significantly in Batch 5, with oil production rising by 20% and gas production by 21%. Additionally, water production has decreased by 15%, resulting in reduced operational costs associated with water handling. The combination of higher oil and gas output, along with lower water production, leads to a notable improvement in NPV due to the optimized well trajectories.
+The Figures below compare the cumulative production between the initial well configuration (Batch 0) and the optimized well trajectory result (Batch 8). Both cumulative oil production and gas production have increased significantly in Batch 8. Additionally, water production has decreased, resulting in reduced operational costs associated with water handling. The combination of higher oil and gas output, along with lower water production, leads to a notable improvement in NPV due to the optimized well trajectories.
 
-.. figure:: images/well_trajectory/DROGON_TRAJECTORY_FOPT.svg
+.. figure:: images/production/wt_FOPT.svg
     :align: center
-    :alt: model zones
     :figclass: align-center
+    :width: 90%
 
-    Comparison of total field oil production for initial and optimized well trajectory strategies.
+    Figure: Comparison of total field oil production for initial and optimized well trajectory strategies.
 
-.. figure:: images/well_trajectory/DROGON_TRAJECTORY_FGPT.svg
+.. figure:: images/production/wt_FGPT.svg
     :align: center
-    :alt: model zones
     :figclass: align-center
+    :width: 90%
 
-    Comparison of total field gas production for initial and optimized well trajectory strategies.
+    Figure: Comparison of total field gas production for initial and optimized well trajectory strategies.
 
 
-.. figure:: images/well_trajectory/DROGON_TRAJECTORY_FWPT.svg
+.. figure:: images/production/wt_FWPT.svg
     :align: center
-    :alt: model zones
     :figclass: align-center
+    :width: 90%
 
-    Comparison of total field water production for initial and optimized well trajectory strategies.
+    Figure: Comparison of total field water production for initial and optimized well trajectory strategies.
 
-Finally, Figure 11 and Figure 12 display the initial and optimized well trajectories. Production wells A1 and A2 are shifted closer to the crest of the southern structure, which significantly improved hydrocarbon drainage in that area. The positions of wells A3 and A5 were only marginally adjusted, yet the comparison of average oil saturation in December 2027 clearly shows enhanced recovery across the field. Additionally, injection wells A5 and A6 were moved slightly toward the western direction.
+Finally, figures below display the initial and optimized well trajectories and the oil saturation maps at the end of simulation period for the intiial well trajectories and the optimal well trajectories. The maps show averaged oil saturation over the 100 simulation models and then averaged again over the depth of the reservoir. Production wells A1 and A3, as well as injection well A5 are shifted closer together. In addition, producer A4 and injector A6 have become more horizontal. These changes have significantly improved hydrocarbon drainage in the area in between producers A1, A3 and A4.
 
 .. figure:: images/drogon/SOIL_BATCH_0.png
     :align: center
-    :alt: model zones
     :figclass: align-center
+    :width: 90%
 
-    Average oil saturation of the Drogon ensemble for Batch 0 (base case).
+    Figure: Average oil saturation of the Drogon ensemble for Batch 0 (base case).
 
-.. figure:: images/drogon/SOIL_BATCH_5.png
+.. figure:: images/drogon/SOIL_BATCH_8.png
     :align: center
-    :alt: model zones
     :figclass: align-center
+    :width: 90%
 
-    Average oil saturation of the Drogon ensemble for Batch 5 (optimized case).
-
-
-
+    Figure: Average oil saturation of the Drogon ensemble for Batch 8 (optimized case).
