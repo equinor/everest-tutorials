@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.0.3](https://github.com/equinor/everest-tutorials/compare/v1.0.2...v1.0.3) (2025-12-18)
+
+
+### Bug Fixes
+
+* date only required for dynamic perforations with everest-models 3.0.0 ([dac6404](https://github.com/equinor/everest-tutorials/commit/dac640457e8d5a29bb9381814ab5fe777c3d9025))
+* restore the download links ([#121](https://github.com/equinor/everest-tutorials/issues/121)) ([a7fb7f7](https://github.com/equinor/everest-tutorials/commit/a7fb7f78f667fdc01cad94f1c5fcb0bba1311dfd))
+* update trajectory and well rate tutorials ([#127](https://github.com/equinor/everest-tutorials/issues/127)) ([474b1ee](https://github.com/equinor/everest-tutorials/commit/474b1eefa22b57c190b18f59091b0ba65b78b6f8))
+* use get-site-plugins() ([#102](https://github.com/equinor/everest-tutorials/issues/102)) ([40c29ac](https://github.com/equinor/everest-tutorials/commit/40c29acf2f6279d38684b8f2b97b0f2d3312f474))
+
+
+### Documentation
+
+* fix label in well_selection ([0164b05](https://github.com/equinor/everest-tutorials/commit/0164b05d26ae61439bb6357477ee947bee998925))
+* fix labels in well_swap ([b48f13f](https://github.com/equinor/everest-tutorials/commit/b48f13f0ec78e6eb401f828dfcef711257ef7377))
+* fix references to other documents ([a6ca4b8](https://github.com/equinor/everest-tutorials/commit/a6ca4b8099c0819fe7b6bd506cc1bac067dd14e0))
+* fix warnings in control_sensitivities ([bb7e3fd](https://github.com/equinor/everest-tutorials/commit/bb7e3fd390b1a3d8918d0cc49aee2650b35e4b6e))
+* fix warnings in download_material ([5d5347e](https://github.com/equinor/everest-tutorials/commit/5d5347e55b903d02c1eab8f68c57b5b97747896f))
+* fix warnings in well_order ([de5fb30](https://github.com/equinor/everest-tutorials/commit/de5fb30399ecf809d3602d4d0563a8b99be21ef5))
+* fix warnings in well_selection ([1e53f06](https://github.com/equinor/everest-tutorials/commit/1e53f06c1793785fa96e87bc99019908ddc472dd))
+* fix warnings in well_swapping rst ([e41f29d](https://github.com/equinor/everest-tutorials/commit/e41f29df19b470324b2490dd33458b3c3002ba5f))
+* split text for better readability ([3c93194](https://github.com/equinor/everest-tutorials/commit/3c93194a31efe6ea3d2a5c0aa4e1e3d8101ae4c1))
+
 ## [1.0.2](https://github.com/equinor/everest-tutorials/compare/v1.0.1...v1.0.2) (2025-10-29)
 
 
