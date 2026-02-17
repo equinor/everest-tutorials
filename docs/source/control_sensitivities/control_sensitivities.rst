@@ -121,7 +121,7 @@ The initial guess for EVEREST is located in the section ``controls`` in main con
    optimizing the drilling order (see :doc:`drilling order optimization
    tutorial <../well_order/well_order>`), but here they are disabled, meaning
    that they will not be perturbed nor optimized. Alternatively, one can
-   remove the priority controls altogether from the ``enabled: False``and
+   remove the priority controls altogether from the ``enabled: False`` and
    provide a user-defined ``well_order.json`` file to be used as input for the
    ``drill_planner`` forward job.
 
