@@ -17,6 +17,8 @@ run_tests () {
     cp -rf . "$run_path"/everest-tutorials
     pushd "$run_path"/everest-tutorials
 
+    disable_komodo
+
     # Add /global/bin to path for access to bsub commands etc.
     # Important that this is done before sourcing komodo!!!
 
