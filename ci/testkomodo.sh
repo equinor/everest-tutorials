@@ -17,6 +17,11 @@ run_tests () {
     cp -rf . "$run_path"/everest-tutorials
     pushd "$run_path"/everest-tutorials
 
+    # Add /global/bin to path for access to bsub commands etc.
+    # Important that this is done before sourcing komodo!!!
+
+    export PATH=$PATH:/global/bin
+
     # Need to create a komodoenv on a network mapped drive for LSF etc.
     source "${_KOMODO_ROOT}"/"${_FULL_RELEASE_NAME}"/enable
     komodoenv --root "${_KOMODO_ROOT}" -r "${_FULL_RELEASE_NAME}" --no-update --force test-kenv
