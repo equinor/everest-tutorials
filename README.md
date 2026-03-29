@@ -1,6 +1,6 @@
 [![Code Style](https://github.com/equinor/everest-tutorials/actions/workflows/style.yml/badge.svg)](https://github.com/equinor/everest-tutorials/actions/workflows/style.yml)
 
-Everest tutorials
+EVEREST tutorials
 
 
 

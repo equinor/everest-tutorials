@@ -44,7 +44,7 @@ We plan to drill 6 wells; 4 producers: A1, A2, A3, A4 and 2 injectors A5, A6. We
    "Wells","A1","A2","A3","A4","A5","A6"
    "Priorities","0.6","0.55","0.5","0.45","0.4","0.35"
 
-Let's assume, we want to start optimization with wells drilled in alphabetical order. We need to assign drilling priority value for each well. The higher the probability value the earlier the well will be drilled. This means, we need to choose the highest priority value for the first well (A1) and lowest priority for the last well (A6). See the :ref:`table_initial_controls_do` for chosen well priority values. We recommend spacing priority values evenly. We also need to specify what standard deviation to use when randomizing priorities for perturbations. We recommend setting standard deviation to be equal to difference between the priority values (0.05 for the example in :ref:`table_initial_controls_do`). For information on how to define a more complex time scheduling constraints with rig and slot availability, see relevant documentation section `(Everest documentation <https://everest.readthedocs.io/en/latest/forward_model_jobs.html#drill_planner-category>`_)
+Let's assume, we want to start optimization with wells drilled in alphabetical order. We need to assign drilling priority value for each well. The higher the probability value the earlier the well will be drilled. This means, we need to choose the highest priority value for the first well (A1) and lowest priority for the last well (A6). See the :ref:`table_initial_controls_do` for chosen well priority values. We recommend spacing priority values evenly. We also need to specify what standard deviation to use when randomizing priorities for perturbations. We recommend setting standard deviation to be equal to difference between the priority values (0.05 for the example in :ref:`table_initial_controls_do`). For information on how to define a more complex time scheduling constraints with rig and slot availability, see relevant documentation section `(EVEREST documentation <https://everest.readthedocs.io/en/latest/forward_model_jobs.html#drill_planner-category>`_)
 
 .. _objectives_wo:
 
@@ -176,7 +176,7 @@ to the correct directory path.
       :language: yaml
       :lines: 46-48
    
-   See also `Everest documentation <https://everest.readthedocs.io/en/latest/config_reference.html#>`_.
+   See also `EVEREST documentation <https://everest.readthedocs.io/en/latest/config_reference.html#>`_.
 
 To launch EVEREST, we can execute the following command in the directory with configuration file:
 
@@ -205,7 +205,7 @@ In our case we can find optimization results in ``r{{configpath}}/../output/r{{c
    Drilling order in batch 0 is the chosen initial drilling order. 
 
 .. note::
-   Depending on the choice of ``speculative`` option in ``optimization`` section, the calculations for current best solution and for the gradient might be split in multiple batches, see `Everest documentation <https://everest.readthedocs.io/en/latest/config_reference.html#>`_.
+   Depending on the choice of ``speculative`` option in ``optimization`` section, the calculations for current best solution and for the gradient might be split in multiple batches, see `EVEREST documentation <https://everest.readthedocs.io/en/latest/config_reference.html#>`_.
 
 The :ref:`figure_objectives_wo` shows average objective function at the
 iterations of the optimization experiment (average NPV over all geological realizations).
