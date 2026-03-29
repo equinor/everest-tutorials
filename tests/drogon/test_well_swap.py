@@ -19,7 +19,7 @@ def test_well_swap_simulation(capsys):
     try:
         everest_entry([str(config_path), "--skip-prompt"])
     except SystemExit as e:
-        pytest.fail(f"Everest exited with SystemExit: {e}")
+        pytest.fail(f"EVEREST exited with SystemExit: {e}")
 
     captured = capsys.readouterr()
-    assert "Everest run finished with" in captured.out
+    assert "EVEREST run finished with" in captured.out
