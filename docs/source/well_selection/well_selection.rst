@@ -33,7 +33,7 @@ Optimization variables
 Drilling priority values
 ************************
 
-Let's assume that we plan to select up to 5 wells out of 6 candidates and find the best drilling order; 4 producers: A1, A2, A3, A4 and 2 injectors A5, A6. We choose the starting date for drilling to be 2022-09-03. We assume that the drilling rig continuously available without any interruptions. We also assume that it takes 120 days for each well to be drilled, completed and ready to operate. This means that the dates at which wells will be opened in the model are fixed and we only select the wells to be drilled and their order. See the :ref:`table_initial_controls_ws` for resulting drilling dates based on chosen starting date and drilling times. For information on how to define a more complex time scheduling constraints with rig and slot availability, see relevant documentation section (`Everest documentation <https://everest.readthedocs.io/en/latest/forward_model_jobs.html#drill_planner-category>`_).
+Let's assume that we plan to select up to 5 wells out of 6 candidates and find the best drilling order; 4 producers: A1, A2, A3, A4 and 2 injectors A5, A6. We choose the starting date for drilling to be 2022-09-03. We assume that the drilling rig continuously available without any interruptions. We also assume that it takes 120 days for each well to be drilled, completed and ready to operate. This means that the dates at which wells will be opened in the model are fixed and we only select the wells to be drilled and their order. See the :ref:`table_initial_controls_ws` for resulting drilling dates based on chosen starting date and drilling times. For information on how to define a more complex time scheduling constraints with rig and slot availability, see relevant documentation section (`EVEREST documentation <https://everest.readthedocs.io/en/latest/forward_model_jobs.html#drill_planner-category>`_).
 
 .. _table_initial_controls_ws:
 .. csv-table:: Table: Initial priority values
@@ -44,7 +44,7 @@ Let's assume that we plan to select up to 5 wells out of 6 candidates and find t
    "Wells","A1","A2","A3","A4","A5","A6"
    "Priorities","0.6","0.55","0.5","0.45","0.4","0.35"
 
-Let's assume, we want to start optimization with the first 4 wells selected based on alphabetical order of their names. We need to assign drilling priority value for each well. The higher the priority value the more likely the well will be selected. This means, we need to choose the highest priority value for the first well (A1) and lowest priority for the last well (A6). See the :ref:`table_initial_controls_ws` for chosen well priority values. We recommend spacing priority values evenly. We also need to specify what standard deviation to use when randomizing priorities for perturbations. We recommend setting standard deviation to be equal to difference between the priority values (0.05 for the example in :ref:`table_initial_controls_ws`). In addition, we will need another control variable to specify the number of wells selected. In our case, we will start with the first 4 wells and we will also specify that we are searching for optimal number of wells between 1 and 5. It is also possible to specified fixed number of wells to be selected, see relevant documentation section (`Everest documentation <https://everest.readthedocs.io/en/latest/forward_model_jobs.html#select_wells-category>`_).
+Let's assume, we want to start optimization with the first 4 wells selected based on alphabetical order of their names. We need to assign drilling priority value for each well. The higher the priority value the more likely the well will be selected. This means, we need to choose the highest priority value for the first well (A1) and lowest priority for the last well (A6). See the :ref:`table_initial_controls_ws` for chosen well priority values. We recommend spacing priority values evenly. We also need to specify what standard deviation to use when randomizing priorities for perturbations. We recommend setting standard deviation to be equal to difference between the priority values (0.05 for the example in :ref:`table_initial_controls_ws`). In addition, we will need another control variable to specify the number of wells selected. In our case, we will start with the first 4 wells and we will also specify that we are searching for optimal number of wells between 1 and 5. It is also possible to specified fixed number of wells to be selected, see relevant documentation section (`EVEREST documentation <https://everest.readthedocs.io/en/latest/forward_model_jobs.html#select_wells-category>`_).
 
 .. note::
    This tutorial extends on the well order tutorial where priority values were used to define drilling order of the wells. Here, meaning of the priority is similar, i.e. the higher the priority value for the well is, the earlier the well will be drillied. However, in addition, the more likely that well will be selected. The number of wells variable acts as a cut-off for the number of wells selected with the highest priorities. 
@@ -183,7 +183,7 @@ to the correct directory path.
       :language: yaml
       :lines: 54-56
    
-   See also `Everest documentation <https://everest.readthedocs.io/en/latest/config_reference.html#>`_.
+   See also `EVEREST documentation <https://everest.readthedocs.io/en/latest/config_reference.html#>`_.
 
 To launch EVEREST, we can execute the following command in the directory with configuration file:
 
@@ -212,7 +212,7 @@ In our case we can find optimization results in ``r{{configpath}}/../output/r{{c
    Well selection scenario in batch 0 is the chosen initial well selection scenario. 
 
 .. note::
-   Depending on the choice of ``speculative`` option in ``optimization`` section, the calculations for current best solution and for the gradient might be split in multiple batches, see `Everest documentation <https://everest.readthedocs.io/en/latest/config_reference.html#>`_.
+   Depending on the choice of ``speculative`` option in ``optimization`` section, the calculations for current best solution and for the gradient might be split in multiple batches, see `EVEREST documentation <https://everest.readthedocs.io/en/latest/config_reference.html#>`_.
 
 The :ref:`figure_objectives_ws` shows average objective function at the
 iterations of the optimization experiment (average NPV over all geological realizations).

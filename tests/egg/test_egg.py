@@ -9,7 +9,7 @@ def test_egg_simulation(capsys):
     try:
         everest_entry(["data/egg/everest/model/egg.yml", "--skip-prompt"])
     except SystemExit as e:
-        pytest.fail(f"Everest exited with SystemExit: {e}")
+        pytest.fail(f"EVEREST exited with SystemExit: {e}")
 
     captured = capsys.readouterr()
-    assert "Everest run finished with" in captured.out
+    assert "EVEREST run finished with" in captured.out
