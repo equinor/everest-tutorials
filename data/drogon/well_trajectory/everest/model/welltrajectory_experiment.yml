@@ -18,7 +18,6 @@ wells:
 
 controls:
   - name: p1_x
-    type: generic_control         
     perturbation_magnitude: 75
     min: 459341
     max: 466548
@@ -30,7 +29,6 @@ controls:
       - {name: A5, initial_guess: 461553} 
       - {name: A6, initial_guess: 461362} 
   - name: p1_y
-    type: generic_control         
     perturbation_magnitude: 75
     min: 5929863
     max: 5936166
@@ -42,7 +40,6 @@ controls:
       - {name: A5, initial_guess:  5935779}
       - {name: A6, initial_guess:  5931866}
   - name: p1_z
-    type: generic_control         
     perturbation_magnitude: 3
     min: 1566.5
     max: 1699.5
@@ -54,7 +51,6 @@ controls:
       - {name: A5, initial_guess: 1689.1}
       - {name: A6, initial_guess: 1689.5}
   - name: p2_a
-    type: generic_control         
     perturbation_magnitude: 0.01
     min: 0.0
     max: 1.0
@@ -66,7 +62,6 @@ controls:
       - {name: A5, initial_guess:  0.5}
       - {name: A6, initial_guess:  0.5}
   - name: p2_b
-    type: generic_control         
     perturbation_magnitude: 0.01
     min: -0.3
     max:  0.3
@@ -78,7 +73,6 @@ controls:
       - {name: A5, initial_guess:  0.0}
       - {name: A6, initial_guess:  0.0} 
   - name: p2_c
-    type: generic_control         
     perturbation_magnitude: 0.01
     min: 0.0
     max: 1.0
@@ -90,7 +84,6 @@ controls:
       - {name: A5, initial_guess:  0.5}
       - {name: A6, initial_guess:  0.5}
   - name: p3_x
-    type: generic_control         
     perturbation_magnitude: 125
     min: 459341
     max: 466548
@@ -102,7 +95,6 @@ controls:
       - {name: A5, initial_guess: 461527}
       - {name: A6, initial_guess: 461369}
   - name: p3_y
-    type: generic_control         
     perturbation_magnitude: 125
     min: 5929863
     max: 5936166
@@ -114,7 +106,6 @@ controls:
       - {name: A5, initial_guess:  5935588}
       - {name: A6, initial_guess:  5931801}
   - name: p3_z
-    type: generic_control         
     perturbation_magnitude: 3
     min: 1566.5
     max: 1739

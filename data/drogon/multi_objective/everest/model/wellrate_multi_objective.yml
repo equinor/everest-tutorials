@@ -10,7 +10,6 @@ environment:
 
 controls:
   - name: well_rate
-    type: well_control
     min: 0
     max: 8000
     perturbation_magnitude: 1200
