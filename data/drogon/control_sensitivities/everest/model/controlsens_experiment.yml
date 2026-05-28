@@ -18,7 +18,6 @@ wells:
       
 controls:
   - name: well_order
-    type: well_control
     min: 0.0
     max: 1.0
     perturbation_magnitude: 0.05
@@ -30,7 +29,6 @@ controls:
       - {name: A5, initial_guess: 0.40, enabled: False}
       - {name: A6, initial_guess: 0.35, enabled: False}
   - name: well_delay
-    type: generic_control
     min: 0.0
     max: 90.0
     perturbation_magnitude: 36.0

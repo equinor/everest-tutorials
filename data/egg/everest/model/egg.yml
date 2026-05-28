@@ -12,7 +12,6 @@ environment:
 
 controls:
   - name: well_rate
-    type: generic_control
     perturbation_magnitude: 30
     min: 0
     max: 320
