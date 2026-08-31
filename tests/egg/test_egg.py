@@ -7,7 +7,7 @@ def test_egg_simulation(capsys):
     Run a basic egg simulation test case.
     """
     try:
-        everest_entry(["data/egg/everest/model/egg.yml", "--skip-prompt"])
+        everest_entry(["data/egg/everest/model/egg.yml"])
     except SystemExit as e:
         pytest.fail(f"EVEREST exited with SystemExit: {e}")
 
