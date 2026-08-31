@@ -16,7 +16,7 @@ def test_well_order_simulation(capsys):
         .replace("name: lsf", "name: lsf\n    lsf_queue: test")
     )
     try:
-        everest_entry([str(config_path), "--skip-prompt"])
+        everest_entry([str(config_path)])
     except SystemExit as e:
         pytest.fail(f"EVEREST exited with SystemExit: {e}")
 

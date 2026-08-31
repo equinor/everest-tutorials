@@ -18,7 +18,7 @@ def test_control_sensitivities_simulation(capsys):
     )
 
     try:
-        everest_entry([str(config_path), "--skip-prompt"])
+        everest_entry([str(config_path)])
     except SystemExit as e:
         pytest.fail(f"EVEREST exited with SystemExit: {e}")
 
