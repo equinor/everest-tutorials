@@ -212,7 +212,7 @@ In our case we can find optimization results in ``r{{configpath}}/../output/r{{c
    Well selection scenario in batch 0 is the chosen initial well selection scenario. 
 
 .. note::
-   Depending on the choice of ``speculative`` option in ``optimization`` section, the calculations for current best solution and for the gradient might be split in multiple batches, see `EVEREST documentation <https://everest.readthedocs.io/en/latest/config_reference.html#>`_.
+   Depending on the choice of ``speculative`` option in ``optimization`` section, the calculations for current best solution and for the gradient might be split in multiple batches, see `EVEREST documentation <https://everest.readthedocs.io/en/latest/backends/optimization.html>`_.
 
 The :ref:`figure_objectives_ws` shows average objective function at the
 iterations of the optimization experiment (average NPV over all geological realizations).
