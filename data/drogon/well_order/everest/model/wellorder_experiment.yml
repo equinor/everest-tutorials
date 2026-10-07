@@ -1,4 +1,4 @@
-definitions: 
+definitions:
   case_name: WELLORDER_EXP
   realization_folder: r{{configpath}}/../../../fmu-drogon-flow-files/realization-r{{realization}}/iter-0/eclipse
   eclbase: simulator/model/DROGON
@@ -15,7 +15,7 @@ wells:
   - {name: A4, drill_time: 120}
   - {name: A5, drill_time: 120}
   - {name: A6, drill_time: 120}
-      
+
 controls:
   - name: well_order
     min: 0
@@ -41,10 +41,10 @@ optimization:
 
 model:
   realizations: r{{range(100) | list()}}
-     
+
 simulator:
   queue_system:
-    name: lsf 
+    name: lsf
 
 install_data:
   - link: True
@@ -59,7 +59,7 @@ install_data:
 
 forward_model:
   - drill_planner -i wells.json -c input/drill_planner_config.yml -opt well_order.json -o wells.json
-  - add_templates -i wells.json -c input/template_config.yml -o wells.json 
+  - add_templates -i wells.json -c input/template_config.yml -o wells.json
   - schmerge -i wells.json -s simulator/model/WELLORDER.SCH -o simulator/model/SCHEDULE_OPT.SCH
   - job: flow r{{eclbase}} --enable-tuning=true
     results:

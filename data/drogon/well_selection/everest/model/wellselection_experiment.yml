@@ -1,4 +1,4 @@
-definitions: 
+definitions:
   case_name: WELLSELECTION_EXP
   realization_folder: r{{configpath}}/../../../fmu-drogon-flow-files/realization-r{{realization}}/iter-0/eclipse
   eclbase: simulator/model/DROGON
@@ -67,7 +67,7 @@ install_data:
 forward_model:
   - drill_planner -i wells.json -c input/drill_planner_config.yml -opt well_order.json -o wells.json
   - select_wells -i wells.json -o wells.json file well_number.json
-  - add_templates -i wells.json -c input/template_config.yml -o wells.json 
+  - add_templates -i wells.json -c input/template_config.yml -o wells.json
   - schmerge -i wells.json -s simulator/model/WELLSELECT.SCH -o simulator/model/SCHEDULE_OPT.SCH
   - job: flow r{{eclbase}} --enable-tuning=true
     results:
