@@ -1,4 +1,4 @@
-definitions: 
+definitions:
   case_name: WELLRATE_EXP
   realization_folder: r{{configpath}}/../../../fmu-drogon-flow-files/realization-r{{realization}}/iter-0/eclipse
   eclbase: simulator/model/DROGON
@@ -52,7 +52,7 @@ install_data:
 
 forward_model:
   - well_constraints -i input/readydates.json -c input/constraints_config.yml -rc well_rate.json -o wells.json
-  - add_templates -i wells.json -c input/template_config.yml -o wells.json 
+  - add_templates -i wells.json -c input/template_config.yml -o wells.json
   - schmerge -i wells.json -s simulator/model/WELLRATE.SCH -o simulator/model/SCHEDULE_OPT.SCH
   - job: flow r{{eclbase}} --enable-tuning=true
     results:

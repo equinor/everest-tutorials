@@ -1,4 +1,4 @@
-definitions: 
+definitions:
   case_name: WELLSWAP_EXP
   realization_folder: r{{configpath}}/../../../fmu-drogon-flow-files/realization-r{{realization}}/iter-0/eclipse
   eclbase: simulator/model/DROGON
@@ -15,7 +15,7 @@ wells:
   - {name: A4}
   - {name: A5}
   - {name: A6}
-      
+
 controls:
   - name: well_priorities
     min: 0.0
@@ -50,7 +50,7 @@ model:
 
 simulator:
   queue_system:
-    name: lsf 
+    name: lsf
 
 install_data:
   - link: True

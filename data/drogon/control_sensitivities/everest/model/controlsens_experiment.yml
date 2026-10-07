@@ -1,4 +1,4 @@
-definitions: 
+definitions:
   case_name: CONTROLSENS_EXP
   realization_folder: r{{configpath}}/../../../fmu-drogon-flow-files/realization-r{{realization}}/iter-0/eclipse
   eclbase: simulator/model/DROGON
@@ -15,7 +15,7 @@ wells:
   - {name: A4, drill_time: 120}
   - {name: A5, drill_time: 120}
   - {name: A6, drill_time: 120}
-      
+
 controls:
   - name: well_order
     min: 0.0
