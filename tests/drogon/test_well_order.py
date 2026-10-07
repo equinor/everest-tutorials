@@ -1,9 +1,8 @@
-import pytest
+import subprocess
 from pathlib import Path
-from everest.bin.everest_script import everest_entry
 
 
-def test_well_order_simulation(capsys):
+def test_well_order_simulation():
     """
     Run a modified Drogon well_order tutorial test case.
     """
@@ -15,10 +14,13 @@ def test_well_order_simulation(capsys):
         .replace("realizations: r{{range(100) | list()}}", "realizations: 0-9")
         .replace("name: lsf", "name: lsf\n    lsf_queue: test")
     )
-    try:
-        everest_entry([str(config_path)])
-    except SystemExit as e:
-        pytest.fail(f"EVEREST exited with SystemExit: {e}")
 
-    captured = capsys.readouterr()
-    assert "EVEREST run finished with" in captured.out
+    result = subprocess.run(
+        ["everest", "run", str(config_path)],
+        capture_output=True,
+        text=True,
+    )
+
+    assert "EVEREST run finished with" in result.stdout, (
+        f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+    )
