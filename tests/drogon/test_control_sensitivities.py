@@ -1,9 +1,8 @@
-import pytest
-from everest.bin.everest_script import everest_entry
+import subprocess
 from pathlib import Path
 
 
-def test_control_sensitivities_simulation(capsys):
+def test_control_sensitivities_simulation():
     """
     Run a modified Drogon control_sensitivities tutorial test case.
     """
@@ -14,13 +13,15 @@ def test_control_sensitivities_simulation(capsys):
     config_path.write_text(
         config_path.read_text()
         .replace("realizations: 0-99", "realizations: 0-9")
-        .replace("name: lsf", "name: lsf\n    lsf_queue: test")
+        .replace("name: lsf", "name: lsf\n\n    lsf_queue: test\n")
     )
 
-    try:
-        everest_entry([str(config_path)])
-    except SystemExit as e:
-        pytest.fail(f"EVEREST exited with SystemExit: {e}")
+    result = subprocess.run(
+        ["everest", "run", str(config_path)],
+        capture_output=True,
+        text=True,
+    )
 
-    captured = capsys.readouterr()
-    assert "EVEREST run finished with" in captured.out
+    assert "EVEREST run finished with" in result.stdout, (
+        f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+    )
