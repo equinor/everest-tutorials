@@ -13,7 +13,7 @@ def test_control_sensitivities_simulation():
     config_path.write_text(
         config_path.read_text()
         .replace("realizations: 0-99", "realizations: 0-9")
-        .replace("name: lsf", "name: lsf\n\n    lsf_queue: test\n")
+        .replace("name: lsf\n\n", "name: lsf\n    lsf_queue: test\n\n")
     )
 
     result = subprocess.run(

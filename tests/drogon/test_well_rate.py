@@ -12,7 +12,7 @@ def test_well_rate_simulation():
         config_path.read_text()
         .replace("max_batch_num: 10", "max_batch_num: 2")
         .replace("realizations: r{{range(100) | list()}}", "realizations: 0-9")
-        .replace("name: lsf", "name: lsf\n    lsf_queue: test")
+        .replace("name: lsf\n\n", "name: lsf\n    lsf_queue: test\n\n")
     )
 
     result = subprocess.run(
